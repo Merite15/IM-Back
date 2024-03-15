@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Enums\UserGender;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -21,19 +24,34 @@ class User extends Authenticatable implements MustVerifyEmail
 
     protected $guarded = [];
 
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime'
+        'password' => 'hashed',
+        'gender' => UserGender::class,
     ];
 
-    public function companies(): HasMany
+    public function companies(): BelongsToMany
     {
-        return $this->hasMany(User::class);
+        return $this->belongsToMany(Company::class, 'user_hospitals');
+    }
+
+    public function currentUserCompany(): BelongsTo
+    {
+        return $this->belongsTo(Company::class, 'current_company');
     }
 }

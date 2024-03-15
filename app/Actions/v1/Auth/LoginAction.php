@@ -22,10 +22,14 @@ final class LoginAction
         try {
             $data = $dto->toArray();
 
-            $user = User::query()->with('roles.permissions')->where('email', $data['email'])->first();
+            $user = User::query()->with('roles.permissions', 'companies')->where('email', $data['email'])->first();
 
-            if ( ! $user || ! Hash::check($data['password'], $user->password)) {
+            if (!$user || !Hash::check($data['password'], $user->password)) {
                 throw new Exception('Les informations d\'identification fournies sont incorrectes.', Response::HTTP_UNAUTHORIZED);
+            }
+
+            if ($user->companies->count() === 0) {
+                throw new Exception('Vous n’êtes affilié à aucun hôpital.', Response::HTTP_UNAUTHORIZED);
             }
 
             $user->update([
@@ -33,15 +37,32 @@ final class LoginAction
                 'last_login_ip' => Request::getClientIp()
             ]);
 
-            $data = [
-                'user' => $user,
-                'token' => $user->createToken($data['email'])->plainTextToken
-            ];
+            if ($user->companies->isNotEmpty() && request('company_id') === null) {
+                return response([
+                    'success' => true,
+                    'message' => 'Veuillez sélectionner un hôpital',
+                    'data' => $user,
+                    'companies' => $user->companies,
+                ]);
+            }
 
-            return new ApiSuccessResponse(
-                message: 'Connecté avec succès',
-                data: $data,
-            );
+            if (request()->has('company_id') && request('company_id') !== null) {
+                $user->update([
+                    'current_hospital' => request('company_id')
+                ]);
+
+                $data = [
+                    'user' => $user,
+                    'token' => $user->createToken($data['email'])->plainTextToken
+                ];
+
+                return new ApiSuccessResponse(
+                    message: 'Connecté avec succès',
+                    data: $data,
+                );
+            } else {
+                throw new Exception('Vous devez spécifier un hôpital pour vous connecter en tant qu\'administrateur.', Response::HTTP_UNAUTHORIZED);
+            }
         } catch (Throwable $exception) {
             return new ApiErrorResponse(
                 exception: $exception,

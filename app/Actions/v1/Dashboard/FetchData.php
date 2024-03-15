@@ -19,15 +19,23 @@ final class FetchData
     {
         try {
             $data = [
-                'orders' => Order::query()->all()->count(),
-                'products' => Product::query()->all()->count(),
-                'purchases' => Purchase::query()->all()->count(),
-                'todayPurchases' => Purchase::query()->whereDate('date', today()->format('Y-m-d'))->count(),
-                'todayProducts' => Product::query()->whereDate('created_at', today()->format('Y-m-d'))->count(),
-                'todayQuotations' => Quotation::query()->whereDate('created_at', today()->format('Y-m-d'))->count(),
-                'todayOrders' => Order::query()->whereDate('created_at', today()->format('Y-m-d'))->count(),
-                'categories' => Category::query()->all()->count(),
-                'quotations' => Quotation::query()->all()->count()
+                'orders' => Order::query()->where('company_id', auth()->user->current_company)->count(),
+
+                'products' => Product::query()->where('company_id', auth()->user->current_company)->count(),
+
+                'purchases' => Purchase::query()->where('company_id', auth()->user->current_company)->count(),
+
+                'todayPurchases' => Purchase::query()->where('company_id', auth()->user->current_company)->whereDate('date', today()->format('Y-m-d'))->count(),
+
+                'todayProducts' => Product::query()->where('company_id', auth()->user->current_company)->whereDate('created_at', today()->format('Y-m-d'))->count(),
+
+                'todayQuotations' => Quotation::query()->where('company_id', auth()->user->current_company)->whereDate('created_at', today()->format('Y-m-d'))->count(),
+
+                'todayOrders' => Order::query()->where('company_id', auth()->user->current_company)->whereDate('created_at', today()->format('Y-m-d'))->count(),
+
+                'categories' => Category::query()->where('company_id', auth()->user->current_company)->count(),
+
+                'quotations' => Quotation::query()->where('company_id', auth()->user->current_company)->count()
             ];
 
             return new ApiSuccessResponse(

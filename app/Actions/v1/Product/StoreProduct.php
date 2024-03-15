@@ -19,9 +19,9 @@ final class StoreProduct
         try {
             $data = $dto->toArray();
 
-            $product_code = IdGenerator::generate([
+            $code = IdGenerator::generate([
                 'table' => 'products',
-                'field' => 'product_code',
+                'field' => 'code',
                 'length' => 4,
                 'prefix' => 'PC'
             ]);
@@ -36,10 +36,11 @@ final class StoreProduct
                 'expire_date' => (int) $data['expire_date'],
                 'buying_price' => $data['buying_price'],
                 'selling_price' => $data['selling_price'],
-                'product_code' => $product_code
+                'code' => $code,
+                'company_id' => auth()->user()->current_company,
             ]);
 
-            if ($file = $data['product_image']) {
+            if ($file = $data['image']) {
                 $fileName = hexdec(uniqid()) . '.' . $file->getClientOriginalExtension();
                 $path = 'public/products/';
 

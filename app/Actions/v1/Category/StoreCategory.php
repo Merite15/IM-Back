@@ -22,6 +22,7 @@ final class StoreCategory
             $category = Category::create([
                 'name' => $data['name'],
                 'slug' =>  Str::slug($data['slug']),
+                'company_id' => auth()->user()->current_company,
             ]);
 
             return new ApiSuccessResponse(

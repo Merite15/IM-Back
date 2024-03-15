@@ -26,6 +26,7 @@ class LoginRequest extends FormRequest
         return [
             'email' => 'required|email:rfc,dns,spoof,filter,filter_unicode',
             'password' => 'required|string',
+            'company_id' => 'nullable|integer',
         ];
     }
 

@@ -2,7 +2,16 @@
 
 declare(strict_types=1);
 
-if ( ! function_exists('settings')) {
+use App\Models\Company;
+
+function getCompanyInfoById(int $companyId)
+{
+    $company = Company::query()->findOrFail($companyId);
+
+    return $company;
+}
+
+if (!function_exists('settings')) {
     function settings()
     {
         $settings = cache()->remember('settings', 24 * 60, function (): void {
@@ -13,10 +22,10 @@ if ( ! function_exists('settings')) {
     }
 }
 
-if ( ! function_exists('format_currency')) {
+if (!function_exists('format_currency')) {
     function format_currency($value, $format = true)
     {
-        if ( ! $format) {
+        if (!$format) {
             return $value;
         }
 
@@ -36,7 +45,7 @@ if ( ! function_exists('format_currency')) {
     }
 }
 
-if ( ! function_exists('make_reference_id')) {
+if (!function_exists('make_reference_id')) {
     function make_reference_id($prefix, $number)
     {
         $padded_text = $prefix . '-' . str_pad($number, 5, 0, STR_PAD_LEFT);
@@ -45,17 +54,17 @@ if ( ! function_exists('make_reference_id')) {
     }
 }
 
-if ( ! function_exists('array_merge_numeric_values')) {
+if (!function_exists('array_merge_numeric_values')) {
     function array_merge_numeric_values()
     {
         $arrays = func_get_args();
         $merged = [];
         foreach ($arrays as $array) {
             foreach ($array as $key => $value) {
-                if ( ! is_numeric($value)) {
+                if (!is_numeric($value)) {
                     continue;
                 }
-                if ( ! isset($merged[$key])) {
+                if (!isset($merged[$key])) {
                     $merged[$key] = $value;
                 } else {
                     $merged[$key] += $value;

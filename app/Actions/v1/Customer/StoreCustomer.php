@@ -26,6 +26,7 @@ final class StoreCustomer
                 'shop_name' => $data['shop_name'],
                 'gender' => $data['gender'],
                 'city' => $data['city'],
+                'company_id' => auth()->user()->current_company,
             ]);
 
             return new ApiSuccessResponse(
