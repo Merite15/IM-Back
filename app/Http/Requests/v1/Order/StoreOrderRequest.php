@@ -29,7 +29,6 @@ class StoreOrderRequest extends FormRequest
         return [
             'customer_id' => 'required|integer|exists:customers,id',
             'order_status' => ['required', new Enum(OrderStatus::class)],
-            'payment_status' => ['required', new Enum(PaymentStatus::class)],
             'pay' => 'numeric|nullable',
             'due' => 'numeric|nullable',
         ];

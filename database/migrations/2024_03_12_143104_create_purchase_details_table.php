@@ -18,12 +18,12 @@ return new class() extends Migration
     {
         Schema::create('purchase_details', function (Blueprint $table): void {
             $table->id();
-            $table->foreignIdFor(Purchase::class);
-            $table->foreignIdFor(Product::class);
             $table->integer('quantity');
             $table->integer('unit_cost');
             $table->integer('total');
-            $table->foreignIdFor(Company::class);
+            $table->foreignIdFor(Purchase::class)->constrained();
+            $table->foreignIdFor(Product::class)->constrained();
+            $table->foreignIdFor(Company::class)->constrained();
             $table->softDeletes();
             $table->timestamps();
         });

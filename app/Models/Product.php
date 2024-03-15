@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Enums\TaxType;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -19,8 +20,6 @@ class Product extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
         'tax_type' => TaxType::class
     ];
 
@@ -58,5 +57,12 @@ class Product extends Model
             get: fn ($value) => $value / 100,
             set: fn ($value) => $value * 100,
         );
+    }
+
+    protected static function booted(): void
+    {
+        static::addGlobalScope('current_year', function (Builder $builder): void {
+            $builder->whereYear('company_id', auth()->user()->current_company);
+        });
     }
 }

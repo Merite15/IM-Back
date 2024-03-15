@@ -6,9 +6,9 @@ namespace App\Enums;
 
 enum QuotationStatus: int
 {
-    case PENDING = 0;
-    case SENT = 1;
-    case CANCELED = 2;
+    case PENDING = 'En Attente';
+    case SENT = 'Envoyé';
+    case CANCELED = 'Annulé';
 
     public static function values(): array
     {

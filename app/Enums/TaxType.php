@@ -6,8 +6,8 @@ namespace App\Enums;
 
 enum TaxType: int
 {
-    case EXCLUSIVE = 0;
-    case INCLUSIVE = 1;
+    case CA = 'CA';
+    case TVA = 'TVA';
 
     public static function values(): array
     {

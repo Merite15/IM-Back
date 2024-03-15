@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Enums\TaxType;
 use App\Models\Category;
 use App\Models\Company;
 use App\Models\Unit;
@@ -26,12 +27,12 @@ return new class() extends Migration
             $table->integer('selling_price')->comment('Selling Price');
             $table->integer('quantity_alert');
             $table->integer('tax')->nullable();
-            $table->tinyInteger('tax_type')->nullable();
+            $table->enum('tax_type', TaxType::values());
             $table->text('notes')->nullable();
-            $table->string('product_image')->nullable();
-            $table->foreignIdFor(Category::class)->nullable();
-            $table->foreignIdFor(Unit::class);
-            $table->foreignIdFor(Company::class);
+            $table->string('image')->nullable();
+            $table->foreignIdFor(Category::class)->constrained();
+            $table->foreignIdFor(Unit::class)->constrained();
+            $table->foreignIdFor(Company::class)->constrained();
             $table->softDeletes();
             $table->timestamps();
         });

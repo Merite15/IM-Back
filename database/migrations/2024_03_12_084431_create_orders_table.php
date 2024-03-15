@@ -18,10 +18,8 @@ return new class() extends Migration
     {
         Schema::create('orders', function (Blueprint $table): void {
             $table->id();
-            $table->foreignIdFor(Customer::class);
-            $table->foreignIdFor(Company::class);
             $table->string('date');
-            $table->enum('gender', OrderStatus::values());
+            $table->enum('status', OrderStatus::values());
             $table->integer('total_products');
             $table->integer('sub_total');
             $table->integer('vat');
@@ -30,6 +28,8 @@ return new class() extends Migration
             $table->string('payment_type');
             $table->integer('pay');
             $table->integer('due');
+            $table->foreignIdFor(Customer::class)->constrained();
+            $table->foreignIdFor(Company::class)->constrained();
             $table->softDeletes();
             $table->timestamps();
         });

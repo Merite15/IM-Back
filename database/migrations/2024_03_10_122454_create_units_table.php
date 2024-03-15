@@ -19,7 +19,7 @@ return new class() extends Migration
             $table->string('name');
             $table->string('slug');
             $table->string('short_code')->nullable();
-            $table->foreignIdFor(Company::class);
+            $table->foreignIdFor(Company::class)->constrained();
             $table->softDeletes();
             $table->timestamps();
         });

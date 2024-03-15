@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Enums\QuotationStatus;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -21,20 +22,8 @@ class Quotation extends Model
 
     protected $casts = [
         'date' => 'date',
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
         'status' => QuotationStatus::class
     ];
-
-    public static function boot(): void
-    {
-        parent::boot();
-
-        static::creating(function ($model): void {
-            $number = Quotation::max('id') + 1;
-            $model->reference = make_reference_id('QT', $number);
-        });
-    }
 
     public function quotationDetails(): HasMany
     {
@@ -86,5 +75,17 @@ class Quotation extends Model
             get: fn ($value) => $value / 100,
             set: fn ($value) => $value * 100,
         );
+    }
+
+    protected static function booted(): void
+    {
+        static::creating(function ($model): void {
+            $number = Quotation::max('id') + 1;
+            $model->reference = make_reference_id('QT', $number);
+        });
+
+        static::addGlobalScope('current_year', function (Builder $builder): void {
+            $builder->whereYear('company_id', auth()->user()->current_company);
+        });
     }
 }

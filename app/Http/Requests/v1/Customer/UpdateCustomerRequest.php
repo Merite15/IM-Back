@@ -31,10 +31,6 @@ class UpdateCustomerRequest extends FormRequest
             'email' => 'required|max:50|email:rfc,dns,spoof,filter,filter_unicode|unique:customers,email,filter' . $this->customer,
             'phone' => 'required|string|size:9|unique:customers,phone,' . $this->customer,
             'shop_name' => 'required|string|max:50',
-            'account_holder' => 'nullable|max:50',
-            'account_number' => 'nullable|max:25',
-            'bank_name' => 'nullable|max:25',
-            'bank_branch' => 'nullable|max:50',
             'city' => 'required|string|max:50',
             'address' => 'required|string|max:100',
         ];

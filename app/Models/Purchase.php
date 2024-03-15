@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Enums\PurchaseStatus;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -20,8 +21,6 @@ class Purchase extends Model
 
     protected $casts = [
         'date'       => 'date',
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
         'status'     => PurchaseStatus::class
     ];
 
@@ -43,5 +42,12 @@ class Purchase extends Model
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);
+    }
+
+    protected static function booted(): void
+    {
+        static::addGlobalScope('current_year', function (Builder $builder): void {
+            $builder->whereYear('company_id', auth()->user()->current_company);
+        });
     }
 }

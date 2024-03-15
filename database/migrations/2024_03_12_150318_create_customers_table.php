@@ -21,10 +21,10 @@ return new class() extends Migration
             $table->string('email')->unique();
             $table->string('phone')->unique();
             $table->string('address');
-            $table->enum('gender', UserGender::values());
             $table->string('shop_name')->nullable();
-            $table->string('city')->nullable();
-            $table->foreignIdFor(Company::class);
+            $table->string('city');
+            $table->enum('gender', UserGender::values());
+            $table->foreignIdFor(Company::class)->constrained();
             $table->softDeletes();
             $table->timestamps();
         });

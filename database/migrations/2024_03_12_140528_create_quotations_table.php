@@ -19,7 +19,6 @@ return new class() extends Migration
         Schema::create('quotations', function (Blueprint $table): void {
             $table->id();
             $table->date('date');
-            $table->foreignIdFor(Customer::class);
             $table->string('reference');
             $table->integer('tax_percentage')->default(0);
             $table->integer('tax_amount')->default(0);
@@ -27,9 +26,10 @@ return new class() extends Migration
             $table->integer('discount_amount')->default(0);
             $table->integer('shipping_amount')->default(0);
             $table->integer('total_amount');
-            $table->enum('gender', OrderStatus::values());
             $table->text('note')->nullable();
-            $table->foreignIdFor(Company::class);
+            $table->enum('status', OrderStatus::values());
+            $table->foreignIdFor(Customer::class)->constrained();
+            $table->foreignIdFor(Company::class)->constrained();
             $table->softDeletes();
             $table->timestamps();
         });

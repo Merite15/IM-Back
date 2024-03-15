@@ -18,8 +18,6 @@ return new class() extends Migration
     {
         Schema::create('quotation_details', function (Blueprint $table): void {
             $table->id();
-            $table->foreignIdFor(Quotation::class);
-            $table->foreignIdFor(Product::class);
             $table->integer('quantity');
             $table->integer('price');
             $table->integer('unit_price');
@@ -27,7 +25,9 @@ return new class() extends Migration
             $table->integer('product_discount_amount');
             $table->string('product_discount_type')->default('fixed');
             $table->integer('product_tax_amount');
-            $table->foreignIdFor(Company::class);
+            $table->foreignIdFor(Quotation::class)->constrained();
+            $table->foreignIdFor(Product::class)->constrained();
+            $table->foreignIdFor(Company::class)->constrained();
             $table->softDeletes();
             $table->timestamps();
         });

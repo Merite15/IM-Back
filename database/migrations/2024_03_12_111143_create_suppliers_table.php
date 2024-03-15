@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Enums\SupplierType;
 use App\Models\Company;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -18,11 +19,11 @@ return new class() extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('email')->unique()->nullable();
-            $table->string('phone')->unique()->nullable();
+            $table->string('phone')->unique();
             $table->string('address')->nullable();
-            $table->string('shop_name')->nullable();
-            $table->string('type')->nullable();
-            $table->foreignIdFor(Company::class);
+            $table->string('shop_name');
+            $table->enum('type', SupplierType::values());
+            $table->foreignIdFor(Company::class)->constrained();
             $table->softDeletes();
             $table->timestamps();
         });

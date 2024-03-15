@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('user_companies', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class);
-            $table->foreignIdFor(Company::class);
+            $table->foreignIdFor(User::class)->constrained();
+            $table->foreignIdFor(Company::class)->constrained();
             $table->softDeletes();
             $table->timestamps();
         });

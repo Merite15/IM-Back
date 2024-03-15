@@ -18,12 +18,12 @@ return new class() extends Migration
     {
         Schema::create('purchases', function (Blueprint $table): void {
             $table->id();
-            $table->foreignIdFor(Supplier::class);
             $table->string('date');
             $table->string('purchase_no');
-            $table->enum('gender', PurchaseStatus::values());
             $table->integer('total_amount');
-            $table->foreignIdFor(Company::class);
+            $table->enum('gender', PurchaseStatus::values());
+            $table->foreignIdFor(Supplier::class)->constrained();
+            $table->foreignIdFor(Company::class)->constrained();
             $table->softDeletes();
             $table->timestamps();
         });

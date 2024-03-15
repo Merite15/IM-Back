@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Enums\SupplierType;
+use App\Enums\UserGender;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -19,8 +21,7 @@ class Supplier extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
+        'gender' => UserGender::class,
         'type' => SupplierType::class
     ];
 
@@ -37,5 +38,12 @@ class Supplier extends Model
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);
+    }
+
+    protected static function booted(): void
+    {
+        static::addGlobalScope('current_year', function (Builder $builder): void {
+            $builder->whereYear('company_id', auth()->user()->current_company);
+        });
     }
 }
