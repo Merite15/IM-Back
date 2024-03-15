@@ -26,14 +26,4 @@ class Unit extends Model
     {
         return $this->hasMany(Product::class);
     }
-
-    /**
-     * Get the user that owns the Category
-     *
-     * @return BelongsTo
-     */
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
 }

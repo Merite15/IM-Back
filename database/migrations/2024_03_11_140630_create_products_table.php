@@ -3,12 +3,14 @@
 declare(strict_types=1);
 
 use App\Models\Category;
+use App\Models\Company;
 use App\Models\Unit;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class () extends Migration {
+return new class() extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -29,6 +31,7 @@ return new class () extends Migration {
             $table->string('product_image')->nullable();
             $table->foreignIdFor(Category::class)->nullable();
             $table->foreignIdFor(Unit::class);
+            $table->foreignIdFor(Company::class);
             $table->softDeletes();
             $table->timestamps();
         });

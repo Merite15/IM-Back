@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Enums\UserGender;
+use App\Models\Company;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -23,6 +24,7 @@ return new class() extends Migration
             $table->enum('gender', UserGender::values());
             $table->string('shop_name')->nullable();
             $table->string('city')->nullable();
+            $table->foreignIdFor(Company::class);
             $table->softDeletes();
             $table->timestamps();
         });

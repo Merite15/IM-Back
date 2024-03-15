@@ -2,13 +2,15 @@
 
 declare(strict_types=1);
 
+use App\Models\Company;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class () extends Migration {
+return new class() extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -18,6 +20,7 @@ return new class () extends Migration {
             $table->id();
             $table->foreignIdFor(Order::class)->constrained();
             $table->foreignIdFor(Product::class)->constrained();
+            $table->foreignIdFor(Company::class);
             $table->integer('quantity');
             $table->integer('unit_cost');
             $table->integer('total');

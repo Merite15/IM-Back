@@ -1,22 +1,22 @@
 <?php
 
-declare(strict_types=1);
-
+use App\Models\Company;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class () extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('units', function (Blueprint $table): void {
+        Schema::create('user_companies', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('slug');
-            $table->string('short_code')->nullable();
+            $table->foreignIdFor(User::class);
+            $table->foreignIdFor(Company::class);
             $table->softDeletes();
             $table->timestamps();
         });
@@ -27,6 +27,6 @@ return new class () extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('units');
+        Schema::dropIfExists('user_companies');
     }
 };
