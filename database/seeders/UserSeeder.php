@@ -1,11 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Str;
 
 class UserSeeder extends Seeder
 {
@@ -38,7 +38,7 @@ class UserSeeder extends Seeder
             ]
         ]);
 
-        $users->each(function ($user) {
+        $users->each(function ($user): void {
             User::insert($user);
         });
     }

@@ -1,12 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
 use App\Models\Product;
-use Haruncpi\LaravelIdGenerator\IdGenerator;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Str;
 
 class ProductSeeder extends Seeder
 {
@@ -90,7 +89,7 @@ class ProductSeeder extends Seeder
             ]
         ]);
 
-        $products->each(function ($product) {
+        $products->each(function ($product): void {
             Product::create($product);
         });
     }
