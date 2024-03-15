@@ -2,22 +2,16 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PurchaseDetails extends Model
 {
-    protected $guarded = [
-        'id',
-    ];
+    use HasFactory, SoftDeletes;
 
-    protected $fillable = [
-        'purchase_id',
-        'product_id',
-        'quantity',
-        'unitcost',
-        'total',
-    ];
+    protected $guarded = [];
 
     protected $casts = [
         'created_at' => 'datetime',

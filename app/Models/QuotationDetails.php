@@ -2,25 +2,17 @@
 
 namespace App\Models;
 
-use Attribute;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class QuotationDetails extends Model
 {
-    protected $fillable = [
-        'quotation_id',
-        'product_id',
-        'product_name',
-        'product_code',
-        'quantity',
-        'price',
-        'unit_price',
-        'sub_total',
-        'product_discount_amount',
-        'product_discount_type',
-        'product_tax_amount'
-    ];
+    use HasFactory, SoftDeletes;
+
+    protected $guarded = [];
 
     protected $with = ['product'];
 
@@ -38,7 +30,6 @@ class QuotationDetails extends Model
     {
         return $this->belongsTo(Product::class, 'product_id', 'id');
     }
-
 
     protected function price(): Attribute
     {

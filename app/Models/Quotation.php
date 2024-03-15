@@ -3,31 +3,18 @@
 namespace App\Models;
 
 use App\Enums\QuotationStatus;
-use Attribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Quotation extends Model
 {
-    protected $fillable = [
-        'date',
-        'reference',
-        'customer_id',
-        'customer_name',
-        'tax_percentage',
-        'tax_amount',
-        'discount_percentage',
-        'discount_amount',
-        'shipping_amount',
-        'total_amount',
-        'status',
-        'note',
-        'created_at',
-        'updated_at',
-        "user_id",
-        "uuid"
-    ];
+    use HasFactory, SoftDeletes;
+
+    protected $guarded = [];
 
     protected $casts = [
         'date' => 'date',
@@ -36,7 +23,8 @@ class Quotation extends Model
         'status' => QuotationStatus::class
     ];
 
-    public static function boot() {
+    public static function boot()
+    {
         parent::boot();
 
         static::creating(function ($model) {
@@ -88,15 +76,7 @@ class Quotation extends Model
         );
     }
 
-
-    public function scopeSearch($query, $value): void
-    {
-        $query->where('reference', 'like', "%{$value}%")
-            ->orWhere('customer_name', 'like', "%{$value}%")
-            ->orWhere('status', 'like', "%{$value}%");
-    }
-
-     /**
+    /**
      * Get the user that owns the Category
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

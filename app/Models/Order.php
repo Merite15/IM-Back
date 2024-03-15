@@ -3,31 +3,17 @@
 namespace App\Models;
 
 use App\Enums\OrderStatus;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Order extends Model
 {
-    protected $guarded = [
-        'id',
-    ];
+    use HasFactory, SoftDeletes;
 
-    protected $fillable = [
-        'customer_id',
-        'order_date',
-        'order_status',
-        'total_products',
-        'sub_total',
-        'vat',
-        'total',
-        'invoice_no',
-        'payment_type',
-        'pay',
-        'due',
-        "user_id",
-        "uuid"
-    ];
+    protected $guarded = [];
 
     protected $casts = [
         'order_date'    => 'date',
@@ -46,14 +32,7 @@ class Order extends Model
         return $this->hasMany(OrderDetails::class);
     }
 
-    public function scopeSearch($query, $value): void
-    {
-        $query->where('invoice_no', 'like', "%{$value}%")
-            ->orWhere('order_status', 'like', "%{$value}%")
-            ->orWhere('payment_type', 'like', "%{$value}%");
-    }
-
-     /**
+    /**
      * Get the user that owns the Category
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

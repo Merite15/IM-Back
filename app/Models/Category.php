@@ -6,23 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends Model
 {
-    use HasFactory;
-    
+    use HasFactory, SoftDeletes;
+
     public $timestamps = true;
 
-    protected $guarded = [
-        'id',
-    ];
-
-    protected $fillable = [
-        'name',
-        'slug',
-        'short_code',
-        "user_id",
-    ];
+    protected $guarded = [];
 
     protected $casts = [
         'created_at' => 'datetime',
@@ -32,17 +24,6 @@ class Category extends Model
     public function products(): HasMany
     {
         return $this->hasMany(Product::class, 'category_id', 'id');
-    }
-
-    public function scopeSearch($query, $value): void
-    {
-        $query->where('name', 'like', "%{$value}%")
-            ->orWhere('slug', 'like', "%{$value}%");
-    }
-
-    public function getRouteKeyName(): string
-    {
-        return 'slug';
     }
 
     /**

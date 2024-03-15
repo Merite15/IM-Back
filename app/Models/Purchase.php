@@ -7,26 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Purchase extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
-    protected $guarded = [
-        'id',
-    ];
-
-    protected $fillable = [
-        'supplier_id',
-        'date',
-        'purchase_no',
-        'status',
-        'total_amount',
-        'created_by',
-        'updated_by',
-        "user_id",
-        "uuid"
-    ];
+    protected $guarded = [];
 
     protected $casts = [
         'date'       => 'date',
@@ -40,28 +27,12 @@ class Purchase extends Model
         return $this->belongsTo(Supplier::class, 'supplier_id', 'id');
     }
 
-    public function createdBy(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'created_by', 'id');
-    }
-
-    public function updatedBy(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'updated_by', 'id');
-    }
-
     public function details(): HasMany
     {
         return $this->hasMany(PurchaseDetails::class);
     }
 
-    public function scopeSearch($query, $value): void
-    {
-        $query->where('purchase_no', 'like', "%{$value}%")
-            ->orWhere('status', 'like', "%{$value}%")
-        ;
-    }
-     /**
+    /**
      * Get the user that owns the Category
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
