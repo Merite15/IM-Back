@@ -7,11 +7,8 @@ enum PurchaseStatus: int
     case PENDING = 0;
     case APPROVED = 1;
 
-    public function label(): string
+    public static function values(): array
     {
-        return match ($this) {
-            self::PENDING => __('Pending'),
-            self::APPROVED => __('Approved'),
-        };
+        return array_column(self::cases(), 'value');
     }
 }

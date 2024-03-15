@@ -10,12 +10,8 @@ enum SupplierType: string
 
     case PRODUCER = 'producer';
 
-    public function label(): string
+    public static function values(): array
     {
-        return match ($this) {
-            self::DISTRIBUTOR => __('Distributor'),
-            self::WHOLESALER => __('Wholesaler'),
-            self::PRODUCER => __('Producer'),
-        };
+        return array_column(self::cases(), 'value');
     }
 }

@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Category;
+use App\Models\Unit;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,12 +16,9 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->uuid();
-            $table->foreignId("user_id")->constrained()->onDelete('cascade');
             $table->string('name');
             $table->string('slug');
             $table->string('code');
-            //$table->string('product_barcode_symbology')->nullable();
             $table->integer('quantity');
             $table->integer('buying_price')->comment('Buying Price');
             $table->integer('selling_price')->comment('Selling Price');
@@ -26,16 +26,10 @@ return new class extends Migration
             $table->integer('tax')->nullable();
             $table->tinyInteger('tax_type')->nullable();
             $table->text('notes')->nullable();
-
             $table->string('product_image')->nullable();
-
-            $table->foreignIdFor(\App\Models\Category::class)
-                ->nullable()
-                ->constrained()
-                ->nullOnDelete();
-
-            $table->foreignIdFor(\App\Models\Unit::class)->constrained()
-                ->cascadeOnDelete();
+            $table->foreignIdFor(Category::class)->nullable();
+            $table->foreignIdFor(Unit::class);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

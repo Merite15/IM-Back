@@ -8,12 +8,8 @@ enum OrderStatus: int
     case COMPLETE = 1;
     case CANCEL = 2;
 
-    public function label(): string
+    public static function values(): array
     {
-        return match ($this) {
-            self::PENDING => __('Pending'),
-            self::COMPLETE => __('Complete'),
-            self::CANCEL => __('Cancel'),
-        };
+        return array_column(self::cases(), 'value');
     }
 }

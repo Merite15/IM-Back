@@ -1,5 +1,8 @@
 <?php
 
+use App\Enums\OrderStatus;
+use App\Models\Customer;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,13 +16,9 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->uuid();
-            $table->foreignId("user_id")->constrained()->onDelete('cascade');
-            $table->foreignIdFor(\App\Models\Customer::class)
-                ->constrained();
-            $table->string('order_date');
-            $table->tinyInteger('order_status')
-                ->comment('0 - Pending / 1 - Complete');
+            $table->foreignIdFor(Customer::class);
+            $table->string('date');
+            $table->enum('gender', OrderStatus::values());
             $table->integer('total_products');
             $table->integer('sub_total');
             $table->integer('vat');
@@ -28,6 +27,7 @@ return new class extends Migration
             $table->string('payment_type');
             $table->integer('pay');
             $table->integer('due');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

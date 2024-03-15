@@ -8,12 +8,8 @@ enum QuotationStatus: int
     case SENT = 1;
     case CANCELED = 2;
 
-    public function label(): string
+    public static function values(): array
     {
-        return match ($this) {
-            self::PENDING => __('Pending'),
-            self::SENT => __('Sent'),
-            self::CANCELED => __('Canceled'),
-        };
+        return array_column(self::cases(), 'value');
     }
 }

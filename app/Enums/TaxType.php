@@ -7,11 +7,8 @@ enum TaxType: int
     case EXCLUSIVE = 0;
     case INCLUSIVE = 1;
 
-    public function label(): string
+    public static function values(): array
     {
-        return match ($this) {
-            self::EXCLUSIVE => __('Exclusive'),
-            self::INCLUSIVE => __('Inclusive'),
-        };
+        return array_column(self::cases(), 'value');
     }
 }
