@@ -10,6 +10,7 @@ use App\Responses\ApiErrorResponse;
 use App\Responses\ApiSuccessResponse;
 use Illuminate\Http\Response;
 use Throwable;
+use Illuminate\Support\Str;
 
 final class UpdateCategory
 {
@@ -22,7 +23,7 @@ final class UpdateCategory
 
             $category->update([
                 'name' => $data['name'],
-                'slug' => $data['slug'],
+                'slug' =>  Str::slug($data['slug']),
             ]);
 
             return new ApiSuccessResponse(
