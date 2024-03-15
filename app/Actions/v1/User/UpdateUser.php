@@ -27,6 +27,12 @@ final class UpdateUser
                 'phone' => $data['phone'],
             ]);
 
+            if ($user->doesntHave('roles')) {
+                $user->assignRole($data['role_id']);
+            }
+
+            $user->syncRoles($data['role_id']);
+
             return new ApiSuccessResponse(
                 message: 'Element modifié avec succès',
                 data: $user,

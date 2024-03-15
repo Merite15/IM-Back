@@ -26,6 +26,8 @@ final class StoreUser
                 'phone' => $data['phone'],
             ]);
 
+            $user->assignRole($data['role_id']);
+
             return new ApiSuccessResponse(
                 data: $user,
                 message: "Avance de salaire ajoutée avec succès",

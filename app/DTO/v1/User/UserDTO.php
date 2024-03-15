@@ -15,7 +15,9 @@ final class UserDTO
         private readonly string $email,
         private readonly string $phone,
         private readonly string $password,
-    ) {}
+        private readonly int $role_id,
+    ) {
+    }
 
     public static function fromRequest(Request $request): self
     {
@@ -24,6 +26,7 @@ final class UserDTO
             $request->input('email'),
             $request->input('name'),
             $request->input('password'),
+            $request->input('role_id'),
             $request->input('phone')
         );
     }
@@ -36,6 +39,7 @@ final class UserDTO
             'name' => $this->name,
             'password' => $this->password,
             'phone' => $this->phone,
+            'role_id' => $this->role_id,
         ];
     }
 }
