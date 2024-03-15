@@ -27,7 +27,7 @@ class Purchase extends Model
 
     public function supplier(): BelongsTo
     {
-        return $this->belongsTo(Supplier::class, 'supplier_id', 'id');
+        return $this->belongsTo(Supplier::class);
     }
 
     public function details(): HasMany
@@ -36,12 +36,12 @@ class Purchase extends Model
     }
 
     /**
-     * Get the user that owns the Category
+     * Get the company that owns the Category
      *
      * @return BelongsTo
      */
-    public function user(): BelongsTo
+    public function company(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Company::class);
     }
 }

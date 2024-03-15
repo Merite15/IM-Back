@@ -30,12 +30,12 @@ class Supplier extends Model
     }
 
     /**
-     * Get the user that owns the Category
+     * Get the company that owns the Category
      *
      * @return BelongsTo
      */
-    public function user(): BelongsTo
+    public function company(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Company::class);
     }
 }

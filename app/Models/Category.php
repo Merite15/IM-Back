@@ -26,16 +26,16 @@ class Category extends Model
 
     public function products(): HasMany
     {
-        return $this->hasMany(Product::class, 'category_id', 'id');
+        return $this->hasMany(Product::class);
     }
 
     /**
-     * Get the user that owns the Category
+     * Get the company that owns the Category
      *
      * @return BelongsTo
      */
-    public function user(): BelongsTo
+    public function company(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Company::class);
     }
 }
