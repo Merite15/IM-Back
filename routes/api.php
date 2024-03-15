@@ -6,6 +6,7 @@ use App\Actions\RunMigration;
 use App\Http\Controllers\Api\v1\Auth\LoginController;
 use App\Http\Controllers\Api\v1\Auth\LogoutController;
 use App\Http\Controllers\Api\v1\CategoryController;
+use App\Http\Controllers\Api\v1\CompanyController;
 use App\Http\Controllers\Api\v1\CustomerController;
 use App\Http\Controllers\Api\v1\DashboardController;
 use App\Http\Controllers\Api\v1\ProductController;
@@ -48,6 +49,7 @@ Route::group(['middleware' => ['auth:sanctum']], function (): void {
 
     Route::resources([
         'customers' => CustomerController::class,
+        'companies' => CompanyController::class,
         'units' => UnitController::class,
         'suppliers' => SupplierController::class,
         'categories' => CategoryController::class,
