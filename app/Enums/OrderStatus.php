@@ -6,9 +6,9 @@ namespace App\Enums;
 
 enum OrderStatus: int
 {
-    case PENDING = 'En Attente';
-    case COMPLETE = 'Complété';
-    case CANCEL = 'Annulé';
+    case Pending = 'En Attente';
+    case Complete = 'Complété';
+    case Cancel = 'Annulé';
 
     public static function values(): array
     {

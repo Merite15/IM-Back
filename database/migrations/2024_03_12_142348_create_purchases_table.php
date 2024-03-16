@@ -21,7 +21,7 @@ return new class() extends Migration
             $table->string('date');
             $table->string('purchase_no');
             $table->integer('total_amount');
-            $table->enum('gender', PurchaseStatus::values());
+            $table->enum('status', PurchaseStatus::values())->default(PurchaseStatus::Pending->value);
             $table->foreignIdFor(Supplier::class)->constrained();
             $table->foreignIdFor(Company::class)->constrained();
             $table->softDeletes();

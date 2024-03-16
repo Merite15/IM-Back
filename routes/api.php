@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\v1\CompanyController;
 use App\Http\Controllers\Api\v1\CustomerController;
 use App\Http\Controllers\Api\v1\DashboardController;
 use App\Http\Controllers\Api\v1\ProductController;
+use App\Http\Controllers\Api\v1\PurchaseController;
 use App\Http\Controllers\Api\v1\SupplierController;
 use App\Http\Controllers\Api\v1\UnitController;
 use App\Http\Controllers\Api\v1\UserController;
@@ -45,6 +46,14 @@ Route::group(['middleware' => ['auth:sanctum']], function (): void {
         });
     });
 
+    Route::prefix('purchases')->group(function () {
+        Route::controller(PurchaseController::class)->group(function () {
+            Route::get('export-report', 'exportPurchaseReport');
+            Route::get('export-excel', 'exportExcel');
+            Route::get('approved', 'approvedPurchases');
+        });
+    });
+
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
     Route::resources([
@@ -53,6 +62,7 @@ Route::group(['middleware' => ['auth:sanctum']], function (): void {
         'units' => UnitController::class,
         'suppliers' => SupplierController::class,
         'categories' => CategoryController::class,
+        'purchase' => PurchaseController::class,
         'users' => UserController::class,
         'products' => ProductController::class,
     ], ['except' => ['edit', 'create']]);

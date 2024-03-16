@@ -84,7 +84,7 @@ class Quotation extends Model
             $model->reference = make_reference_id('QT', $number);
         });
 
-        static::addGlobalScope('current_year', function (Builder $builder): void {
+        static::addGlobalScope('current_company', function (Builder $builder): void {
             $builder->whereYear('company_id', auth()->user()->current_company);
         });
     }

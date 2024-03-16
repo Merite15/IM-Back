@@ -61,7 +61,7 @@ class Product extends Model
 
     protected static function booted(): void
     {
-        static::addGlobalScope('current_year', function (Builder $builder): void {
+        static::addGlobalScope('current_company', function (Builder $builder): void {
             $builder->whereYear('company_id', auth()->user()->current_company);
         });
     }

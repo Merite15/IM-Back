@@ -6,9 +6,9 @@ namespace App\Enums;
 
 enum SupplierType: string
 {
-    case DISTRIBUTOR = 'distributeur';
-    case WHOLESALER = 'grossiste';
-    case PRODUCER = 'producteur';
+    case Distributor = 'distributeur';
+    case Wholesaler = 'grossiste';
+    case Producer = 'producteur';
 
     public static function values(): array
     {

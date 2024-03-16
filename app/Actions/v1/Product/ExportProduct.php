@@ -46,7 +46,7 @@ final class ExportProduct
                 );
             }
 
-            $this->ExportExcel($product_array);
+            $this->exportExcel($product_array);
         } catch (Throwable $exception) {
             return new ApiErrorResponse(
                 exception: $exception,

@@ -6,8 +6,8 @@ namespace App\Enums;
 
 enum PurchaseStatus: int
 {
-    case PENDING = 'En Attente';
-    case APPROVED = 'Approuvé';
+    case Pending = 'En Attente';
+    case Approved = 'Approuvé';
 
     public static function values(): array
     {
