@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Database\Factories;
 
 use App\Enums\SupplierType;
+use App\Enums\UserGender;
+use App\Models\Company;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -25,7 +27,10 @@ class SupplierFactory extends Factory
             'phone' => fake()->unique()->phoneNumber(),
             'address' => fake()->address(),
             'shop_name' => fake()->company(),
+            'city' => fake()->city,
             'type' => fake()->randomElement(SupplierType::cases()),
+            'gender' => fake()->randomElement(UserGender::cases()),
+            'company_id' => Company::all()->random()->id,
         ];
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-enum TaxType: int
+enum TaxType: string
 {
     case CA = 'CA';
     case TVA = 'TVA';

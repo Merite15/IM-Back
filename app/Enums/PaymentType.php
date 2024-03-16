@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-enum PaymentType: int
+enum PaymentType: string
 {
     case CASH = 'cash';
     case CARD = 'card';

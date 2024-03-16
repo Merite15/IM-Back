@@ -79,13 +79,16 @@ class Quotation extends Model
 
     protected static function booted(): void
     {
-        static::creating(function ($model): void {
-            $number = Quotation::max('id') + 1;
-            $model->reference = make_reference_id('QT', $number);
-        });
+        // static::creating(function ($model): void {
+        //     $number = Quotation::max('id') + 1;
+
+        //     $model->reference = make_reference_id('QT', $number);
+        // });
 
         static::addGlobalScope('current_company', function (Builder $builder): void {
-            $builder->whereYear('company_id', auth()->user()->current_company);
+            if (auth()->check()) {
+                $builder->where('company_id', auth()->user()->current_company);
+            }
         });
     }
 }

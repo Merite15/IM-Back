@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Enums\SupplierType;
+use App\Enums\UserGender;
 use App\Models\Company;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -22,7 +23,9 @@ return new class() extends Migration
             $table->string('phone')->unique();
             $table->string('address')->nullable();
             $table->string('shop_name');
+            $table->string('city');
             $table->enum('type', SupplierType::values());
+            $table->enum('gender', UserGender::values());
             $table->foreignIdFor(Company::class)->constrained();
             $table->softDeletes();
             $table->timestamps();

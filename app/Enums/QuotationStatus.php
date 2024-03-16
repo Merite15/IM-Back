@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Enums;
 
-enum QuotationStatus: int
+enum QuotationStatus: string
 {
     case Pending = 'En Attente';
     case Sent = 'Envoyé';
