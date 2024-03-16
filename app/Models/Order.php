@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Enums\OrderStatus;
+use App\Enums\PaymentType;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -21,7 +22,8 @@ class Order extends Model
 
     protected $casts = [
         'order_date'    => 'date',
-        'order_status'  => OrderStatus::class
+        'order_status'  => OrderStatus::class,
+        'payment_type'  => PaymentType::class
     ];
 
     public function customer(): BelongsTo

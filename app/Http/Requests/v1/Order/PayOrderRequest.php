@@ -1,14 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Http\Requests\v1\Order;
 
-use App\Enums\OrderStatus;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Enum;
 
-class StoreOrderRequest extends FormRequest
+class PayOrderRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,10 +22,7 @@ class StoreOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'customer_id' => 'required|integer|exists:customers,id',
-            'order_status' => ['required', new Enum(OrderStatus::class)],
-            'pay' => 'numeric|nullable',
-            'due' => 'numeric|nullable',
+            'pay' => 'required|numeric'
         ];
     }
 }

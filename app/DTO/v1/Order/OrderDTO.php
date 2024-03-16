@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\DTO\v1\Order;
 
 use App\Enums\OrderStatus;
-use App\Enums\PaymentStatus;
+use App\Enums\PaymentType;
 use Illuminate\Http\Request;
 
 final class OrderDTO
@@ -19,10 +19,11 @@ final class OrderDTO
         private readonly int $vat,
         private readonly string $invoice_no,
         private readonly int $total,
-        private readonly PaymentStatus $payment_status,
+        private readonly PaymentType $payment_type,
         private readonly int $pay,
         private readonly int $due,
-    ) {}
+    ) {
+    }
 
     public static function fromRequest(Request $request): self
     {
@@ -52,7 +53,7 @@ final class OrderDTO
             'vat' => $this->vat,
             'invoice_no' => $this->invoice_no,
             'total' => $this->total,
-            'payment_status' => $this->payment_status,
+            'payment_type' => $this->payment_type,
             'pay' => $this->pay,
             'due' => $this->due,
         ];

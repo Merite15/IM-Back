@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Enums\OrderStatus;
+use App\Enums\PaymentType;
 use App\Models\Company;
 use App\Models\Customer;
 use Illuminate\Database\Migrations\Migration;
@@ -25,7 +26,7 @@ return new class() extends Migration
             $table->integer('vat');
             $table->integer('total');
             $table->string('invoice_no');
-            $table->string('payment_type');
+            $table->enum('payment_type', PaymentType::values());
             $table->integer('pay');
             $table->integer('due');
             $table->foreignIdFor(Customer::class)->constrained();
