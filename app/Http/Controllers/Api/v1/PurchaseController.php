@@ -31,7 +31,7 @@ class PurchaseController extends Controller
         return $action->handle();
     }
 
-    public function approvedPurchases(FetchApprovedPurchases $action)
+    public function getApprovedPurchases(FetchApprovedPurchases $action)
     {
         return $action->handle();
     }

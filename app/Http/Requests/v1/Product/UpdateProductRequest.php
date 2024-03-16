@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Requests\v1\Product;
 
+use App\Enums\TaxType;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Enum;
 
 class UpdateProductRequest extends FormRequest
 {
@@ -24,16 +26,19 @@ class UpdateProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'image' => 'image|file|max:1024',
             'name' => 'required|string',
+            'slug' => 'required|string',
+            'code' => 'required|string',
+            'quantity' => 'required|integer|min:0',
+            'buying_price' => 'required|numeric|min:0',
+            'selling_price' => 'required|numeric|min:0',
+            'quantity_alert' => 'required|integer|min:0',
+            'tax' => 'nullable|numeric|min:0',
+            'tax_type' => ['required', new Enum(TaxType::class)],
+            'notes' => 'nullable|string',
+            'image' => 'nullable|image|file|max:1024',
             'category_id' => 'required|integer|exists:categories,id',
-            'supplier_id' => 'required|integer|exists:suppliers,id',
-            'garage' => 'string|nullable',
-            'store' => 'string|nullable',
-            'buying_date' => 'date_format:Y-m-d|max:10|nullable',
-            'expire_date' => 'date_format:Y-m-d|max:10|nullable',
-            'buying_price' => 'required|integer',
-            'selling_price' => 'required|integer',
+            'unit_id' => 'required|integer|exists:units,id',
         ];
     }
 }

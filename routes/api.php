@@ -3,12 +3,12 @@
 declare(strict_types=1);
 
 use App\Actions\RunMigration;
-use App\Http\Controllers\Api\v1\Auth\LoginController;
-use App\Http\Controllers\Api\v1\Auth\LogoutController;
+use App\Http\Controllers\Api\v1\AuthController;
 use App\Http\Controllers\Api\v1\CategoryController;
 use App\Http\Controllers\Api\v1\CompanyController;
 use App\Http\Controllers\Api\v1\CustomerController;
 use App\Http\Controllers\Api\v1\DashboardController;
+use App\Http\Controllers\Api\v1\OrderController;
 use App\Http\Controllers\Api\v1\ProductController;
 use App\Http\Controllers\Api\v1\PurchaseController;
 use App\Http\Controllers\Api\v1\SupplierController;
@@ -33,11 +33,13 @@ Route::get('/run-migration', fn () => RunMigration::handle());
 Route::middleware('auth:sanctum')->get('/user', fn (Request $request) => $request->user());
 
 Route::prefix('auth')->group(function (): void {
-    Route::post('/login', LoginController::class)->name('login');
-    Route::middleware('auth:sanctum')->delete('/logout', LogoutController::class)->name('logout');
+    Route::post('/login', [AuthController::class, 'login'])->name('login');
+    Route::middleware('auth:sanctum')->delete('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
 Route::group(['middleware' => ['auth:sanctum']], function (): void {
+    Route::get('/dashboard', DashboardController::class)->name('dashboard');
+
     Route::prefix('products')->group(function () {
         Route::controller(ProductController::class)->group(function () {
             Route::get('import', 'import');
@@ -50,11 +52,18 @@ Route::group(['middleware' => ['auth:sanctum']], function (): void {
         Route::controller(PurchaseController::class)->group(function () {
             Route::get('export-report', 'exportPurchaseReport');
             Route::get('export-excel', 'exportExcel');
-            Route::get('approved', 'approvedPurchases');
+            Route::get('approved', 'getApprovedPurchases');
         });
     });
 
-    Route::get('/dashboard', DashboardController::class)->name('dashboard');
+    Route::prefix('orders')->group(function () {
+        Route::controller(OrderController::class)->group(function () {
+            Route::get('pending', 'getPendingOrders');
+            Route::get('due', 'getDueOrders');
+            Route::put('pay-due-order/{order}', 'payDueOrder');
+            Route::get('complete', 'getCompleteOrders');
+        });
+    });
 
     Route::resources([
         'customers' => CustomerController::class,
@@ -65,5 +74,6 @@ Route::group(['middleware' => ['auth:sanctum']], function (): void {
         'purchase' => PurchaseController::class,
         'users' => UserController::class,
         'products' => ProductController::class,
+        'orders' => OrderController::class,
     ], ['except' => ['edit', 'create']]);
 });

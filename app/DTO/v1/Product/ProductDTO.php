@@ -4,21 +4,25 @@ declare(strict_types=1);
 
 namespace App\DTO\v1\Product;
 
+use App\Enums\TaxType;
 use Illuminate\Http\Request;
 
 final class ProductDTO
 {
     public function __construct(
         private readonly string $name,
-        private readonly int $category_id,
-        private readonly int $supplier_id,
-        private readonly string $garage,
-        private readonly int $store,
-        private readonly ?string $image = null,
-        private readonly string $buying_date,
-        private readonly string $expire_date,
+        private readonly string $slug,
+        private readonly string $code,
+        private readonly int $quantity,
         private readonly int $buying_price,
         private readonly int $selling_price,
+        private readonly int $quantity_alert,
+        private readonly ?int $tax = null,
+        private readonly TaxType $tax_type,
+        private readonly ?string $notes = null,
+        private readonly ?string $image = null,
+        private readonly int $category_id,
+        private readonly int $unit_id,
     ) {
     }
 
@@ -26,15 +30,18 @@ final class ProductDTO
     {
         return [
             'name' => $this->name,
-            'category_id' => $this->category_id,
-            'supplier_id' => $this->supplier_id,
-            'garage' => $this->garage,
-            'store' => $this->store,
-            'image' => $this->image,
-            'buying_date' => $this->buying_date,
-            'expire_date' => $this->expire_date,
+            'slug' => $this->slug,
+            'code' => $this->code,
+            'quantity' => $this->quantity,
             'buying_price' => $this->buying_price,
             'selling_price' => $this->selling_price,
+            'quantity_alert' => $this->quantity_alert,
+            'tax' => $this->tax,
+            'tax_type' => $this->tax_type,
+            'notes' => $this->notes,
+            'image' => $this->image,
+            'category_id' => $this->category_id,
+            'unit_id' => $this->unit_id,
         ];
     }
 
@@ -42,15 +49,18 @@ final class ProductDTO
     {
         return new self(
             $request->input('name'),
-            $request->input('category_id'),
-            $request->input('supplier_id'),
-            $request->input('garage'),
-            $request->input('store'),
-            $request->input('image'),
-            $request->input('buying_date'),
-            $request->input('expire_date'),
+            $request->input('slug'),
+            $request->input('code'),
+            $request->input('quantity'),
             $request->input('buying_price'),
-            $request->input('selling_price')
+            $request->input('selling_price'),
+            $request->input('quantity_alert'),
+            $request->input('tax'),
+            $request->input('tax_type'),
+            $request->input('notes'),
+            $request->input('image'),
+            $request->input('category_id'),
+            $request->input('unit_id')
         );
     }
 }

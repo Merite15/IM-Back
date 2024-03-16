@@ -6,6 +6,7 @@ namespace App\Http\Requests\v1\Order;
 
 use App\Enums\OrderStatus;
 use App\Enums\PaymentStatus;
+use App\Enums\PaymentType;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
 
@@ -28,9 +29,15 @@ class UpdateOrderRequest extends FormRequest
     {
         return [
             'customer_id' => 'required|integer|exists:customers,id',
-            'order_status' => ['required', new Enum(OrderStatus::class)],
-            'pay' => 'numeric|nullable',
-            'due' => 'numeric|nullable',
+            'status' => ['required', new Enum(OrderStatus::class)],
+            'total_products' => 'required|integer|min:0',
+            'sub_total' => 'required|numeric|min:0',
+            'vat' => 'required|numeric|min:0',
+            'total' => 'required|numeric|min:0',
+            'invoice_no' => 'required|string',
+            'payment_type' => ['required', new Enum(PaymentType::class)],
+            'pay' => 'nullable|numeric|min:0',
+            'due' => 'nullable|numeric|min:0',
         ];
     }
 }

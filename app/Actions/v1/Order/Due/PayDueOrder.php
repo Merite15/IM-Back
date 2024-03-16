@@ -16,7 +16,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Mail;
 use Throwable;
 
-final class FetchCompleteOrders
+final class PayDueOrder
 {
     public function handle(string $id, PayOrderDTO $dto): ApiErrorResponse | ApiSuccessResponse
     {

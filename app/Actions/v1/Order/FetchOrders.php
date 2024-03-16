@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace App\Actions\v1\Order;
 
-use App\Enums\OrderStatus;
 use App\Http\Resources\v1\Order\OrderCollection;
 use App\Models\Order;
 use App\Responses\ApiErrorResponse;
 use App\Responses\v1\Order\OrderCollectionResponse;
 use Throwable;
 
-final class FetchDueOrders
+final class FetchOrders
 {
     public function handle(): ApiErrorResponse | OrderCollectionResponse
     {
@@ -19,7 +18,6 @@ final class FetchDueOrders
             return new OrderCollectionResponse(
                 orderCollection: new OrderCollection(
                     resource: Order::query()
-                        ->where('due', '>', '0')
                         ->with('customer')
                         ->latest()
                         ->get()
