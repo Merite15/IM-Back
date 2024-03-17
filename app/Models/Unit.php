@@ -25,9 +25,7 @@ class Unit extends Model
     protected static function booted(): void
     {
         static::addGlobalScope('current_company', function (Builder $builder): void {
-            if (auth()->check()) {
-                $builder->where('company_id', auth()->user()->current_company);
-            }
+            $builder->where('company_id', auth()->user()->current_company);
         });
     }
 }

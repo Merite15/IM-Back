@@ -15,29 +15,6 @@ class UnitSeeder extends Seeder
      */
     public function run(): void
     {
-        $units = collect([
-            [
-                'name' => 'Meters',
-                'slug' => 'meters',
-                'short_code' => 'm',
-                'company_id' => 1
-            ],
-            [
-                'name' => 'Centimeters',
-                'slug' => 'centimeters',
-                'short_code' => 'cm',
-                'company_id' => 1
-            ],
-            [
-                'name' => 'Piece',
-                'slug' => 'piece',
-                'short_code' => 'pc',
-                'company_id' => 1
-            ]
-        ]);
-
-        $units->each(function ($unit): void {
-            Unit::insert($unit);
-        });
+        Unit::factory()->count(10)->create();
     }
 }

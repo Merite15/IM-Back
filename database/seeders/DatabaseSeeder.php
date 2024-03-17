@@ -23,16 +23,13 @@ class DatabaseSeeder extends Seeder
             SupplierSeeder::class,
             CategorySeeder::class,
             UnitSeeder::class,
+            ProductSeeder::class,
             QuotationSeeder::class,
-            // QuotationDetailsSeeder::class,
+            QuotationDetailsSeeder::class,
             OrderSeeder::class,
-            // OrderDetailsSeeder::class,
+            OrderDetailsSeeder::class,
             PurchaseSeeder::class,
-            // PurchaseDetailsSeeder::class,
-            ProductSeeder::class
+            PurchaseDetailsSeeder::class
         ]);
-
-        Customer::factory(15)->create();
-        Supplier::factory(15)->create();
     }
 }

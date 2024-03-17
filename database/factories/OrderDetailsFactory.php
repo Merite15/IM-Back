@@ -23,8 +23,8 @@ class OrderDetailsFactory extends Factory
             'quantity' => fake()->numberBetween(1, 10),
             'unit_cost' => fake()->numberBetween(100, 1000),
             'total' => fake()->numberBetween(100, 1000),
-            'order_id' => Order::all()->random()->id,
-            'product_id' => Product::all()->random()->id,
+            'order_id' => fake()->randomElement([1, 2, 3, 4, 5]),
+            'product_id' => fake()->randomElement([1, 2, 3, 4, 5]),
             'company_id' => Company::all()->random()->id,
         ];
     }

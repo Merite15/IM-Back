@@ -22,7 +22,7 @@ class PurchaseFactory extends Factory
     public function definition(): array
     {
         return [
-            'supplier_id' => Supplier::all()->random()->id,
+            'supplier_id' => fake()->randomElement([1, 2, 3, 4, 5]),
             'date' => now(),
             'purchase_no' => fake()->randomElement([1, 2, 3, 4, 5]),
             'status' => fake()->randomElement(PurchaseStatus::values()),

@@ -32,7 +32,7 @@ class OrderFactory extends Factory
             'payment_type' => fake()->randomElement(PaymentType::cases()),
             'pay' => fake()->numberBetween(0, 500),
             'due' => fake()->numberBetween(0, 500),
-            'customer_id' => Customer::all()->random()->id,
+            'customer_id' => fake()->randomElement([1, 2, 3, 4, 5]),
             'company_id' => Company::all()->random()->id,
         ];
     }

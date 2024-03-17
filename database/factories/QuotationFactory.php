@@ -31,7 +31,7 @@ class QuotationFactory extends Factory
             'note' => fake()->sentence(),
             'status' => fake()->randomElement(OrderStatus::cases()),
             'company_id' => Company::all()->random()->id,
-            'customer_id' =>  Customer::all()->random()->id,
+            'customer_id' => fake()->randomElement([1, 2, 3, 4, 5]),
         ];
     }
 }

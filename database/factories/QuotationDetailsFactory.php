@@ -27,9 +27,9 @@ class QuotationDetailsFactory extends Factory
             'product_discount_amount' => fake()->numberBetween(0, 100),
             'product_discount_type' => 'fixed',
             'product_tax_amount' => fake()->numberBetween(0, 100),
-            'quotation_id' => Quotation::all()->random()->id,
             'company_id' => Company::all()->random()->id,
-            'product_id' =>  Product::all()->random()->id,
+            'quotation_id' => fake()->randomElement([1, 2, 3, 4, 5]),
+            'product_id' => fake()->randomElement([1, 2, 3, 4, 5]),
         ];
     }
 }
