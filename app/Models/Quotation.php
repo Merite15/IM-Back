@@ -45,38 +45,6 @@ class Quotation extends Model
         return $this->belongsTo(Company::class);
     }
 
-    protected function shippingAmount(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => $value / 100,
-            set: fn ($value) => $value * 100,
-        );
-    }
-
-    protected function totalAmount(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => $value / 100,
-            set: fn ($value) => $value * 100,
-        );
-    }
-
-    protected function taxAmount(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => $value / 100,
-            set: fn ($value) => $value * 100,
-        );
-    }
-
-    protected function discountAmount(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value) => $value / 100,
-            set: fn ($value) => $value * 100,
-        );
-    }
-
     protected static function booted(): void
     {
         // static::creating(function ($model): void {
@@ -88,5 +56,37 @@ class Quotation extends Model
         static::addGlobalScope('current_company', function (Builder $builder): void {
             $builder->where('company_id', auth()->user()->current_company);
         });
+    }
+
+    protected function shippingAmount(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => $value / 100,
+            set: fn($value) => $value * 100,
+        );
+    }
+
+    protected function totalAmount(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => $value / 100,
+            set: fn($value) => $value * 100,
+        );
+    }
+
+    protected function taxAmount(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => $value / 100,
+            set: fn($value) => $value * 100,
+        );
+    }
+
+    protected function discountAmount(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => $value / 100,
+            set: fn($value) => $value * 100,
+        );
     }
 }

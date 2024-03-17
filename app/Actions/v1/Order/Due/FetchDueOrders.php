@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Actions\v1\Order;
 
-use App\Enums\OrderStatus;
 use App\Http\Resources\v1\Order\OrderCollection;
 use App\Models\Order;
 use App\Responses\ApiErrorResponse;

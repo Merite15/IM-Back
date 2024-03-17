@@ -14,8 +14,7 @@ final class CompanyCollectionResponse implements Responsable
     public function __construct(
         private readonly CompanyCollection $companyCollection,
         private readonly int $status = Response::HTTP_OK,
-    ) {
-    }
+    ) {}
 
     public function toResponse($request): JsonResponse
     {

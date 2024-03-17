@@ -1,10 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Factories;
 
 use App\Models\Company;
-use App\Models\Order;
-use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

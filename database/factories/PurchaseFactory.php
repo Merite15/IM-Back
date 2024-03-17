@@ -6,7 +6,6 @@ namespace Database\Factories;
 
 use App\Enums\PurchaseStatus;
 use App\Models\Company;
-use App\Models\Supplier;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

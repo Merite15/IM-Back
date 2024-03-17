@@ -43,26 +43,26 @@ class Product extends Model
         return $this->belongsTo(Company::class);
     }
 
+    protected static function booted(): void
+    {
+        static::addGlobalScope('current_company', function (Builder $builder): void {
+            $builder->where('company_id', auth()->user()->current_company);
+        });
+    }
+
     protected function buyingPrice(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => $value / 100,
-            set: fn ($value) => $value * 100,
+            get: fn($value) => $value / 100,
+            set: fn($value) => $value * 100,
         );
     }
 
     protected function sellingPrice(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => $value / 100,
-            set: fn ($value) => $value * 100,
+            get: fn($value) => $value / 100,
+            set: fn($value) => $value * 100,
         );
-    }
-
-    protected static function booted(): void
-    {
-        static::addGlobalScope('current_company', function (Builder $builder): void {
-            $builder->where('company_id', auth()->user()->current_company);
-        });
     }
 }

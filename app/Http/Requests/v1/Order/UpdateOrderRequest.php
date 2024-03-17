@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Http\Requests\v1\Order;
 
 use App\Enums\OrderStatus;
-use App\Enums\PaymentStatus;
 use App\Enums\PaymentType;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;

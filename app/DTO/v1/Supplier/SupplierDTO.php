@@ -19,8 +19,7 @@ final class SupplierDTO
         private readonly SupplierType $type,
         private readonly UserGender $gender,
         private readonly string $city,
-    ) {
-    }
+    ) {}
 
     public static function fromRequest(Request $request): self
     {

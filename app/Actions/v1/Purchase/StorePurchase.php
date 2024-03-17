@@ -33,14 +33,14 @@ final class StorePurchase
                 'company_id' => auth()->user()->current_company,
             ]);
 
-            if (!$data['products'] == null) {
+            if ( ! $data['products'] === null) {
                 $details = [];
 
                 foreach ($data['products'] as $product) {
                     $details['purchase_id']    = $purchase['id'];
                     $details['product_id']     = $product['product_id'];
                     $details['quantity']       = $product['quantity'];
-                    $details['unit_cost']       = intval($product['unit_cost']);
+                    $details['unit_cost']       = (int) ($product['unit_cost']);
                     $details['total']          = $product['total'];
                     $details['created_at']     = Carbon::now();
 

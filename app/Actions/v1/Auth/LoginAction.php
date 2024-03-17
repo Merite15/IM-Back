@@ -24,7 +24,7 @@ final class LoginAction
 
             $user = User::query()->with('roles.permissions', 'companies')->where('email', $data['email'])->first();
 
-            if (!$user || !Hash::check($data['password'], $user->password)) {
+            if ( ! $user || ! Hash::check($data['password'], $user->password)) {
                 throw new Exception('Les informations d\'identification fournies sont incorrectes.', Response::HTTP_UNAUTHORIZED);
             }
 
@@ -60,9 +60,9 @@ final class LoginAction
                     message: 'Connecté avec succès',
                     data: $data,
                 );
-            } else {
-                throw new Exception('Vous devez spécifier un hôpital pour vous connecter en tant qu\'administrateur.', Response::HTTP_UNAUTHORIZED);
             }
+            throw new Exception('Vous devez spécifier un hôpital pour vous connecter en tant qu\'administrateur.', Response::HTTP_UNAUTHORIZED);
+
         } catch (Throwable $exception) {
             return new ApiErrorResponse(
                 exception: $exception,

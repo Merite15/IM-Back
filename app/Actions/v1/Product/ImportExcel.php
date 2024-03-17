@@ -16,7 +16,7 @@ final class ImportExcel
         try {
             $products = Product::query()->all()->sortBy('name');
 
-            $product_array[] = array(
+            $product_array[] = [
                 'Product Name',
                 'Product Slug',
                 'Category Id',
@@ -28,10 +28,10 @@ final class ImportExcel
                 'Selling Price',
                 'Product Image',
                 "Note"
-            );
+            ];
 
             foreach ($products as $product) {
-                $product_array[] = array(
+                $product_array[] = [
                     'Product Name' => $product->name,
                     'Product Slug' => $product->slug,
                     'Category Id' => $product->category_id,
@@ -43,7 +43,7 @@ final class ImportExcel
                     'Selling Price' => $product->selling_price,
                     'Product Image' => $product->image,
                     "Note" => $product->note
-                );
+                ];
             }
 
             Product::create($product_array);

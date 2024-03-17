@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api\v1;
 
 use App\Actions\v1\Company\DestroyCompany;
@@ -14,7 +16,6 @@ use App\Http\Requests\v1\Company\UpdateCompanyRequest;
 use App\Responses\ApiErrorResponse;
 use App\Responses\ApiSuccessResponse;
 use App\Responses\v1\Company\CompanyCollectionResponse;
-use Illuminate\Http\Request;
 
 class CompanyController extends Controller
 {

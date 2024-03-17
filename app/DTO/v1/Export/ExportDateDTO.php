@@ -11,9 +11,7 @@ final class ExportDateDTO
     public function __construct(
         private readonly string $start_date,
         private readonly string $end_date,
-
-    ) {
-    }
+    ) {}
 
     public static function fromRequest(Request $request): self
     {

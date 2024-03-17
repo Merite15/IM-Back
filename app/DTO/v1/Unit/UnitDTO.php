@@ -12,8 +12,7 @@ final class UnitDTO
         private readonly string $name,
         private readonly string $slug,
         private readonly string $short_code,
-    ) {
-    }
+    ) {}
 
     public static function fromRequest(Request $request): self
     {

@@ -29,7 +29,7 @@ final class ImportProduct
 
             $startCount = 2;
 
-            $data = array();
+            $data = [];
 
             foreach ($row_range as $row) {
                 $data[] = [

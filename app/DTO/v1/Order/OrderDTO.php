@@ -22,8 +22,7 @@ final class OrderDTO
         private readonly PaymentType $payment_type,
         private readonly int $pay,
         private readonly int $due,
-    ) {
-    }
+    ) {}
 
     public static function fromRequest(Request $request): self
     {

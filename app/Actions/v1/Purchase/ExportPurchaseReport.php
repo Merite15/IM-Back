@@ -36,7 +36,7 @@ final class ExportPurchaseReport
                 )
                 ->get();
 
-            $purchase_array[] = array(
+            $purchase_array[] = [
                 'Date',
                 'No Purchase',
                 'Supplier',
@@ -46,10 +46,10 @@ final class ExportPurchaseReport
                 'Unit Cost',
                 'Total',
                 'Created By'
-            );
+            ];
 
             foreach ($purchases as $purchase) {
-                $purchase_array[] = array(
+                $purchase_array[] = [
                     'Date' => $purchase->updated_at,
                     'No Purchase' => $purchase->purchase_no,
                     'Supplier' => $purchase->supplier_id,
@@ -59,7 +59,7 @@ final class ExportPurchaseReport
                     'Unit Cost' => $purchase->unit_cost,
                     'Total' => $purchase->total,
                     'Created By' => $purchase->created_by
-                );
+                ];
             }
 
             $this->exportExcel($purchase_array);

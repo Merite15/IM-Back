@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Resources\v1\Purchase;
 
 use Illuminate\Http\Request;

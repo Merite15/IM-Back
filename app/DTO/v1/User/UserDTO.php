@@ -16,8 +16,7 @@ final class UserDTO
         private readonly string $phone,
         private readonly string $password,
         private readonly int $role_id,
-    ) {
-    }
+    ) {}
 
     public static function fromRequest(Request $request): self
     {

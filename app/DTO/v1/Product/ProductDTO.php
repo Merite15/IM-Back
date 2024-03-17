@@ -22,7 +22,24 @@ final class ProductDTO
         private readonly ?string $image = null,
         private readonly int $category_id,
         private readonly int $unit_id,
-    ) {
+    ) {}
+
+    public static function fromRequest(Request $request): self
+    {
+        return new self(
+            $request->input('name'),
+            $request->input('slug'),
+            $request->input('quantity'),
+            $request->input('buying_price'),
+            $request->input('selling_price'),
+            $request->input('quantity_alert'),
+            $request->input('tax'),
+            $request->input('tax_type'),
+            $request->input('notes'),
+            $request->input('image'),
+            $request->input('category_id'),
+            $request->input('unit_id')
+        );
     }
 
     public function toArray(): array
@@ -41,23 +58,5 @@ final class ProductDTO
             'category_id' => $this->category_id,
             'unit_id' => $this->unit_id,
         ];
-    }
-
-    public static function fromRequest(Request $request): self
-    {
-        return new self(
-            $request->input('name'),
-            $request->input('slug'),
-            $request->input('quantity'),
-            $request->input('buying_price'),
-            $request->input('selling_price'),
-            $request->input('quantity_alert'),
-            $request->input('tax'),
-            $request->input('tax_type'),
-            $request->input('notes'),
-            $request->input('image'),
-            $request->input('category_id'),
-            $request->input('unit_id')
-        );
     }
 }

@@ -34,7 +34,7 @@ final class PayDueOrder
                 'pay' => $paidPay
             ]);
 
-            if ($paidDue == 0) {
+            if ($paidDue === 0) {
                 $order->update([
                     'status' => OrderStatus::Complete
                 ]);

@@ -28,9 +28,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/run-migration', fn () => RunMigration::handle());
+Route::get('/run-migration', fn() => RunMigration::handle());
 
-Route::middleware('auth:sanctum')->get('/user', fn (Request $request) => $request->user());
+Route::middleware('auth:sanctum')->get('/user', fn(Request $request) => $request->user());
 
 Route::prefix('auth')->group(function (): void {
     Route::post('/login', [AuthController::class, 'login'])->name('login');
@@ -40,23 +40,23 @@ Route::prefix('auth')->group(function (): void {
 Route::group(['middleware' => ['auth:sanctum']], function (): void {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
-    Route::prefix('products')->group(function () {
-        Route::controller(ProductController::class)->group(function () {
+    Route::prefix('products')->group(function (): void {
+        Route::controller(ProductController::class)->group(function (): void {
             Route::get('import', 'import');
             Route::get('export-excel', 'exportExcel');
         });
     });
 
-    Route::prefix('purchases')->group(function () {
-        Route::controller(PurchaseController::class)->group(function () {
+    Route::prefix('purchases')->group(function (): void {
+        Route::controller(PurchaseController::class)->group(function (): void {
             Route::get('export-report', 'exportPurchaseReport');
             Route::get('export-excel', 'exportExcel');
             Route::get('approved', 'getApprovedPurchases');
         });
     });
 
-    Route::prefix('orders')->group(function () {
-        Route::controller(OrderController::class)->group(function () {
+    Route::prefix('orders')->group(function (): void {
+        Route::controller(OrderController::class)->group(function (): void {
             Route::get('pending', 'getPendingOrders');
             Route::get('due', 'getDueOrders');
             Route::put('pay-due-order/{order}', 'payDueOrder');

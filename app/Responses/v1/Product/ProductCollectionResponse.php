@@ -14,8 +14,7 @@ final class ProductCollectionResponse implements Responsable
     public function __construct(
         private readonly ProductCollection $productCollection,
         private readonly int $status = Response::HTTP_OK,
-    ) {
-    }
+    ) {}
 
     public function toResponse($request): JsonResponse
     {

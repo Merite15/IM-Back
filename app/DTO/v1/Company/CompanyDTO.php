@@ -12,8 +12,7 @@ final class CompanyDTO
         private readonly string $name,
         private readonly string $address,
         private readonly string $phone,
-    ) {
-    }
+    ) {}
 
     public static function fromRequest(Request $request): self
     {

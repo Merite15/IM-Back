@@ -10,8 +10,7 @@ final class SaveCustomerDTO
 {
     public function __construct(
         private readonly int $customer_id,
-    ) {
-    }
+    ) {}
 
     public static function fromRequest(Request $request): self
     {

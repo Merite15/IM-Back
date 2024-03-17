@@ -13,7 +13,16 @@ final class PurchaseDTO
         private readonly int $supplier_id,
         private readonly int $total_amount,
         private readonly array $products,
-    ) {
+    ) {}
+
+    public static function fromRequest(Request $request): self
+    {
+        return new self(
+            $request->input('date'),
+            $request->input('total_amount'),
+            $request->input('supplier_id'),
+            $request->input('products'),
+        );
     }
 
     public function toArray(): array
@@ -24,15 +33,5 @@ final class PurchaseDTO
             'total_amount' => $this->total_amount,
             'products' => $this->products,
         ];
-    }
-
-    public static function fromRequest(Request $request): self
-    {
-        return new self(
-            $request->input('date'),
-            $request->input('total_amount'),
-            $request->input('supplier_id'),
-            $request->input('products'),
-        );
     }
 }

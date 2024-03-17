@@ -9,8 +9,8 @@ use App\Models\Unit;
 use App\Responses\ApiErrorResponse;
 use App\Responses\ApiSuccessResponse;
 use Illuminate\Http\Response;
-use Throwable;
 use Illuminate\Support\Str;
+use Throwable;
 
 final class StoreUnit
 {

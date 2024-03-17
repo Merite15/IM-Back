@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api\v1;
 
 use App\Actions\v1\Purchase\DestroyPurchase;
@@ -19,7 +21,6 @@ use App\Http\Requests\v1\Purchase\StorePurchaseRequest;
 use App\Responses\ApiErrorResponse;
 use App\Responses\ApiSuccessResponse;
 use App\Responses\v1\Purchase\PurchaseCollectionResponse;
-use Illuminate\Http\Request;
 
 class PurchaseController extends Controller
 {

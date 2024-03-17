@@ -10,8 +10,7 @@ final class PayOrderDTO
 {
     public function __construct(
         private readonly int $pay,
-    ) {
-    }
+    ) {}
 
     public static function fromRequest(Request $request): self
     {
