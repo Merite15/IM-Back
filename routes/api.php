@@ -44,7 +44,6 @@ Route::group(['middleware' => ['auth:sanctum']], function (): void {
         Route::controller(ProductController::class)->group(function () {
             Route::get('import', 'import');
             Route::get('export-excel', 'exportExcel');
-            Route::get('export-data', 'exportData');
         });
     });
 
@@ -75,5 +74,5 @@ Route::group(['middleware' => ['auth:sanctum']], function (): void {
         'users' => UserController::class,
         'products' => ProductController::class,
         'orders' => OrderController::class,
-    ], ['except' => ['edit', 'create']]);
+    ], ['except' => ['create', 'edit']]);
 });

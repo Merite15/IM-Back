@@ -28,12 +28,12 @@ final class StoreProduct
 
             $product = Product::create([
                 'name' => $data['name'],
+                'tax_type' => $data['tax_type'],
+                'tax' => $data['tax'],
                 'category_id' => $data['category_id'],
-                'supplier_id' => $data['supplier_id'],
-                'garage' => $data['garage'],
-                'store' => $data['store'],
-                'buying_date' => $data['buying_date'],
-                'expire_date' => (int) $data['expire_date'],
+                'unit_id' => $data['unit_id'],
+                'quantity' => $data['quantity'],
+                'notes' => $data['notes'],
                 'buying_price' => $data['buying_price'],
                 'selling_price' => $data['selling_price'],
                 'code' => $code,
@@ -51,7 +51,7 @@ final class StoreProduct
 
             return new ApiSuccessResponse(
                 data: $product,
-                message: "Employé ajouté avec succès",
+                message: "Produit ajouté avec succès",
                 code: Response::HTTP_CREATED
             );
         } catch (Throwable $exception) {

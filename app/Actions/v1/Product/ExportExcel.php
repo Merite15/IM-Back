@@ -18,9 +18,9 @@ final class ExportExcel
         ini_set('max_execution_time', 0);
         ini_set('memory_limit', '4000M');
 
-        $products = Product::all()->toArray();
-
         try {
+            $products = Product::all()->toArray();
+
             $spreadSheet = new Spreadsheet();
 
             $spreadSheet->getActiveSheet()->getDefaultColumnDimension()->setWidth(20);
@@ -31,7 +31,7 @@ final class ExportExcel
 
             header('Content-Type: application/vnd.ms-excel');
 
-            header('Content-Disposition: attachment;filename="Products_ExportedData.xls"');
+            header('Content-Disposition: attachment;filename="products.xls"');
 
             header('Cache-Control: max-age=0');
 

@@ -22,18 +22,19 @@ final class UpdateProduct
 
             $product->update([
                 'name' => $data['name'],
+                'tax_type' => $data['tax_type'],
+                'tax' => $data['tax'],
                 'category_id' => $data['category_id'],
-                'supplier_id' => $data['supplier_id'],
-                'garage' => $data['garage'],
-                'store' => $data['store'],
-                'buying_date' => $data['buying_date'],
-                'expire_date' => (int) $data['expire_date'],
+                'unit_id' => $data['unit_id'],
+                'quantity' => $data['quantity'],
+                'notes' => $data['notes'],
                 'buying_price' => $data['buying_price'],
                 'selling_price' => $data['selling_price'],
             ]);
 
             if ($file = $data['product_image']) {
                 $fileName = hexdec(uniqid()) . '.' . $file->getClientOriginalExtension();
+
                 $path = 'public/products/';
 
                 $file->storeAs($path, $fileName);

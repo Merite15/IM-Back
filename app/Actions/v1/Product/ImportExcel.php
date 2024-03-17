@@ -9,44 +9,44 @@ use App\Responses\ApiErrorResponse;
 use App\Responses\ApiSuccessResponse;
 use Throwable;
 
-final class ExportProduct
+final class ImportExcel
 {
     public function handle(): ApiSuccessResponse | ApiErrorResponse
     {
         try {
-            $products = Product::all()->sortByDesc('product_id');
+            $products = Product::query()->all()->sortBy('name');
 
             $product_array[] = array(
                 'Product Name',
+                'Product Slug',
                 'Category Id',
-                'Supplier Id',
+                'Unit Id',
                 'Product Code',
-                'Product Garage',
-                'Product Image',
-                'Product Store',
-                'Buying Date',
-                'Expire Date',
+                'Stock',
+                "Stock Alert",
                 'Buying Price',
                 'Selling Price',
+                'Product Image',
+                "Note"
             );
 
             foreach ($products as $product) {
                 $product_array[] = array(
                     'Product Name' => $product->name,
+                    'Product Slug' => $product->slug,
                     'Category Id' => $product->category_id,
-                    'Supplier Id' => $product->supplier_id,
+                    'Unit Id' => $product->unit_id,
                     'Product Code' => $product->code,
-                    'Product Garage' => $product->garage,
-                    'Product Image' => $product->image,
-                    'Product Store' => $product->store,
-                    'Buying Date' => $product->buying_date,
-                    'Expire Date' => $product->expire_date,
+                    'Stock' => $product->quantity,
+                    "Stock Alert" => $product->quantity_alert,
                     'Buying Price' => $product->buying_price,
                     'Selling Price' => $product->selling_price,
+                    'Product Image' => $product->image,
+                    "Note" => $product->note
                 );
             }
 
-            $this->exportExcel($product_array);
+            Product::create($product_array);
         } catch (Throwable $exception) {
             return new ApiErrorResponse(
                 exception: $exception,

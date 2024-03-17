@@ -12,7 +12,6 @@ final class ProductDTO
     public function __construct(
         private readonly string $name,
         private readonly string $slug,
-        private readonly string $code,
         private readonly int $quantity,
         private readonly int $buying_price,
         private readonly int $selling_price,
@@ -31,7 +30,6 @@ final class ProductDTO
         return [
             'name' => $this->name,
             'slug' => $this->slug,
-            'code' => $this->code,
             'quantity' => $this->quantity,
             'buying_price' => $this->buying_price,
             'selling_price' => $this->selling_price,
@@ -50,7 +48,6 @@ final class ProductDTO
         return new self(
             $request->input('name'),
             $request->input('slug'),
-            $request->input('code'),
             $request->input('quantity'),
             $request->input('buying_price'),
             $request->input('selling_price'),

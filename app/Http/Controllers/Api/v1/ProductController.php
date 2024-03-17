@@ -6,8 +6,8 @@ namespace App\Http\Controllers\Api\v1;
 
 use App\Actions\v1\Product\DestroyProduct;
 use App\Actions\v1\Product\ExportExcel;
-use App\Actions\v1\Product\ExportProduct;
 use App\Actions\v1\Product\FetchProducts;
+use App\Actions\v1\Product\ImportExcel;
 use App\Actions\v1\Product\ImportProduct;
 use App\Actions\v1\Product\ShowProduct;
 use App\Actions\v1\Product\StoreProduct;
@@ -75,7 +75,7 @@ class ProductController extends Controller
         return $action->handle();
     }
 
-    public function exportData(ExportProduct $action)
+    public function importExcel(ImportExcel $action)
     {
         return $action->handle();
     }

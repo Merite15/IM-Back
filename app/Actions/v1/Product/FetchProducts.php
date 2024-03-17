@@ -17,7 +17,7 @@ final class FetchProducts
         try {
             return new ProductCollectionResponse(
                 productCollection: new ProductCollection(
-                    resource: Product::query()->with(['category', 'supplier'])->latest()->get()
+                    resource: Product::query()->with('category', 'unit')->latest()->get()
                 ),
             );
         } catch (Throwable $exception) {
