@@ -27,15 +27,15 @@ final class StoreProduct
             ]);
 
             $product = Product::create([
-                'name' => $data['name'],
-                'tax_type' => $data['tax_type'],
-                'tax' => $data['tax'],
-                'category_id' => $data['category_id'],
-                'unit_id' => $data['unit_id'],
-                'quantity' => $data['quantity'],
-                'notes' => $data['notes'],
-                'buying_price' => $data['buying_price'],
-                'selling_price' => $data['selling_price'],
+                'name' => $dto->getName(),
+                'tax_type' => $dto->getTaxType(),
+                'tax' => $dto->getTax(),
+                'category_id' => $dto->getCategoryId(),
+                'unit_id' => $dto->getUnitId(),
+                'quantity' => $dto->getQuantity(),
+                'notes' => $dto->getNotes(),
+                'buying_price' => $dto->getBuyingPrice(),
+                'selling_price' => $dto->getSellingPrice(),
                 'code' => $code,
                 'company_id' => auth()->user()->current_company,
             ]);
@@ -50,7 +50,6 @@ final class StoreProduct
             }
 
             return new ApiSuccessResponse(
-                data: $product,
                 message: "Produit ajouté avec succès",
                 code: Response::HTTP_CREATED
             );

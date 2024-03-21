@@ -11,13 +11,14 @@ final class CategoryDTO
     public function __construct(
         private readonly string $name,
         private readonly string $slug,
-    ) {}
+    ) {
+    }
 
     public static function fromRequest(Request $request): self
     {
         return new self(
-            $request->input('name'),
-            $request->input('slug')
+            (string)$request->input('name'),
+            (string)$request->input('slug')
         );
     }
 
@@ -27,5 +28,15 @@ final class CategoryDTO
             'name' => $this->name,
             'slug' => $this->slug,
         ];
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getSlug(): string
+    {
+        return $this->slug;
     }
 }

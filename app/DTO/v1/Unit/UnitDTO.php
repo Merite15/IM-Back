@@ -12,14 +12,15 @@ final class UnitDTO
         private readonly string $name,
         private readonly string $slug,
         private readonly string $short_code,
-    ) {}
+    ) {
+    }
 
     public static function fromRequest(Request $request): self
     {
         return new self(
-            $request->input('name'),
-            $request->input('slug'),
-            $request->input('short_code')
+            (string)$request->input('name'),
+            (string)$request->input('slug'),
+            (string)$request->input('short_code')
         );
     }
 
@@ -30,5 +31,20 @@ final class UnitDTO
             'slug' => $this->slug,
             'short_code' => $this->short_code,
         ];
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    public function getShortCode(): string
+    {
+        return $this->short_code;
     }
 }

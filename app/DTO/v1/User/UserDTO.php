@@ -16,17 +16,18 @@ final class UserDTO
         private readonly string $phone,
         private readonly string $password,
         private readonly int $role_id,
-    ) {}
+    ) {
+    }
 
     public static function fromRequest(Request $request): self
     {
         return new self(
-            $request->input('gender'),
-            $request->input('email'),
-            $request->input('name'),
-            $request->input('password'),
-            $request->input('role_id'),
-            $request->input('phone')
+            (string)$request->input('name'),
+            UserGender::from($request->input('gender')),
+            (string)$request->input('email'),
+            (string)$request->input('phone'),
+            (string)$request->input('password'),
+            (int)$request->input('role_id'),
         );
     }
 
@@ -40,5 +41,35 @@ final class UserDTO
             'phone' => $this->phone,
             'role_id' => $this->role_id,
         ];
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getGender(): UserGender
+    {
+        return $this->gender;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function getPhone(): string
+    {
+        return $this->phone;
+    }
+
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    public function getRoleId(): int
+    {
+        return $this->role_id;
     }
 }

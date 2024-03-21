@@ -16,20 +16,17 @@ final class StoreUser
     public function handle(UserDTO $dto): ApiSuccessResponse | ApiErrorResponse
     {
         try {
-            $data = $dto->toArray();
-
             $user = User::create([
-                'name' => $data['name'],
-                'gender' => $data['gender'],
-                'email' => $data['email'],
-                'password' => $data['password'],
-                'phone' => $data['phone'],
+                'name' => $dto->getName(),
+                'gender' => $dto->getGender(),
+                'email' => $dto->getEmail(),
+                'password' => $dto->getPassword(),
+                'phone' => $dto->getPhone(),
             ]);
 
-            $user->assignRole($data['role_id']);
+            $user->assignRole($dto->getRoleId());
 
             return new ApiSuccessResponse(
-                data: $user,
                 message: "Avance de salaire ajoutée avec succès",
                 code: Response::HTTP_CREATED
             );

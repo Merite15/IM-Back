@@ -10,12 +10,13 @@ final class SaveCustomerDTO
 {
     public function __construct(
         private readonly int $customer_id,
-    ) {}
+    ) {
+    }
 
     public static function fromRequest(Request $request): self
     {
         return new self(
-            $request->input('customer_id'),
+            (int)$request->input('customer_id'),
         );
     }
 
@@ -24,5 +25,10 @@ final class SaveCustomerDTO
         return [
             'customer_id' => $this->customer_id,
         ];
+    }
+
+    public function getCustomerId(): int
+    {
+        return $this->customer_id;
     }
 }

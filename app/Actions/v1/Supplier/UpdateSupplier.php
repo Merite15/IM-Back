@@ -16,25 +16,20 @@ final class UpdateSupplier
     public function handle(string $id, SupplierDTO $dto): ApiSuccessResponse | ApiErrorResponse
     {
         try {
-            $data = $dto->toArray();
-
             $supplier = Supplier::query()->findOrFail($id);
 
             $supplier->update([
-                'type' => $data['type'],
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'address' => $data['address'],
-                'phone' => $data['phone'],
-                'shop_name' => $data['shop_name'],
-                'gender' => $data['gender'],
-                'city' => $data['city'],
+                'type' => $dto->getType(),
+                'name' => $dto->getName(),
+                'email' => $dto->getEmail(),
+                'address' => $dto->getAddress(),
+                'phone' => $dto->getPhone(),
+                'shop_name' => $dto->getShopName(),
+                'gender' => $dto->getGender(),
+                'city' => $dto->getCity(),
             ]);
 
-            return new ApiSuccessResponse(
-                message: 'Element modifié avec succès',
-                data: $supplier,
-            );
+            return new ApiSuccessResponse(message: 'Element modifié avec succès');
         } catch (Throwable $exception) {
             return new ApiErrorResponse(
                 exception: $exception,

@@ -16,24 +16,19 @@ final class UpdateCustomer
     public function handle(string $id, CustomerDTO $dto): ApiSuccessResponse | ApiErrorResponse
     {
         try {
-            $data = $dto->toArray();
-
             $customer = Customer::query()->findOrFail($id);
 
             $customer->update([
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'address' => $data['address'],
-                'phone' => $data['phone'],
-                'shop_name' => $data['shop_name'],
-                'gender' => $data['gender'],
-                'city' => $data['city'],
+                'name' => $dto->getName(),
+                'email' => $dto->getEmail(),
+                'address' => $dto->getAddress(),
+                'phone' => $dto->getPhone(),
+                'shop_name' => $dto->getShopName(),
+                'gender' => $dto->getGender(),
+                'city' => $dto->getCity(),
             ]);
 
-            return new ApiSuccessResponse(
-                message: 'Client modifié avec succès',
-                data: $customer,
-            );
+            return new ApiSuccessResponse(message: 'Client modifié avec succès');
         } catch (Throwable $exception) {
             return new ApiErrorResponse(
                 exception: $exception,

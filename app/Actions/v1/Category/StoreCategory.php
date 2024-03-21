@@ -17,17 +17,14 @@ final class StoreCategory
     public function handle(CategoryDTO $dto): ApiSuccessResponse | ApiErrorResponse
     {
         try {
-            $data = $dto->toArray();
-
-            $category = Category::create([
-                'name' => $data['name'],
-                'slug' =>  Str::slug($data['slug']),
+            Category::create([
+                'name' => $dto->getName(),
+                'slug' =>  Str::slug($dto->getSlug()),
                 'company_id' => auth()->user()->current_company,
             ]);
 
             return new ApiSuccessResponse(
-                data: $category,
-                message: "Avance de salaire ajoutée avec succès",
+                message: "Catégorie ajoutée avec succès",
                 code: Response::HTTP_CREATED
             );
         } catch (Throwable $exception) {

@@ -17,7 +17,10 @@ final class PurchaseReport
         try {
             return new PurchaseCollectionResponse(
                 purchaseCollection: new PurchaseCollection(
-                    resource: Purchase::query()->with('supplier')->where('date', today()->format('Y-m-d'))->get()
+                    resource: Purchase::query()
+                        ->with('supplier')
+                        ->where('date', today()->format('Y-m-d'))
+                        ->get()
                 ),
             );
         } catch (Throwable $exception) {

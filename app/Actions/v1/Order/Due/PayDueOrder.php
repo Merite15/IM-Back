@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Actions\v1\Order;
+namespace App\Actions\v1\Order\Due;
 
 use App\DTO\v1\Order\PayOrderDTO;
 use App\Enums\OrderStatus;
@@ -21,13 +21,11 @@ final class PayDueOrder
     public function handle(string $id, PayOrderDTO $dto): ApiErrorResponse | ApiSuccessResponse
     {
         try {
-            $data = $dto->toArray();
-
             $order = Order::query()->findOrFail($id);
 
-            $paidDue = $order->due - $data['pay'];
+            $paidDue = $order->due - $dto->getPay();
 
-            $paidPay = $order->pay + $data['pay'];
+            $paidPay = $order->pay + $dto->getPay();
 
             $order->update([
                 'due' => $paidDue,

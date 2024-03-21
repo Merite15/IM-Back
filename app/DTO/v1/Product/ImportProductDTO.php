@@ -10,7 +10,8 @@ final class ImportProductDTO
 {
     public function __construct(
         private readonly mixed $upload_file,
-    ) {}
+    ) {
+    }
 
     public static function fromRequest(Request $request): self
     {
@@ -24,5 +25,10 @@ final class ImportProductDTO
         return [
             'upload_file' => $this->upload_file,
         ];
+    }
+
+    public function getUploadFiles(): mixed
+    {
+        return $this->upload_file;
     }
 }

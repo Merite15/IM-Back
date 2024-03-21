@@ -16,21 +16,18 @@ final class StoreCustomer
     public function handle(CustomerDTO $dto): ApiSuccessResponse | ApiErrorResponse
     {
         try {
-            $data = $dto->toArray();
-
-            $customer = Customer::create([
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'address' => $data['address'],
-                'phone' => $data['phone'],
-                'shop_name' => $data['shop_name'],
-                'gender' => $data['gender'],
-                'city' => $data['city'],
+            Customer::create([
+                'name' => $dto->getName(),
+                'email' => $dto->getEmail(),
+                'address' => $dto->getAddress(),
+                'phone' => $dto->getPhone(),
+                'shop_name' => $dto->getShopName(),
+                'gender' => $dto->getGender(),
+                'city' => $dto->getCity(),
                 'company_id' => auth()->user()->current_company,
             ]);
 
             return new ApiSuccessResponse(
-                data: $customer,
                 message: "Client ajouté avec succès",
                 code: Response::HTTP_CREATED
             );

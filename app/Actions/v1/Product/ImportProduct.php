@@ -16,10 +16,8 @@ final class ImportProduct
 {
     public function handle(ImportProductDTO $dto): ApiSuccessResponse | ApiErrorResponse
     {
-        $data = $dto->toArray();
-
         try {
-            $spreadsheet = IOFactory::load($data['upload_file']->getRealPath());
+            $spreadsheet = IOFactory::load($dto->getUploadFiles()->getRealPath());
 
             $sheet        = $spreadsheet->getActiveSheet();
 

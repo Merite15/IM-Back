@@ -22,23 +22,24 @@ final class ProductDTO
         private readonly ?string $image = null,
         private readonly int $category_id,
         private readonly int $unit_id,
-    ) {}
+    ) {
+    }
 
     public static function fromRequest(Request $request): self
     {
         return new self(
-            $request->input('name'),
-            $request->input('slug'),
-            $request->input('quantity'),
-            $request->input('buying_price'),
-            $request->input('selling_price'),
-            $request->input('quantity_alert'),
-            $request->input('tax'),
-            $request->input('tax_type'),
-            $request->input('notes'),
-            $request->input('image'),
-            $request->input('category_id'),
-            $request->input('unit_id')
+            (string)$request->input('name'),
+            (string)$request->input('slug'),
+            (int)$request->input('quantity'),
+            (int)$request->input('buying_price'),
+            (int)$request->input('selling_price'),
+            (int)$request->input('quantity_alert'),
+            (int)$request->input('tax'),
+            TaxType::from($request->input('tax_type')),
+            (string)$request->input('notes'),
+            (string)$request->input('image'),
+            (int)$request->input('category_id'),
+            (int)$request->input('unit_id')
         );
     }
 
@@ -58,5 +59,65 @@ final class ProductDTO
             'category_id' => $this->category_id,
             'unit_id' => $this->unit_id,
         ];
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
+    public function getQuantity(): int
+    {
+        return $this->quantity;
+    }
+
+    public function getBuyingPrice(): int
+    {
+        return $this->buying_price;
+    }
+
+    public function getSellingPrice(): int
+    {
+        return $this->selling_price;
+    }
+
+    public function getQuantityAlert(): int
+    {
+        return $this->quantity_alert;
+    }
+
+    public function getTax(): ?int
+    {
+        return $this->tax;
+    }
+
+    public function getTaxType(): TaxType
+    {
+        return $this->tax_type;
+    }
+
+    public function getNotes(): ?string
+    {
+        return $this->notes;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function getCategoryId(): int
+    {
+        return $this->category_id;
+    }
+
+    public function getUnitId(): int
+    {
+        return $this->unit_id;
     }
 }

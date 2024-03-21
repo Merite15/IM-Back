@@ -16,18 +16,15 @@ final class StoreCompany
     public function handle(CompanyDTO $dto): ApiSuccessResponse | ApiErrorResponse
     {
         try {
-            $data = $dto->toArray();
-
             $company = Company::create([
-                'name' => $data['name'],
-                'address' => $data['address'],
-                'phone' => $data['phone']
+                'name' => $dto->getName(),
+                'address' => $dto->getAddress(),
+                'phone' => $dto->getPhone()
             ]);
 
             $company->users()->attach(auth()->user()->id);
 
             return new ApiSuccessResponse(
-                data: $company,
                 message: "Compagnie ajoutée avec succès",
                 code: Response::HTTP_CREATED
             );

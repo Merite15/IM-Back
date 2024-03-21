@@ -17,18 +17,19 @@ final class CustomerDTO
         private readonly string $shop_name,
         private readonly UserGender $gender,
         private readonly string $city,
-    ) {}
+    ) {
+    }
 
     public static function fromRequest(Request $request): self
     {
         return new self(
-            $request->input('name'),
-            $request->input('email'),
-            $request->input('address'),
-            $request->input('phone'),
-            $request->input('shop_name'),
-            new UserGender($request->input('gender')),
-            $request->input('city')
+            (string)$request->input('name'),
+            (string)$request->input('email'),
+            (string)$request->input('address'),
+            (string)$request->input('phone'),
+            (string)$request->input('shop_name'),
+            UserGender::from($request->input('gender')),
+            (string)$request->input('city')
         );
     }
 
@@ -43,5 +44,40 @@ final class CustomerDTO
             'gender' => $this->gender,
             'city' => $this->city,
         ];
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function getAddress(): string
+    {
+        return $this->address;
+    }
+
+    public function getPhone(): string
+    {
+        return $this->phone;
+    }
+
+    public function getShopName(): string
+    {
+        return $this->shop_name;
+    }
+
+    public function getGender(): UserGender
+    {
+        return $this->gender;
+    }
+
+    public function getCity(): string
+    {
+        return $this->city;
     }
 }

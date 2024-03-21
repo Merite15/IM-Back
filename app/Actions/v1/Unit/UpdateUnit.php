@@ -17,20 +17,15 @@ final class UpdateUnit
     public function handle(string $id, UnitDTO $dto): ApiSuccessResponse | ApiErrorResponse
     {
         try {
-            $data = $dto->toArray();
-
             $unit = Unit::query()->findOrFail($id);
 
             $unit->update([
-                'name' => $data['name'],
-                'slug' =>  Str::slug($data['slug']),
-                'short_code' =>  Str::slug($data['short_code']),
+                'name' => $dto->getName(),
+                'slug' =>  Str::slug($dto->getSlug()),
+                'short_code' =>  Str::slug($dto->getShortCode()),
             ]);
 
-            return new ApiSuccessResponse(
-                message: 'Element modifié avec succès',
-                data: $unit,
-            );
+            return new ApiSuccessResponse(message: 'Element modifié avec succès');
         } catch (Throwable $exception) {
             return new ApiErrorResponse(
                 exception: $exception,

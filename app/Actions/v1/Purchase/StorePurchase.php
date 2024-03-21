@@ -18,8 +18,6 @@ final class StorePurchase
     public function handle(PurchaseDTO $dto): ApiSuccessResponse | ApiErrorResponse
     {
         try {
-            $data = $dto->toArray();
-
             $purchase = Purchase::create([
                 'purchase_no' => IdGenerator::generate([
                     'table' => 'purchases',
@@ -27,16 +25,16 @@ final class StorePurchase
                     'length' => 10,
                     'prefix' => 'PRS-'
                 ]),
-                'supplier_id'   => $data['supplier_id'],
-                'date'          => $data['date'],
-                'total_amount'  => $data['total_amount'],
+                'supplier_id'   => $dto->getSupplierId(),
+                'date'          => $dto->getDate(),
+                'total_amount'  => $dto->getTotalAmount(),
                 'company_id' => auth()->user()->current_company,
             ]);
 
-            if ( ! $data['products'] === null) {
+            if (!$dto->getProducts() === null) {
                 $details = [];
 
-                foreach ($data['products'] as $product) {
+                foreach ($dto->getProducts() as $product) {
                     $details['purchase_id']    = $purchase['id'];
                     $details['product_id']     = $product['product_id'];
                     $details['quantity']       = $product['quantity'];
@@ -49,8 +47,7 @@ final class StorePurchase
             }
 
             return new ApiSuccessResponse(
-                data: $purchase,
-                message: "Client ajouté avec succès",
+                message: "Achat ajouté avec succès",
                 code: Response::HTTP_CREATED
             );
         } catch (Throwable $exception) {

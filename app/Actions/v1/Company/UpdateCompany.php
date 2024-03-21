@@ -16,20 +16,15 @@ final class UpdateCompany
     public function handle(string $id, CompanyDTO $dto): ApiSuccessResponse | ApiErrorResponse
     {
         try {
-            $data = $dto->toArray();
-
             $company = Company::query()->findOrFail($id);
 
             $company->update([
-                'name' => $data['name'],
-                'address' => $data['address'],
-                'phone' => $data['phone']
+                'name' => $dto->getName(),
+                'address' => $dto->getAddress(),
+                'phone' => $dto->getPhone()
             ]);
 
-            return new ApiSuccessResponse(
-                message: 'Element modifié avec succès',
-                data: $company,
-            );
+            return new ApiSuccessResponse(message: 'Element modifié avec succès');
         } catch (Throwable $exception) {
             return new ApiErrorResponse(
                 exception: $exception,

@@ -16,26 +16,23 @@ final class UpdateUser
     public function handle(string $id, UserDTO $dto): ApiSuccessResponse | ApiErrorResponse
     {
         try {
-            $data = $dto->toArray();
-
             $user = User::query()->findOrFail($id);
 
             $user->update([
-                'name' => $data['name'],
-                'gender' => $data['gender'],
-                'email' => $data['email'],
-                'phone' => $data['phone'],
+                'name' => $dto->getName(),
+                'gender' => $dto->getGender(),
+                'email' => $dto->getEmail(),
+                'phone' => $dto->getPhone(),
             ]);
 
             if ($user->doesntHave('roles')) {
-                $user->assignRole($data['role_id']);
+                $user->assignRole($dto->getRoleId());
             }
 
-            $user->syncRoles($data['role_id']);
+            $user->syncRoles($dto->getRoleId());
 
             return new ApiSuccessResponse(
                 message: 'Element modifié avec succès',
-                data: $user,
             );
         } catch (Throwable $exception) {
             return new ApiErrorResponse(

@@ -22,22 +22,23 @@ final class OrderDTO
         private readonly PaymentType $payment_type,
         private readonly int $pay,
         private readonly int $due,
-    ) {}
+    ) {
+    }
 
     public static function fromRequest(Request $request): self
     {
         return new self(
-            $request->input('date'),
-            $request->input('customer_id'),
-            $request->input('status'),
-            $request->input('total_products'),
-            $request->input('sub_total'),
-            $request->input('vat'),
-            $request->input('invoice_no'),
-            $request->input('total'),
-            $request->input('payment_status'),
-            $request->input('pay'),
-            $request->input('due')
+            (string)$request->input('date'),
+            (int)$request->input('customer_id'),
+            OrderStatus::from($request->input('status')),
+            (int)$request->input('total_products'),
+            (int)$request->input('sub_total'),
+            (int)$request->input('vat'),
+            (string)$request->input('invoice_no'),
+            (int)$request->input('total'),
+            PaymentType::from($request->input('payment_type')),
+            (int)$request->input('pay'),
+            (int)$request->input('due')
         );
     }
 
@@ -56,5 +57,60 @@ final class OrderDTO
             'pay' => $this->pay,
             'due' => $this->due,
         ];
+    }
+
+    public function getDate(): string
+    {
+        return $this->date;
+    }
+
+    public function getCustomerId(): int
+    {
+        return $this->customer_id;
+    }
+
+    public function getStatus(): OrderStatus
+    {
+        return $this->status;
+    }
+
+    public function getTotalProducts(): int
+    {
+        return $this->total_products;
+    }
+
+    public function getSubTotal(): int
+    {
+        return $this->sub_total;
+    }
+
+    public function getVat(): int
+    {
+        return $this->vat;
+    }
+
+    public function getInvoiceNo(): string
+    {
+        return $this->invoice_no;
+    }
+
+    public function getTotal(): int
+    {
+        return $this->total;
+    }
+
+    public function getPaymentType(): PaymentType
+    {
+        return $this->payment_type;
+    }
+
+    public function getPay(): int
+    {
+        return $this->pay;
+    }
+
+    public function getDue(): int
+    {
+        return $this->due;
     }
 }

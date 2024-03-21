@@ -17,19 +17,14 @@ final class UpdateCategory
     public function handle(string $id, CategoryDTO $dto): ApiSuccessResponse | ApiErrorResponse
     {
         try {
-            $data = $dto->toArray();
-
             $category = Category::query()->findOrFail($id);
 
             $category->update([
-                'name' => $data['name'],
-                'slug' =>  Str::slug($data['slug']),
+                'name' => $dto->getName(),
+                'slug' =>  Str::slug($dto->getSlug()),
             ]);
 
-            return new ApiSuccessResponse(
-                message: 'Element modifié avec succès',
-                data: $category,
-            );
+            return new ApiSuccessResponse(message: 'Catégorie modifiée avec succès');
         } catch (Throwable $exception) {
             return new ApiErrorResponse(
                 exception: $exception,

@@ -19,19 +19,20 @@ final class SupplierDTO
         private readonly SupplierType $type,
         private readonly UserGender $gender,
         private readonly string $city,
-    ) {}
+    ) {
+    }
 
     public static function fromRequest(Request $request): self
     {
         return new self(
-            $request->input('name'),
-            $request->input('email'),
-            $request->input('address'),
-            $request->input('phone'),
-            $request->input('shop_name'),
-            $request->input('gender'),
-            $request->input('city'),
-            $request->input('type')
+            (string)$request->input('name'),
+            (string)$request->input('email'),
+            (string)$request->input('address'),
+            (string)$request->input('phone'),
+            (string)$request->input('shop_name'),
+            SupplierType::from($request->input('type')),
+            UserGender::from($request->input('gender')),
+            (string)$request->input('city'),
         );
     }
 
@@ -47,5 +48,45 @@ final class SupplierDTO
             'city' => $this->city,
             'type' => $this->type,
         ];
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function getAddress(): string
+    {
+        return $this->address;
+    }
+
+    public function getPhone(): string
+    {
+        return $this->phone;
+    }
+
+    public function getShopName(): string
+    {
+        return $this->shop_name;
+    }
+
+    public function getType(): SupplierType
+    {
+        return $this->type;
+    }
+
+    public function getGender(): UserGender
+    {
+        return $this->gender;
+    }
+
+    public function getCity(): string
+    {
+        return $this->city;
     }
 }

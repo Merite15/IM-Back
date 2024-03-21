@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Actions\v1\Order;
+namespace App\Actions\v1\Order\Due;
 
 use App\Http\Resources\v1\Order\OrderCollection;
 use App\Models\Order;

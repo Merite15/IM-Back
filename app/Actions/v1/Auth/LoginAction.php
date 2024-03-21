@@ -20,11 +20,9 @@ final class LoginAction
     public function handle(LoginDTO $dto): ApiErrorResponse | Exception | ApiSuccessResponse
     {
         try {
-            $data = $dto->toArray();
+            $user = User::query()->with('roles.permissions', 'companies')->where('email', $dto->getEmail())->first();
 
-            $user = User::query()->with('roles.permissions', 'companies')->where('email', $data['email'])->first();
-
-            if ( ! $user || ! Hash::check($data['password'], $user->password)) {
+            if (!$user || !Hash::check($dto->getPassword(), $user->password)) {
                 throw new Exception('Les informations d\'identification fournies sont incorrectes.', Response::HTTP_UNAUTHORIZED);
             }
 
@@ -48,12 +46,12 @@ final class LoginAction
 
             if (request()->has('company_id') && request('company_id') !== null) {
                 $user->update([
-                    'current_hospital' => request('company_id')
+                    'current_company' => request('company_id')
                 ]);
 
                 $data = [
                     'user' => $user,
-                    'token' => $user->createToken($data['email'])->plainTextToken
+                    'token' => $user->createToken($dto->getEmail())->plainTextToken
                 ];
 
                 return new ApiSuccessResponse(
@@ -61,8 +59,8 @@ final class LoginAction
                     data: $data,
                 );
             }
-            throw new Exception('Vous devez spécifier un hôpital pour vous connecter en tant qu\'administrateur.', Response::HTTP_UNAUTHORIZED);
 
+            throw new Exception('Vous devez spécifier une compagnie pour vous connecter en tant qu\'administrateur.', Response::HTTP_UNAUTHORIZED);
         } catch (Throwable $exception) {
             return new ApiErrorResponse(
                 exception: $exception,

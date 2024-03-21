@@ -10,12 +10,13 @@ final class PayOrderDTO
 {
     public function __construct(
         private readonly int $pay,
-    ) {}
+    ) {
+    }
 
     public static function fromRequest(Request $request): self
     {
         return new self(
-            $request->input('pay')
+            (int)$request->input('pay')
         );
     }
 
@@ -24,5 +25,10 @@ final class PayOrderDTO
         return [
             'pay' => $this->pay,
         ];
+    }
+
+    public function getPay(): int
+    {
+        return $this->pay;
     }
 }

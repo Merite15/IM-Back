@@ -16,23 +16,20 @@ final class StoreSupplier
     public function handle(SupplierDTO $dto): ApiSuccessResponse | ApiErrorResponse
     {
         try {
-            $data = $dto->toArray();
-
-            $supplier = Supplier::create([
-                'type' => $data['type'],
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'address' => $data['address'],
-                'phone' => $data['phone'],
-                'shop_name' => $data['shop_name'],
-                'gender' => $data['gender'],
-                'city' => $data['city'],
+            Supplier::create([
+                'type' => $dto->getType(),
+                'name' => $dto->getName(),
+                'email' => $dto->getEmail(),
+                'address' => $dto->getAddress(),
+                'phone' => $dto->getPhone(),
+                'shop_name' => $dto->getShopName(),
+                'gender' => $dto->getGender(),
+                'city' => $dto->getCity(),
                 'company_id' => auth()->user()->current_company,
             ]);
 
             return new ApiSuccessResponse(
-                data: $supplier,
-                message: "Avance de salaire ajoutée avec succès",
+                message: "fournisseur ajouté avec succès",
                 code: Response::HTTP_CREATED
             );
         } catch (Throwable $exception) {

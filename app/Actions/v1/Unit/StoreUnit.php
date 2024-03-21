@@ -17,18 +17,15 @@ final class StoreUnit
     public function handle(UnitDTO $dto): ApiSuccessResponse | ApiErrorResponse
     {
         try {
-            $data = $dto->toArray();
-
-            $Unit = Unit::create([
-                'name' => $data['name'],
-                'slug' =>  Str::slug($data['slug']),
-                'short_code' =>  Str::slug($data['short_code']),
+            Unit::create([
+                'name' => $dto->getName(),
+                'slug' =>  Str::slug($dto->getSlug()),
+                'short_code' =>  Str::slug($dto->getShortCode()),
                 'company_id' => auth()->user()->current_company,
             ]);
 
             return new ApiSuccessResponse(
-                data: $Unit,
-                message: "Avance de salaire ajoutée avec succès",
+                message: "Unité ajoutée avec succès",
                 code: Response::HTTP_CREATED
             );
         } catch (Throwable $exception) {
