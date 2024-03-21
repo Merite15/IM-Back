@@ -19,13 +19,17 @@
         "spatie/laravel-permission": "^6.4"
     },
     "require-dev": {
+        "driftingly/rector-laravel": "^1.0",
         "fakerphp/faker": "^1.9.1",
+        "larastan/larastan": "^2.9",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.18",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^7.0",
         "pestphp/pest": "^2.34",
         "pestphp/pest-plugin-laravel": "^2.3",
+        "phpstan/phpstan": "^1.10",
+        "rector/rector": "*",
         "spatie/laravel-ignition": "^2.0"
     },
     "autoload": {
@@ -56,6 +60,27 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
+        ],
+        "dump": [
+            "composer dump-autoload --optimize --strict-psr --classmap-authoritative"
+        ],
+        "pint": [
+            "./vendor/bin/pint"
+        ],
+        "stan": [
+            "./vendor/bin/phpstan analyse --memory-limit=3g --debug"
+        ],
+        "test": [
+            "@php artisan test"
+        ],
+        " Preview rector changes": [
+            "vendor/bin/rector --dry-run"
+        ],
+        " Run rector": [
+            "vendor/bin/rector"
+        ],
+        "types": [
+            "./vendor/bin/pest --type-coverage"
         ]
     },
     "extra": {
