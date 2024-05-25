@@ -64,19 +64,4 @@ class ProductController extends Controller
     {
         return $action->handle($id);
     }
-
-    public function import(ImportProductRequest $request, ImportProduct $action)
-    {
-        return $action->handle(ImportProductDTO::fromRequest($request));
-    }
-
-    public function exportExcel(ExportExcel $action)
-    {
-        return $action->handle();
-    }
-
-    public function importExcel(ImportExcel $action)
-    {
-        return $action->handle();
-    }
 }
