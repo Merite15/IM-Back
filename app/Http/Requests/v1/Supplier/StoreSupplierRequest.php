@@ -30,7 +30,7 @@ class StoreSupplierRequest extends FormRequest
             'name' => 'required|string|max:50',
             'gender' => ['required', new Enum(UserGender::class)],
             'type' => ['required', new Enum(SupplierType::class)],
-            'email' => 'required|max:50|email:rfc,dns,spoof,filter,filter_unicode|unique:suppliers,email,filter',
+            'email' => 'required|max:50|indisposable|email:rfc,dns,spoof,filter,filter_unicode|unique:suppliers,email,filter',
             'phone' => 'required|string|size:9|unique:suppliers,phone',
             'shop_name' => 'required|string|max:50',
             'city' => 'required|string|max:50',

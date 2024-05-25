@@ -29,7 +29,7 @@ class UpdateSupplierRequest extends FormRequest
         return [
             'name' => 'required|string|max:50',
             'gender' => ['required', new Enum(UserGender::class)],
-            'email' => 'required|max:50|email:rfc,dns,spoof,filter,filter_unicode|unique:suppliers,email,filter' . $this->supplier,
+            'email' => 'required|max:50|indisposable|email:rfc,dns,spoof,filter,filter_unicode|unique:suppliers,email,filter' . $this->supplier,
             'phone' => 'required|string|size:9|unique:suppliers,phone,' . $this->supplier,
             'shop_name' => 'required|string|max:50',
             'type' => ['required', new Enum(SupplierType::class)],

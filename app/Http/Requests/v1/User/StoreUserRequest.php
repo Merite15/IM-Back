@@ -31,7 +31,7 @@ class StoreUserRequest extends FormRequest
             'gender' => ['required', new Enum(UserGender::class)],
             'phone' => 'required|string|unique:users,phone|min:9',
             'role_id' => 'integer|required|exists:roles,id',
-            'email' => 'required|max:50|email:rfc,dns,spoof,filter,filter_unicode|unique:users,email,filter',
+            'email' => 'required|max:50|indisposable|email:rfc,dns,spoof,filter,filter_unicode|unique:users,email,filter',
             'password' => ['required', Password::min(8)
                 ->letters()
                 ->mixedCase()
