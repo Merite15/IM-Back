@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Actions\v1\Auth;
 
 use App\DTO\v1\Auth\LoginDTO;
+use App\Enums\TokenAbility;
 use App\Models\User;
 use App\Responses\ApiErrorResponse;
 use App\Responses\ApiSuccessResponse;
@@ -27,7 +28,7 @@ final class LoginAction
             }
 
             if ($user->companies->count() === 0) {
-                throw new Exception('Vous n’êtes affilié à aucun hôpital.', Response::HTTP_UNAUTHORIZED);
+                throw new Exception('Vous n’êtes affilié à aucune compagnie.', Response::HTTP_UNAUTHORIZED);
             }
 
             $user->update([
@@ -38,7 +39,7 @@ final class LoginAction
             if ($user->companies->isNotEmpty() && request('company_id') === null) {
                 return response([
                     'success' => true,
-                    'message' => 'Veuillez sélectionner un hôpital',
+                    'message' => 'Veuillez sélectionner une compagnie',
                     'data' => $user,
                     'companies' => $user->companies,
                 ]);
@@ -49,9 +50,15 @@ final class LoginAction
                     'current_company' => request('company_id')
                 ]);
 
+                $accessToken = $user->createToken('access_token', [TokenAbility::ACCESS_API->value], Carbon::now()->addMinutes(config('sanctum.expiration')));
+
+                $refreshToken = $user->createToken('refresh_token', [TokenAbility::ISSUE_ACCESS_TOKEN->value], Carbon::now()->addMinutes(config('sanctum.rt_expiration')));
+
                 $data = [
                     'user' => $user,
-                    'token' => $user->createToken($dto->getEmail())->plainTextToken
+                    'token' => $accessToken->plainTextToken,
+                    'token_expiration' => now()->addMinutes(config('sanctum.expiration')),
+                    'refresh_token' => $refreshToken->plainTextToken
                 ];
 
                 return new ApiSuccessResponse(
@@ -59,8 +66,6 @@ final class LoginAction
                     data: $data,
                 );
             }
-
-            throw new Exception('Vous devez spécifier une compagnie pour vous connecter en tant qu\'administrateur.', Response::HTTP_UNAUTHORIZED);
         } catch (Throwable $exception) {
             return new ApiErrorResponse(
                 exception: $exception,

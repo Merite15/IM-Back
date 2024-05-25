@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Actions\RunMigration;
+use App\Enums\TokenAbility;
 use App\Http\Controllers\Api\v1\AuthController;
 use App\Http\Controllers\Api\v1\CategoryController;
 use App\Http\Controllers\Api\v1\CompanyController;
@@ -28,16 +29,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/run-migration', fn() => RunMigration::handle());
+Route::get('/run-migration', fn () => RunMigration::handle());
 
-Route::middleware('auth:sanctum')->get('/user', fn(Request $request) => $request->user());
+Route::middleware('auth:sanctum')->get('/user', fn (Request $request) => $request->user());
+
+Route::middleware('auth:sanctum', 'ability:' . TokenAbility::ISSUE_ACCESS_TOKEN->value)->group(function (): void {
+    Route::get('/auth/refresh-token', [AuthController::class, 'refreshToken']);
+});
 
 Route::prefix('auth')->group(function (): void {
     Route::post('/login', [AuthController::class, 'login'])->name('login');
     Route::middleware('auth:sanctum')->delete('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
-Route::group(['middleware' => ['auth:sanctum']], function (): void {
+Route::group(['middleware' => ['auth:sanctum', 'ability:' . TokenAbility::ACCESS_API->value]], function (): void {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
     Route::prefix('products')->group(function (): void {
