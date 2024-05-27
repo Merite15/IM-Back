@@ -19,19 +19,19 @@ class UserSeeder extends Seeder
                 'name' => 'Admin',
                 'email' => 'admin@admin.com',
                 'email_verified_at' => now(),
-                'password' => 'password',
+                'password' => bcrypt('Mbongui@1992'),
             ],
             [
                 'name' => 'quest',
                 'email' => 'quest@quest.com',
                 'email_verified_at' => now(),
-                'password' => 'password',
+                'password' => bcrypt('Mbongui@1992'),
             ],
             [
                 'name' => 'user',
                 'email' => 'user@user.com',
                 'email_verified_at' => now(),
-                'password' => 'password',
+                'password' => bcrypt('Mbongui@1992'),
             ]
         ]);
 

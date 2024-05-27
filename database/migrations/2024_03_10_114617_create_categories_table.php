@@ -7,17 +7,18 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class () extends Migration {
+return new class() extends Migration
+{
     /**
      * Run the migrations.
      */
     public function up(): void
     {
         Schema::create('categories', function (Blueprint $table): void {
+            $table->comment('Table qui stocke les catégories');
             $table->id();
-            $table->string('name')->unique();
-            $table->string('slug')->unique();
-            $table->foreignIdFor(Company::class)->constrained();
+            $table->string('name')->unique()->comment('Nom unique de la catégorie');
+            $table->foreignIdFor(Company::class)->constrained()->comment('Identifiant de la société associée');
             $table->softDeletes();
             $table->timestamps();
         });

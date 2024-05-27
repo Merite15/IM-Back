@@ -22,7 +22,6 @@ class ProductFactory extends Factory
     {
         return [
             'name' => fake()->word(),
-            'slug' => fake()->unique()->word(),
             'code' => fake()->unique()->word(),
             'category_id' => fake()->randomElement([1, 2, 3, 4, 5]),
             'unit_id' => fake()->randomElement([1, 2, 3, 4, 5]),

@@ -10,25 +10,26 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class () extends Migration {
+return new class() extends Migration
+{
     /**
      * Run the migrations.
      */
     public function up(): void
     {
         Schema::create('products', function (Blueprint $table): void {
+            $table->comment('Table qui stocke les produits');
             $table->id();
-            $table->string('name');
-            $table->string('slug');
-            $table->string('code');
-            $table->integer('quantity');
-            $table->integer('buying_price')->comment('Buying Price');
-            $table->integer('selling_price')->comment('Selling Price');
-            $table->integer('quantity_alert');
-            $table->integer('tax')->nullable();
-            $table->enum('tax_type', TaxType::values());
-            $table->text('notes')->nullable();
-            $table->string('image')->nullable();
+            $table->string('name')->comment('Nom du produit');
+            $table->string('code')->comment('Code du produit');
+            $table->integer('quantity')->comment('Quantité du produit');
+            $table->integer('buying_price')->comment('Prix d\'achat');
+            $table->integer('selling_price')->comment('Prix de vente');
+            $table->integer('quantity_alert')->comment('Alerte de quantité');
+            $table->integer('tax')->nullable()->comment('Taxe');
+            $table->enum('tax_type', TaxType::values())->comment('Type de taxe');
+            $table->text('notes')->nullable()->comment('Notes');
+            $table->string('image')->nullable()->comment('Image');
             $table->foreignIdFor(Category::class)->constrained();
             $table->foreignIdFor(Unit::class)->constrained();
             $table->foreignIdFor(Company::class)->constrained();

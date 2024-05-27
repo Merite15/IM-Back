@@ -111,7 +111,6 @@ class PermissionSeeder extends Seeder
 
         $user = User::create([
             'name' => 'merite',
-            'gender' => 'M',
             'email' => 'meritekioungou1@gmail.com',
             'password' => 'Mbongui@1992',
         ]);

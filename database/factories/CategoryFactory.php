@@ -20,7 +20,6 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'slug' => fake()->unique()->word(),
             'name' => fake()->unique()->words(2, true),
             'company_id' => Company::all()->random()->id,
         ];

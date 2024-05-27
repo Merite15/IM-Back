@@ -10,24 +10,26 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class () extends Migration {
+return new class() extends Migration
+{
     /**
      * Run the migrations.
      */
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table): void {
+            $table->comment('Table qui stocke les commandes');
             $table->id();
-            $table->string('date');
+            $table->string('date')->comment('Date de la commande');
+            $table->integer('total_products')->comment('Nombre total de produits');
+            $table->integer('sub_total')->comment('Sous-total');
+            $table->integer('vat')->comment('TVA');
+            $table->integer('total')->comment('Total');
+            $table->string('invoice_no')->comment('Numéro de facture');
+            $table->integer('pay')->comment('Montant payé');
+            $table->integer('due')->comment('Montant dû');
             $table->enum('status', OrderStatus::values());
-            $table->integer('total_products');
-            $table->integer('sub_total');
-            $table->integer('vat');
-            $table->integer('total');
-            $table->string('invoice_no');
             $table->enum('payment_type', PaymentType::values());
-            $table->integer('pay');
-            $table->integer('due');
             $table->foreignIdFor(Customer::class)->constrained();
             $table->foreignIdFor(Company::class)->constrained();
             $table->softDeletes();

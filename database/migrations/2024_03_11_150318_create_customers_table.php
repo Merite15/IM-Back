@@ -8,20 +8,22 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class () extends Migration {
+return new class() extends Migration
+{
     /**
      * Run the migrations.
      */
     public function up(): void
     {
         Schema::create('customers', function (Blueprint $table): void {
+            $table->comment('Table qui stocke les clients');
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('phone')->unique();
-            $table->string('address');
-            $table->string('shop_name')->nullable();
-            $table->string('city');
+            $table->string('name')->comment('Nom du client');
+            $table->string('email')->unique()->nullable();
+            $table->string('phone')->unique()->comment('Numéro de téléphone unique du client');
+            $table->string('address')->nullable()->comment('Adresse du client');
+            $table->string('shop_name')->nullable()->comment('Nom du magasin du client');
+            $table->string('city')->comment('Ville du client');
             $table->enum('gender', UserGender::values());
             $table->foreignIdFor(Company::class)->constrained();
             $table->softDeletes();

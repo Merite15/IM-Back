@@ -20,7 +20,6 @@ class UnitFactory extends Factory
     public function definition(): array
     {
         return [
-            'slug' => fake()->word(),
             'name' => fake()->words(2, true),
             'short_code' => fake()->words(1, true),
             'company_id' => Company::all()->random()->id,
