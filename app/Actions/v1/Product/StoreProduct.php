@@ -17,8 +17,6 @@ final class StoreProduct
     public function handle(ProductDTO $dto): ApiSuccessResponse | ApiErrorResponse
     {
         try {
-            $data = $dto->toArray();
-
             $code = IdGenerator::generate([
                 'table' => 'products',
                 'field' => 'code',
@@ -26,10 +24,8 @@ final class StoreProduct
                 'prefix' => 'PC'
             ]);
 
-            $product = Product::create([
+            Product::create([
                 'name' => $dto->getName(),
-                'tax_type' => $dto->getTaxType(),
-                'tax' => $dto->getTax(),
                 'category_id' => $dto->getCategoryId(),
                 'unit_id' => $dto->getUnitId(),
                 'quantity' => $dto->getQuantity(),
@@ -39,15 +35,6 @@ final class StoreProduct
                 'code' => $code,
                 'company_id' => auth()->user()->current_company,
             ]);
-
-            if ($file = $data['image']) {
-                $fileName = hexdec(uniqid()) . '.' . $file->getClientOriginalExtension();
-                $path = 'public/products/';
-
-                $file->storeAs($path, $fileName);
-
-                $product['image'] = $fileName;
-            }
 
             return new ApiSuccessResponse(
                 message: "Produit ajouté avec succès",

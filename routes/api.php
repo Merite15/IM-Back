@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\v1\DashboardController;
 use App\Http\Controllers\Api\v1\OrderController;
 use App\Http\Controllers\Api\v1\ProductController;
 use App\Http\Controllers\Api\v1\PurchaseController;
+use App\Http\Controllers\Api\v1\SaleController;
 use App\Http\Controllers\Api\v1\SupplierController;
 use App\Http\Controllers\Api\v1\UnitController;
 use App\Http\Controllers\Api\v1\UserController;
@@ -77,6 +78,7 @@ Route::group(['middleware' => ['auth:sanctum', 'ability:' . TokenAbility::ACCESS
         'purchases' => PurchaseController::class,
         'users' => UserController::class,
         'products' => ProductController::class,
+        'sales' => SaleController::class,
         // 'customers' => CustomerController::class,
         // 'orders' => OrderController::class,
     ], ['except' => ['create', 'edit']]);

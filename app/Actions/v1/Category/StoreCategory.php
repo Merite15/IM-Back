@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Actions\v1\Category;
 
-use App\DTO\v1\Category\CategoryDTO;
+use App\DTO\v1\CategoryDTO;
 use App\Models\Category;
 use App\Responses\ApiErrorResponse;
 use App\Responses\ApiSuccessResponse;
@@ -19,7 +19,6 @@ final class StoreCategory
         try {
             Category::create([
                 'name' => $dto->getName(),
-                'slug' =>  Str::slug($dto->getSlug()),
                 'company_id' => auth()->user()->current_company,
             ]);
 

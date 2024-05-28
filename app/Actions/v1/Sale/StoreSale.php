@@ -2,30 +2,29 @@
 
 declare(strict_types=1);
 
-namespace App\Actions\v1\Company;
+namespace App\Actions\v1\Sale;
 
-use App\DTO\v1\CompanyDTO;
-use App\Models\Company;
+use App\DTO\v1\SaleDTO;
+use App\Models\Sale;
 use App\Responses\ApiErrorResponse;
 use App\Responses\ApiSuccessResponse;
 use Illuminate\Http\Response;
 use Throwable;
 
-final class StoreCompany
+final class StoreSale
 {
-    public function handle(CompanyDTO $dto): ApiSuccessResponse | ApiErrorResponse
+    public function handle(SaleDTO $dto): ApiSuccessResponse | ApiErrorResponse
     {
         try {
-            $company = Company::create([
-                'name' => $dto->getName(),
-                'address' => $dto->getAddress(),
-                'phone' => $dto->getPhone()
+            Sale::create([
+                'date' => $dto->getDate(),
+                'receipt_no' => $dto->getReceiptNo(),
+                'total_amount' => $dto->getTotalAmount(),
+                'company_id' => auth()->user()->current_company,
             ]);
 
-            $company->users()->attach(auth()->user()->id);
-
             return new ApiSuccessResponse(
-                message: "Compagnie ajoutée avec succès",
+                message: "fournisseur ajouté avec succès",
                 code: Response::HTTP_CREATED
             );
         } catch (Throwable $exception) {

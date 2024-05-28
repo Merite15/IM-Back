@@ -5,17 +5,12 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api\v1;
 
 use App\Actions\v1\Product\DestroyProduct;
-use App\Actions\v1\Product\ExportExcel;
 use App\Actions\v1\Product\FetchProducts;
-use App\Actions\v1\Product\ImportExcel;
-use App\Actions\v1\Product\ImportProduct;
 use App\Actions\v1\Product\ShowProduct;
 use App\Actions\v1\Product\StoreProduct;
 use App\Actions\v1\Product\UpdateProduct;
-use App\DTO\v1\Product\ImportProductDTO;
 use App\DTO\v1\Product\ProductDTO;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\v1\Product\ImportProductRequest;
 use App\Http\Requests\v1\Product\StoreProductRequest;
 use App\Http\Requests\v1\Product\UpdateProductRequest;
 use App\Responses\ApiErrorResponse;

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Actions\v1\Unit;
 
-use App\DTO\v1\Unit\UnitDTO;
+use App\DTO\v1\UnitDTO;
 use App\Models\Unit;
 use App\Responses\ApiErrorResponse;
 use App\Responses\ApiSuccessResponse;

@@ -2,26 +2,26 @@
 
 declare(strict_types=1);
 
-namespace App\Actions\v1\Company;
+namespace App\Actions\v1\Sale;
 
-use App\DTO\v1\CompanyDTO;
-use App\Models\Company;
+use App\DTO\v1\SaleDTO;
+use App\Models\Sale;
 use App\Responses\ApiErrorResponse;
 use App\Responses\ApiSuccessResponse;
 use Illuminate\Http\Response;
 use Throwable;
 
-final class UpdateCompany
+final class UpdateSale
 {
-    public function handle(string $id, CompanyDTO $dto): ApiSuccessResponse | ApiErrorResponse
+    public function handle(string $id, SaleDTO $dto): ApiSuccessResponse | ApiErrorResponse
     {
         try {
-            $company = Company::query()->findOrFail($id);
+            $sale = Sale::query()->findOrFail($id);
 
-            $company->update([
-                'name' => $dto->getName(),
-                'address' => $dto->getAddress(),
-                'phone' => $dto->getPhone()
+            $sale->update([
+                'date' => $dto->getDate(),
+                'receipt_no' => $dto->getReceiptNo(),
+                'total_amount' => $dto->getTotalAmount(),
             ]);
 
             return new ApiSuccessResponse(message: 'Element modifié avec succès');

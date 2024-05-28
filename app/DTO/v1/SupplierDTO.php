@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\DTO\v1\Supplier;
+namespace App\DTO\v1;
 
 use App\Enums\SupplierType;
 use App\Enums\UserGender;

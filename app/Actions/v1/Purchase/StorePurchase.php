@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Actions\v1\Purchase;
 
-use App\DTO\v1\Purchase\PurchaseDTO;
+use App\DTO\v1\PurchaseDTO;
 use App\Models\Purchase;
 use App\Responses\ApiErrorResponse;
 use App\Responses\ApiSuccessResponse;

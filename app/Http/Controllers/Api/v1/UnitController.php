@@ -9,7 +9,7 @@ use App\Actions\v1\Unit\FetchUnits;
 use App\Actions\v1\Unit\ShowUnit;
 use App\Actions\v1\Unit\StoreUnit;
 use App\Actions\v1\Unit\UpdateUnit;
-use App\DTO\v1\Unit\UnitDTO;
+use App\DTO\v1\UnitDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\v1\Unit\StoreUnitRequest;
 use App\Http\Requests\v1\Unit\UpdateUnitRequest;

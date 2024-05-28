@@ -9,7 +9,7 @@ use App\Actions\v1\Customer\FetchCustomers;
 use App\Actions\v1\Customer\ShowCustomer;
 use App\Actions\v1\Customer\StoreCustomer;
 use App\Actions\v1\Customer\UpdateCustomer;
-use App\DTO\v1\Customer\CustomerDTO;
+use App\DTO\v1\CustomerDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\v1\Customer\StoreCustomerRequest;
 use App\Http\Requests\v1\Customer\UpdateCustomerRequest;

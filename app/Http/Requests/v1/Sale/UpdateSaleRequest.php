@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Sale;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreSaleDetailsRequest extends FormRequest
+class UpdateSaleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,12 @@ class StoreSaleDetailsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'date' => 'required|date',
+            'receipt_no' => 'required|string|max:255',
+            'total_amount' => 'required|integer',
+            'payment_type' => 'required|string',
+            'customer_id' => 'nullable|integer|exists:customers,id',
+            'company_id' => 'required|integer|exists:companies,id',
         ];
     }
 }

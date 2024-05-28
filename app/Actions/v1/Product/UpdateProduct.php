@@ -16,14 +16,10 @@ final class UpdateProduct
     public function handle(string $id, ProductDTO $dto): ApiSuccessResponse | ApiErrorResponse
     {
         try {
-            $data = $dto->toArray();
-
             $product = Product::query()->findOrFail($id);
 
             $product->update([
                 'name' => $dto->getName(),
-                'tax_type' => $dto->getTaxType(),
-                'tax' => $dto->getTax(),
                 'category_id' => $dto->getCategoryId(),
                 'unit_id' => $dto->getUnitId(),
                 'quantity' => $dto->getQuantity(),
@@ -31,16 +27,6 @@ final class UpdateProduct
                 'buying_price' => $dto->getBuyingPrice(),
                 'selling_price' => $dto->getSellingPrice(),
             ]);
-
-            if ($file = $data['product_image']) {
-                $fileName = hexdec(uniqid()) . '.' . $file->getClientOriginalExtension();
-
-                $path = 'public/products/';
-
-                $file->storeAs($path, $fileName);
-
-                $product['image'] = $fileName;
-            }
 
             return new ApiSuccessResponse(message: 'Element modifié avec succès');
         } catch (Throwable $exception) {

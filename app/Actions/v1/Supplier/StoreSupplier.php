@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Actions\v1\Supplier;
 
-use App\DTO\v1\Supplier\SupplierDTO;
+use App\DTO\v1\SupplierDTO;
 use App\Models\Supplier;
 use App\Responses\ApiErrorResponse;
 use App\Responses\ApiSuccessResponse;

@@ -9,7 +9,7 @@ use App\Actions\v1\Company\FetchCompanies;
 use App\Actions\v1\Company\ShowCompany;
 use App\Actions\v1\Company\StoreCompany;
 use App\Actions\v1\Company\UpdateCompany;
-use App\DTO\v1\Company\CompanyDTO;
+use App\DTO\v1\CompanyDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\v1\Company\StoreCompanyRequest;
 use App\Http\Requests\v1\Company\UpdateCompanyRequest;

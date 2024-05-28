@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace App\DTO\v1\Unit;
+namespace App\DTO\v1;
 
 use Illuminate\Http\Request;
 
-final class UnitDTO
+final class CompanyDTO
 {
     public function __construct(
         private readonly string $name,
-        private readonly string $slug,
-        private readonly string $short_code,
+        private readonly string $address,
+        private readonly string $phone,
     ) {
     }
 
@@ -19,8 +19,8 @@ final class UnitDTO
     {
         return new self(
             (string)$request->input('name'),
-            (string)$request->input('slug'),
-            (string)$request->input('short_code')
+            (string)$request->input('address'),
+            (string)$request->input('phone')
         );
     }
 
@@ -28,8 +28,8 @@ final class UnitDTO
     {
         return [
             'name' => $this->name,
-            'slug' => $this->slug,
-            'short_code' => $this->short_code,
+            'address' => $this->address,
+            'phone' => $this->phone,
         ];
     }
 
@@ -38,13 +38,13 @@ final class UnitDTO
         return $this->name;
     }
 
-    public function getSlug(): string
+    public function getAddress(): string
     {
-        return $this->slug;
+        return $this->address;
     }
 
-    public function getShortCode(): string
+    public function getPhone(): string
     {
-        return $this->short_code;
+        return $this->phone;
     }
 }

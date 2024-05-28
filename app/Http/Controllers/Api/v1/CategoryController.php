@@ -9,7 +9,7 @@ use App\Actions\v1\Category\FetchCategories;
 use App\Actions\v1\Category\ShowCategory;
 use App\Actions\v1\Category\StoreCategory;
 use App\Actions\v1\Category\UpdateCategory;
-use App\DTO\v1\Category\CategoryDTO;
+use App\DTO\v1\CategoryDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\v1\Category\StoreCategoryRequest;
 use App\Http\Requests\v1\Category\UpdateCategoryRequest;

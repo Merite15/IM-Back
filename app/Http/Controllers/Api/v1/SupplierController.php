@@ -9,7 +9,7 @@ use App\Actions\v1\Supplier\FetchSuppliers;
 use App\Actions\v1\Supplier\ShowSupplier;
 use App\Actions\v1\Supplier\StoreSupplier;
 use App\Actions\v1\Supplier\UpdateSupplier;
-use App\DTO\v1\Supplier\SupplierDTO;
+use App\DTO\v1\SupplierDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\v1\Supplier\StoreSupplierRequest;
 use App\Http\Requests\v1\Supplier\UpdateSupplierRequest;

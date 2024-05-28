@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\DTO\v1\Customer;
+namespace App\DTO\v1;
 
 use App\Enums\UserGender;
 use Illuminate\Http\Request;

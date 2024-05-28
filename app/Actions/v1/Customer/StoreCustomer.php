@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Actions\v1\Customer;
 
-use App\DTO\v1\Customer\CustomerDTO;
+use App\DTO\v1\CustomerDTO;
 use App\Models\Customer;
 use App\Responses\ApiErrorResponse;
 use App\Responses\ApiSuccessResponse;

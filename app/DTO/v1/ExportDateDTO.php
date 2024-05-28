@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\DTO\v1\Export;
+namespace App\DTO\v1;
 
 use Illuminate\Http\Request;
 
