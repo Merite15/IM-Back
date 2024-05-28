@@ -26,8 +26,6 @@ return new class() extends Migration
             $table->integer('buying_price')->comment('Prix d\'achat');
             $table->integer('selling_price')->comment('Prix de vente');
             $table->integer('quantity_alert')->comment('Alerte de quantité');
-            $table->integer('tax')->nullable()->comment('Taxe');
-            $table->enum('tax_type', TaxType::values())->comment('Type de taxe');
             $table->text('notes')->nullable()->comment('Notes');
             $table->string('image')->nullable()->comment('Image');
             $table->foreignIdFor(Category::class)->constrained();

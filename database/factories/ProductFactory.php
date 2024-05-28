@@ -30,8 +30,6 @@ class ProductFactory extends Factory
             'buying_price' => fake()->randomNumber(2),
             'selling_price' => fake()->randomNumber(2),
             'quantity_alert' => fake()->randomElement([5, 10, 15]),
-            'tax' => fake()->randomElement([5, 10, 15, 20, 25]),
-            'tax_type' => fake()->randomElement(TaxType::values()),
             'company_id' => Company::all()->random()->id,
         ];
     }

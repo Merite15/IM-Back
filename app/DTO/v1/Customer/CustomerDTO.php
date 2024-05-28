@@ -11,7 +11,7 @@ final class CustomerDTO
 {
     public function __construct(
         private readonly string $name,
-        private readonly string $email,
+        private readonly ?string $email,
         private readonly string $address,
         private readonly string $phone,
         private readonly string $shop_name,
@@ -33,25 +33,12 @@ final class CustomerDTO
         );
     }
 
-    public function toArray(): array
-    {
-        return [
-            'name' => $this->name,
-            'email' => $this->email,
-            'address' => $this->address,
-            'phone' => $this->phone,
-            'shop_name' => $this->shop_name,
-            'gender' => $this->gender,
-            'city' => $this->city,
-        ];
-    }
-
     public function getName(): string
     {
         return $this->name;
     }
 
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }

@@ -27,14 +27,11 @@ class StoreProductRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'slug' => 'required|string',
             'code' => 'required|string',
             'quantity' => 'required|integer|min:0',
             'buying_price' => 'required|numeric|min:0',
             'selling_price' => 'required|numeric|min:0',
             'quantity_alert' => 'required|integer|min:0',
-            'tax' => 'nullable|numeric|min:0',
-            'tax_type' => ['required', new Enum(TaxType::class)],
             'notes' => 'nullable|string',
             'image' => 'nullable|image|file|max:1024',
             'category_id' => 'required|integer|exists:categories,id',
