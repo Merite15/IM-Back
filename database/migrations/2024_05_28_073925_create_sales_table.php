@@ -17,7 +17,7 @@ return new class extends Migration
             $table->comment('Table qui stocke les ventes en magasin');
             $table->id();
             $table->date('date')->comment('Date de la vente');
-            $table->string('receipt_no')->comment('Numéro de reçu');
+            $table->string('receipt_no')->comment('Numéro de reçu')->nullable();
             $table->integer('total_amount')->comment('Montant total de la vente');
             $table->enum('payment_type', PaymentType::values())->comment('Type de paiement');
             $table->foreignIdFor(Company::class)->constrained()->comment('Identifiant de la société associée');

@@ -25,7 +25,7 @@ return new class() extends Migration
             $table->integer('sub_total')->comment('Sous-total');
             $table->integer('vat')->comment('TVA');
             $table->integer('total')->comment('Total');
-            $table->string('invoice_no')->comment('Numéro de facture');
+            $table->string('invoice_no')->comment('Numéro de facture')->nullable();
             $table->integer('pay')->comment('Montant payé');
             $table->integer('due')->comment('Montant dû');
             $table->enum('status', OrderStatus::values());

@@ -20,7 +20,7 @@ return new class() extends Migration
             $table->comment('Table qui stocke les achats');
             $table->id();
             $table->string('date')->comment('Date de l\'achat');
-            $table->string('purchase_no')->comment('Numéro d\'achat');
+            $table->string('purchase_no')->comment('Numéro d\'achat')->nullable();
             $table->integer('total_amount')->comment('Montant total');
             $table->enum('status', PurchaseStatus::values())->default(PurchaseStatus::Pending->value)->comment('Statut de l\'achat');
             $table->foreignIdFor(Supplier::class)->constrained();
