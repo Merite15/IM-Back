@@ -31,21 +31,20 @@ final class LoginAction
                 throw new Exception('Vous n’êtes affilié à aucune compagnie.');
             }
 
-            $user->update([
-                'last_login_at' => Carbon::now(),
-                'last_login_ip' => Request::getClientIp()
-            ]);
-
             if ($user->companies->isNotEmpty() && request('company_id') === null) {
                 return response([
                     'success' => true,
                     'message' => 'Veuillez sélectionner une compagnie',
-                    'data' => $user,
-                    'companies' => $user->companies,
+                    'data' => $user->companies,
                 ]);
             }
 
             if (request()->has('company_id') && request('company_id') !== null) {
+                $user->update([
+                    'last_login_at' => Carbon::now(),
+                    'last_login_ip' => Request::getClientIp()
+                ]);
+
                 $user->update([
                     'current_company' => request('company_id')
                 ]);

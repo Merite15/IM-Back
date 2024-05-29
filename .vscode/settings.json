@@ -1,3 +1,25 @@
 {
-    "cSpell.ignoreWords": ["Mbongui", "indisposable"]
+    "cSpell.ignoreWords": [
+        "Csrf",
+        "Mbongui",
+        "barryvdh",
+        "doesnt",
+        "gerant",
+        "guzzlehttp",
+        "issets",
+        "lalla",
+        "larastan",
+        "laravel",
+        "nunomaduro",
+        "pestphp",
+        "phpinsights",
+        "phpstan",
+        "phpunit",
+        "renderable",
+        "spatie",
+        "strpos",
+        "supprimer",
+        "unpayed",
+        "unsets"
+    ]
 }
