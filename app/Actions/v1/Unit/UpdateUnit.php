@@ -29,7 +29,7 @@ final class UpdateUnit
         } catch (Throwable $exception) {
             return new ApiErrorResponse(
                 exception: $exception,
-                code: Response::HTTP_NOT_FOUND
+                code: Response::HTTP_NOT_FOUND,
             );
         }
     }

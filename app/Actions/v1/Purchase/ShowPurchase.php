@@ -25,13 +25,13 @@ final class ShowPurchase
                 message: 'Client récupéré avec succès',
                 data: [
                     'purchase' => $purchase,
-                    'products' => $products
+                    'products' => $products,
                 ],
             );
         } catch (Throwable $exception) {
             return new ApiErrorResponse(
                 exception: $exception,
-                code: Response::HTTP_NOT_FOUND
+                code: Response::HTTP_NOT_FOUND,
             );
         }
     }

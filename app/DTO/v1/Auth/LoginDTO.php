@@ -11,14 +11,13 @@ final class LoginDTO
     public function __construct(
         private readonly string $email,
         private readonly string $password,
-    ) {
-    }
+    ) {}
 
     public static function fromRequest(Request $request): self
     {
         return new self(
-            (string)$request->input('email'),
-            (string)$request->input('password'),
+            (string) $request->input('email'),
+            (string) $request->input('password'),
         );
     }
 

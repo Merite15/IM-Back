@@ -20,12 +20,12 @@ final class PurchaseReport
                     resource: Purchase::query()
                         ->with('supplier')
                         ->where('date', today()->format('Y-m-d'))
-                        ->get()
+                        ->get(),
                 ),
             );
         } catch (Throwable $exception) {
             return new ApiErrorResponse(
-                exception: $exception
+                exception: $exception,
             );
         }
     }

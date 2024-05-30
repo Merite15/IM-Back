@@ -23,7 +23,7 @@ final class StorePurchase
                     'table' => 'purchases',
                     'field' => 'purchase_no',
                     'length' => 10,
-                    'prefix' => 'PRS-'
+                    'prefix' => 'PRS-',
                 ]),
                 'supplier_id'   => $dto->getSupplierId(),
                 'date'          => $dto->getDate(),
@@ -31,7 +31,7 @@ final class StorePurchase
                 'company_id' => auth()->user()->current_company,
             ]);
 
-            if (!$dto->getProducts() === null) {
+            if ( ! $dto->getProducts() === null) {
                 $details = [];
 
                 foreach ($dto->getProducts() as $product) {
@@ -48,12 +48,12 @@ final class StorePurchase
 
             return new ApiSuccessResponse(
                 message: "Achat ajouté avec succès",
-                code: Response::HTTP_CREATED
+                code: Response::HTTP_CREATED,
             );
         } catch (Throwable $exception) {
             return new ApiErrorResponse(
                 exception: $exception,
-                code: Response::HTTP_NOT_FOUND
+                code: Response::HTTP_NOT_FOUND,
             );
         }
     }

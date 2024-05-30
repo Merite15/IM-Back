@@ -22,23 +22,22 @@ final class OrderDTO
         private readonly PaymentType $payment_type,
         private readonly int $pay,
         private readonly int $due,
-    ) {
-    }
+    ) {}
 
     public static function fromRequest(Request $request): self
     {
         return new self(
-            (string)$request->input('date'),
-            (int)$request->input('customer_id'),
+            (string) $request->input('date'),
+            (int) $request->input('customer_id'),
             OrderStatus::from($request->input('status')),
-            (int)$request->input('total_products'),
-            (int)$request->input('sub_total'),
-            (int)$request->input('vat'),
-            (string)$request->input('invoice_no'),
-            (int)$request->input('total'),
+            (int) $request->input('total_products'),
+            (int) $request->input('sub_total'),
+            (int) $request->input('vat'),
+            (string) $request->input('invoice_no'),
+            (int) $request->input('total'),
             PaymentType::from($request->input('payment_type')),
-            (int)$request->input('pay'),
-            (int)$request->input('due')
+            (int) $request->input('pay'),
+            (int) $request->input('due'),
         );
     }
 

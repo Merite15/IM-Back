@@ -17,12 +17,12 @@ final class FetchCustomers
         try {
             return new CustomerCollectionResponse(
                 customerCollection: new CustomerCollection(
-                    resource: Customer::query()->latest()->get()
+                    resource: Customer::query()->latest()->get(),
                 ),
             );
         } catch (Throwable $exception) {
             return new ApiErrorResponse(
-                exception: $exception
+                exception: $exception,
             );
         }
     }

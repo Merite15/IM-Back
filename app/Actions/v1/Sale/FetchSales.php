@@ -17,12 +17,12 @@ final class FetchSales
         try {
             return new SaleCollectionResponse(
                 saleCollection: new SaleCollection(
-                    resource: Sale::query()->latest()->get()
+                    resource: Sale::query()->latest()->get(),
                 ),
             );
         } catch (Throwable $exception) {
             return new ApiErrorResponse(
-                exception: $exception
+                exception: $exception,
             );
         }
     }

@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Requests\v1\Product;
 
-use App\Enums\TaxType;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Enum;
 
 class UpdateProductRequest extends FormRequest
 {

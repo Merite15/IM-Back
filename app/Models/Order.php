@@ -8,7 +8,6 @@ use App\Enums\OrderStatus;
 use App\Enums\PaymentType;
 use App\Models\Scopes\CurrentCompanyScope;
 use App\Models\Traits\HasOwnership;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -18,14 +17,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Order extends Model
 {
     use HasFactory;
-    use SoftDeletes, HasOwnership;
+    use HasOwnership;
+    use SoftDeletes;
 
     protected $guarded = [];
 
     protected $casts = [
         'order_date'    => 'date',
         'order_status'  => OrderStatus::class,
-        'payment_type'  => PaymentType::class
+        'payment_type'  => PaymentType::class,
     ];
 
     public function customer(): BelongsTo

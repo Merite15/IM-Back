@@ -16,7 +16,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Customer extends Model
 {
     use HasFactory;
-    use SoftDeletes, HasOwnership;
+    use HasOwnership;
+    use SoftDeletes;
 
     protected $guarded = [];
 

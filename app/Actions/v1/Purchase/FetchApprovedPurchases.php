@@ -21,12 +21,12 @@ final class FetchApprovedPurchases
                     resource: Purchase::query()
                         ->with('supplier')
                         ->where('status', PurchaseStatus::APPROVED)
-                        ->get()
+                        ->get(),
                 ),
             );
         } catch (Throwable $exception) {
             return new ApiErrorResponse(
-                exception: $exception
+                exception: $exception,
             );
         }
     }

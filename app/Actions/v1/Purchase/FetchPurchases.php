@@ -17,12 +17,12 @@ final class FetchPurchases
         try {
             return new PurchaseCollectionResponse(
                 purchaseCollection: new PurchaseCollection(
-                    resource: Purchase::query()->latest()->get()
+                    resource: Purchase::query()->latest()->get(),
                 ),
             );
         } catch (Throwable $exception) {
             return new ApiErrorResponse(
-                exception: $exception
+                exception: $exception,
             );
         }
     }

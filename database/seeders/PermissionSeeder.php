@@ -69,28 +69,28 @@ class PermissionSeeder extends Seeder
                     'name' => 'create-' . $table['name'],
                     'public_name' => 'créer un(e) ' . $table['public_name'],
                     'guard_name' => 'web',
-                ]
+                ],
             );
             Permission::create(
                 [
                     'name' => 'update-' . $table['name'],
                     'public_name' => 'modifier un(e) ' . $table['public_name'],
                     'guard_name' => 'web',
-                ]
+                ],
             );
             Permission::create(
                 [
                     'name' => 'read-' . $table['name'],
                     'public_name' => 'lire un(e) ' . $table['public_name'],
                     'guard_name' => 'web',
-                ]
+                ],
             );
             Permission::create(
                 [
                     'name' => 'delete-' . $table['name'],
                     'public_name' => 'supprimer un(e) ' . $table['public_name'],
                     'guard_name' => 'web',
-                ]
+                ],
             );
         }
 

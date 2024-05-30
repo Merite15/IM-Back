@@ -35,7 +35,7 @@ final class FetchData
 
                 'categories' => Category::query()->where('company_id', auth()->user->current_company)->count(),
 
-                'quotations' => Quotation::query()->where('company_id', auth()->user->current_company)->count()
+                'quotations' => Quotation::query()->where('company_id', auth()->user->current_company)->count(),
             ];
 
             return new ApiSuccessResponse(
@@ -45,7 +45,7 @@ final class FetchData
         } catch (Throwable $exception) {
             return new ApiErrorResponse(
                 exception: $exception,
-                code: $exception->getCode()
+                code: $exception->getCode(),
             );
         }
     }

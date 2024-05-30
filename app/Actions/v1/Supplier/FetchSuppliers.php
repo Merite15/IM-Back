@@ -17,12 +17,12 @@ final class FetchSuppliers
         try {
             return new SupplierCollectionResponse(
                 supplierCollection: new SupplierCollection(
-                    resource: Supplier::query()->latest()->get()
+                    resource: Supplier::query()->latest()->get(),
                 ),
             );
         } catch (Throwable $exception) {
             return new ApiErrorResponse(
-                exception: $exception
+                exception: $exception,
             );
         }
     }

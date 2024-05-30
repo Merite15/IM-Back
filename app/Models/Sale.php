@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use App\Models\Scopes\CurrentCompanyScope;
@@ -11,7 +13,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Sale extends Model
 {
-    use HasFactory, SoftDeletes, HasOwnership;
+    use HasFactory;
+    use HasOwnership;
+    use SoftDeletes;
 
     protected $guarded = [];
 

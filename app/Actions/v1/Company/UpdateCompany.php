@@ -21,14 +21,14 @@ final class UpdateCompany
             $company->update([
                 'name' => $dto->getName(),
                 'address' => $dto->getAddress(),
-                'phone' => $dto->getPhone()
+                'phone' => $dto->getPhone(),
             ]);
 
             return new ApiSuccessResponse(message: 'Element modifié avec succès');
         } catch (Throwable $exception) {
             return new ApiErrorResponse(
                 exception: $exception,
-                code: Response::HTTP_NOT_FOUND
+                code: Response::HTTP_NOT_FOUND,
             );
         }
     }

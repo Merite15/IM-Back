@@ -21,12 +21,12 @@ final class FetchDueOrders
                         ->where('due', '>', '0')
                         ->with('customer')
                         ->latest()
-                        ->get()
+                        ->get(),
                 ),
             );
         } catch (Throwable $exception) {
             return new ApiErrorResponse(
-                exception: $exception
+                exception: $exception,
             );
         }
     }

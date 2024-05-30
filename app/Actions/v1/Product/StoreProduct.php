@@ -21,7 +21,7 @@ final class StoreProduct
                 'table' => 'products',
                 'field' => 'code',
                 'length' => 4,
-                'prefix' => 'PC'
+                'prefix' => 'PC',
             ]);
 
             Product::create([
@@ -38,12 +38,12 @@ final class StoreProduct
 
             return new ApiSuccessResponse(
                 message: "Produit ajouté avec succès",
-                code: Response::HTTP_CREATED
+                code: Response::HTTP_CREATED,
             );
         } catch (Throwable $exception) {
             return new ApiErrorResponse(
                 exception: $exception,
-                code: Response::HTTP_NOT_FOUND
+                code: Response::HTTP_NOT_FOUND,
             );
         }
     }

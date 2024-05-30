@@ -16,12 +16,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Product extends Model
 {
     use HasFactory;
-    use SoftDeletes, HasOwnership;
+    use HasOwnership;
+    use SoftDeletes;
 
     protected $guarded = [];
 
     protected $casts = [
-        'tax_type' => TaxType::class
+        'tax_type' => TaxType::class,
     ];
 
     public function category(): BelongsTo
@@ -42,16 +43,16 @@ class Product extends Model
     protected function buyingPrice(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => $value / 100,
-            set: fn ($value) => $value * 100,
+            get: fn($value) => $value / 100,
+            set: fn($value) => $value * 100,
         );
     }
 
     protected function sellingPrice(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => $value / 100,
-            set: fn ($value) => $value * 100,
+            get: fn($value) => $value / 100,
+            set: fn($value) => $value * 100,
         );
     }
 }

@@ -18,7 +18,7 @@ class ApiSuccessResponse implements Responsable
         private ?bool $success = true,
         private int $code = Response::HTTP_OK,
         private array $headers = [],
-        private array $stat = []
+        private array $stat = [],
     ) {}
 
     /**

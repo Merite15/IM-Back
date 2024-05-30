@@ -17,12 +17,12 @@ final class FetchUsers
         try {
             return new UserCollectionResponse(
                 userCollection: new UserCollection(
-                    resource: User::query()->latest()->get()
+                    resource: User::query()->latest()->get(),
                 ),
             );
         } catch (Throwable $exception) {
             return new ApiErrorResponse(
-                exception: $exception
+                exception: $exception,
             );
         }
     }

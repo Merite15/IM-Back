@@ -19,19 +19,19 @@ final class StoreCompany
             $company = Company::create([
                 'name' => $dto->getName(),
                 'address' => $dto->getAddress(),
-                'phone' => $dto->getPhone()
+                'phone' => $dto->getPhone(),
             ]);
 
             $company->users()->attach(auth()->user()->id);
 
             return new ApiSuccessResponse(
                 message: "Compagnie ajoutée avec succès",
-                code: Response::HTTP_CREATED
+                code: Response::HTTP_CREATED,
             );
         } catch (Throwable $exception) {
             return new ApiErrorResponse(
                 exception: $exception,
-                code: Response::HTTP_NOT_FOUND
+                code: Response::HTTP_NOT_FOUND,
             );
         }
     }

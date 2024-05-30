@@ -14,8 +14,7 @@ final class SaleDTO
         private readonly int $totalAmount,
         private readonly string $paymentType,
         private readonly int $companyId,
-    ) {
-    }
+    ) {}
 
     public static function fromRequest(Request $request): self
     {

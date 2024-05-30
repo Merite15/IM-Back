@@ -23,7 +23,7 @@ final class LoginAction
         try {
             $user = User::query()->with('roles.permissions', 'currentCompany', 'companies')->where('email', $dto->getEmail())->first();
 
-            if (!$user || !Hash::check($dto->getPassword(), $user->password)) {
+            if ( ! $user || ! Hash::check($dto->getPassword(), $user->password)) {
                 throw new Exception('Les informations d\'identification fournies sont incorrectes.');
             }
 
@@ -42,11 +42,11 @@ final class LoginAction
             if (request()->has('company_id') && request('company_id') !== null) {
                 $user->update([
                     'last_login_at' => Carbon::now(),
-                    'last_login_ip' => Request::getClientIp()
+                    'last_login_ip' => Request::getClientIp(),
                 ]);
 
                 $user->update([
-                    'current_company' => request('company_id')
+                    'current_company' => request('company_id'),
                 ]);
 
                 $accessToken = $user->createToken('access_token', [TokenAbility::ACCESS_API->value], Carbon::now()->addMinutes(config('sanctum.expiration')));
@@ -57,7 +57,7 @@ final class LoginAction
                     'user' => $user,
                     'token' => $accessToken->plainTextToken,
                     'token_expiration' => now()->addMinutes(config('sanctum.expiration')),
-                    'refresh_token' => $refreshToken->plainTextToken
+                    'refresh_token' => $refreshToken->plainTextToken,
                 ];
 
                 return new ApiSuccessResponse(

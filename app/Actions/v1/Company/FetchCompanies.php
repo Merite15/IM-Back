@@ -17,12 +17,12 @@ final class FetchCompanies
         try {
             return new CompanyCollectionResponse(
                 companyCollection: new CompanyCollection(
-                    resource: Company::query()->latest()->get()
+                    resource: Company::query()->latest()->get(),
                 ),
             );
         } catch (Throwable $exception) {
             return new ApiErrorResponse(
-                exception: $exception
+                exception: $exception,
             );
         }
     }

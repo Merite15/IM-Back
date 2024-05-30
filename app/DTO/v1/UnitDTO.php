@@ -11,14 +11,13 @@ final class UnitDTO
     public function __construct(
         private readonly string $name,
         private readonly string $short_code,
-    ) {
-    }
+    ) {}
 
     public static function fromRequest(Request $request): self
     {
         return new self(
-            (string)$request->input('name'),
-            (string)$request->input('short_code')
+            (string) $request->input('name'),
+            (string) $request->input('short_code'),
         );
     }
 

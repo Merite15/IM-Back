@@ -17,19 +17,18 @@ final class CustomerDTO
         private readonly string $shop_name,
         private readonly UserGender $gender,
         private readonly string $city,
-    ) {
-    }
+    ) {}
 
     public static function fromRequest(Request $request): self
     {
         return new self(
-            (string)$request->input('name'),
-            (string)$request->input('email'),
-            (string)$request->input('address'),
-            (string)$request->input('phone'),
-            (string)$request->input('shop_name'),
+            (string) $request->input('name'),
+            (string) $request->input('email'),
+            (string) $request->input('address'),
+            (string) $request->input('phone'),
+            (string) $request->input('shop_name'),
             UserGender::from($request->input('gender')),
-            (string)$request->input('city')
+            (string) $request->input('city'),
         );
     }
 

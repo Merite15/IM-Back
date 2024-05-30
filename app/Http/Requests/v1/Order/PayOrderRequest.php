@@ -24,7 +24,7 @@ class PayOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'pay' => 'required|numeric'
+            'pay' => 'required|numeric',
         ];
     }
 }

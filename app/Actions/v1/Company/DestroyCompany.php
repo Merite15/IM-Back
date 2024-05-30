@@ -23,12 +23,12 @@ final class DestroyCompany
 
             return new ApiSuccessResponse(
                 message: 'Element supprimé avec succès',
-                code: Response::HTTP_OK
+                code: Response::HTTP_OK,
             );
         } catch (Throwable $exception) {
             return new ApiErrorResponse(
                 exception: $exception,
-                code: $exception->getCode()
+                code: $exception->getCode(),
             );
         }
     }

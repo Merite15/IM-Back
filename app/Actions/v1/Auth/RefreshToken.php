@@ -19,7 +19,7 @@ final class RefreshToken
             $accessToken = $request->user()->createToken(
                 'access_token',
                 [TokenAbility::ACCESS_API->value],
-                Carbon::now()->addMinutes(config('sanctum.expiration'))
+                Carbon::now()->addMinutes(config('sanctum.expiration')),
             );
 
             return new ApiSuccessResponse(
@@ -32,7 +32,7 @@ final class RefreshToken
         } catch (Throwable $exception) {
             return new ApiErrorResponse(
                 exception: $exception,
-                code: $exception->getCode()
+                code: $exception->getCode(),
             );
         }
     }

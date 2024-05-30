@@ -14,17 +14,16 @@ final class OrderDetailsDTO
         private readonly int $product_id,
         private readonly int $quantity,
         private readonly int $total,
-    ) {
-    }
+    ) {}
 
     public static function fromRequest(Request $request): self
     {
         return new self(
-            (int)$request->input('order_id'),
-            (int)$request->input('unit_cost'),
-            (int)$request->input('product_id'),
-            (int)$request->input('quantity'),
-            (int)$request->input('total')
+            (int) $request->input('order_id'),
+            (int) $request->input('unit_cost'),
+            (int) $request->input('product_id'),
+            (int) $request->input('quantity'),
+            (int) $request->input('total'),
         );
     }
 

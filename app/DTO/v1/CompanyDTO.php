@@ -12,15 +12,14 @@ final class CompanyDTO
         private readonly string $name,
         private readonly string $address,
         private readonly string $phone,
-    ) {
-    }
+    ) {}
 
     public static function fromRequest(Request $request): self
     {
         return new self(
-            (string)$request->input('name'),
-            (string)$request->input('address'),
-            (string)$request->input('phone')
+            (string) $request->input('name'),
+            (string) $request->input('address'),
+            (string) $request->input('phone'),
         );
     }
 

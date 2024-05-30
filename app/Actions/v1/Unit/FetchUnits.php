@@ -17,12 +17,12 @@ final class FetchUnits
         try {
             return new UnitCollectionResponse(
                 unitCollection: new UnitCollection(
-                    resource: Unit::query()->withCount('products')->latest()->get()
+                    resource: Unit::query()->withCount('products')->latest()->get(),
                 ),
             );
         } catch (Throwable $exception) {
             return new ApiErrorResponse(
-                exception: $exception
+                exception: $exception,
             );
         }
     }

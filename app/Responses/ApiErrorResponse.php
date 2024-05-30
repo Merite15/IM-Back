@@ -15,7 +15,7 @@ final class ApiErrorResponse implements Responsable
         private ?Throwable $exception = null,
         private ?bool $success = false,
         private int $code = Response::HTTP_INTERNAL_SERVER_ERROR,
-        private array $headers = []
+        private array $headers = [],
     ) {}
 
     /**
@@ -26,7 +26,7 @@ final class ApiErrorResponse implements Responsable
         $response = [
             'success' => $this->success,
             'message' => $this->message,
-            'error' =>  $this->exception->getMessage()
+            'error' =>  $this->exception->getMessage(),
         ];
 
         if ($this->exception !== null && config('app.debug')) {
@@ -42,7 +42,7 @@ final class ApiErrorResponse implements Responsable
             $response,
             $this->code,
             $this->headers,
-            $this->success
+            $this->success,
         );
     }
 }

@@ -23,12 +23,12 @@ final class StoreCategory
 
             return new ApiSuccessResponse(
                 message: "Catégorie ajoutée avec succès",
-                code: Response::HTTP_CREATED
+                code: Response::HTTP_CREATED,
             );
         } catch (Throwable $exception) {
             return new ApiErrorResponse(
                 exception: $exception,
-                code: Response::HTTP_NOT_FOUND
+                code: Response::HTTP_NOT_FOUND,
             );
         }
     }

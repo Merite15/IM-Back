@@ -9,7 +9,6 @@ use App\Models\Category;
 use App\Responses\ApiErrorResponse;
 use App\Responses\ApiSuccessResponse;
 use Illuminate\Http\Response;
-use Illuminate\Support\Str;
 use Throwable;
 
 final class UpdateCategory
@@ -27,7 +26,7 @@ final class UpdateCategory
         } catch (Throwable $exception) {
             return new ApiErrorResponse(
                 exception: $exception,
-                code: Response::HTTP_NOT_FOUND
+                code: Response::HTTP_NOT_FOUND,
             );
         }
     }

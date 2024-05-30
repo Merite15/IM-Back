@@ -17,12 +17,12 @@ final class FetchProducts
         try {
             return new ProductCollectionResponse(
                 productCollection: new ProductCollection(
-                    resource: Product::query()->with('category', 'unit')->latest()->get()
+                    resource: Product::query()->with('category', 'unit')->latest()->get(),
                 ),
             );
         } catch (Throwable $exception) {
             return new ApiErrorResponse(
-                exception: $exception
+                exception: $exception,
             );
         }
     }

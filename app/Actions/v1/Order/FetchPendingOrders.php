@@ -22,12 +22,12 @@ final class FetchPendingOrders
                         ->where('status', OrderStatus::Pending)
                         ->with('customer')
                         ->latest()
-                        ->get()
+                        ->get(),
                 ),
             );
         } catch (Throwable $exception) {
             return new ApiErrorResponse(
-                exception: $exception
+                exception: $exception,
             );
         }
     }

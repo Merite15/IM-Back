@@ -43,7 +43,7 @@ final class ExportPurchaseExcel
         } catch (Throwable $exception) {
             return new ApiErrorResponse(
                 exception: $exception,
-                code: $exception->getCode()
+                code: $exception->getCode(),
             );
         }
     }

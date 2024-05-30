@@ -17,12 +17,12 @@ final class FetchCategories
         try {
             return new CategoryCollectionResponse(
                 categoryCollection: new CategoryCollection(
-                    resource: Category::query()->withCount('products')->latest()->get()
+                    resource: Category::query()->withCount('products')->latest()->get(),
                 ),
             );
         } catch (Throwable $exception) {
             return new ApiErrorResponse(
-                exception: $exception
+                exception: $exception,
             );
         }
     }

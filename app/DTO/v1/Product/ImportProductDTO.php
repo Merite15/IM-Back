@@ -10,8 +10,7 @@ final class ImportProductDTO
 {
     public function __construct(
         private readonly mixed $upload_file,
-    ) {
-    }
+    ) {}
 
     public static function fromRequest(Request $request): self
     {

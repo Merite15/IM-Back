@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\DTO\v1\Product;
 
-use App\Enums\TaxType;
 use Illuminate\Http\Request;
 
 final class ProductDTO
@@ -19,21 +18,20 @@ final class ProductDTO
         private readonly ?string $image = null,
         private readonly int $category_id,
         private readonly int $unit_id,
-    ) {
-    }
+    ) {}
 
     public static function fromRequest(Request $request): self
     {
         return new self(
-            (string)$request->input('name'),
-            (int)$request->input('quantity'),
-            (int)$request->input('buying_price'),
-            (int)$request->input('selling_price'),
-            (int)$request->input('quantity_alert'),
-            (string)$request->input('notes'),
-            (string)$request->input('image'),
-            (int)$request->input('category_id'),
-            (int)$request->input('unit_id')
+            (string) $request->input('name'),
+            (int) $request->input('quantity'),
+            (int) $request->input('buying_price'),
+            (int) $request->input('selling_price'),
+            (int) $request->input('quantity_alert'),
+            (string) $request->input('notes'),
+            (string) $request->input('image'),
+            (int) $request->input('category_id'),
+            (int) $request->input('unit_id'),
         );
     }
 

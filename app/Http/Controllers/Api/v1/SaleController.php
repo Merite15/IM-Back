@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api\v1;
 
 use App\Actions\v1\Sale\DestroySale;
@@ -9,7 +11,6 @@ use App\Actions\v1\Sale\StoreSale;
 use App\Actions\v1\Sale\UpdateSale;
 use App\DTO\v1\SaleDTO;
 use App\Http\Controllers\Controller;
-use App\Models\Sale;
 use App\Http\Requests\Sale\StoreSaleRequest;
 use App\Http\Requests\Sale\UpdateSaleRequest;
 use App\Responses\ApiErrorResponse;

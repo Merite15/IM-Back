@@ -16,18 +16,17 @@ final class UserDTO
         private readonly string $phone,
         private readonly string $password,
         private readonly int $role_id,
-    ) {
-    }
+    ) {}
 
     public static function fromRequest(Request $request): self
     {
         return new self(
-            (string)$request->input('name'),
+            (string) $request->input('name'),
             UserGender::from($request->input('gender')),
-            (string)$request->input('email'),
-            (string)$request->input('phone'),
-            (string)$request->input('password'),
-            (int)$request->input('role_id'),
+            (string) $request->input('email'),
+            (string) $request->input('phone'),
+            (string) $request->input('password'),
+            (int) $request->input('role_id'),
         );
     }
 

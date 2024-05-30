@@ -38,7 +38,7 @@ class StockAlert extends Mailable
         return new Content(
             view: 'emails.stock-alert',
             with: [
-                'listProducts' => $this->listProducts
+                'listProducts' => $this->listProducts,
             ],
         );
     }

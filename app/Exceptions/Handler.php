@@ -88,7 +88,7 @@ class Handler extends ExceptionHandler
                         'success' => false,
                         'message' => 'Données invalides ***',
                         'errors' => $display_errors,
-                    ], 422)
+                    ], 422),
                 );
             }
         });

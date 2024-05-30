@@ -29,12 +29,12 @@ final class PayDueOrder
 
             $order->update([
                 'due' => $paidDue,
-                'pay' => $paidPay
+                'pay' => $paidPay,
             ]);
 
             if ($paidDue === 0) {
                 $order->update([
-                    'status' => OrderStatus::Complete
+                    'status' => OrderStatus::Complete,
                 ]);
 
                 $products = OrderDetails::where('order_id', $order->id)->get();
@@ -60,11 +60,11 @@ final class PayDueOrder
 
             return new ApiSuccessResponse(
                 message: 'Commande payée avec succès',
-                code: Response::HTTP_ACCEPTED
+                code: Response::HTTP_ACCEPTED,
             );
         } catch (Throwable $exception) {
             return new ApiErrorResponse(
-                exception: $exception
+                exception: $exception,
             );
         }
     }

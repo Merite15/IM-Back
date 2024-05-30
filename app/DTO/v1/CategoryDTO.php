@@ -10,13 +10,12 @@ final class CategoryDTO
 {
     public function __construct(
         private readonly string $name,
-    ) {
-    }
+    ) {}
 
     public static function fromRequest(Request $request): self
     {
         return new self(
-            (string)$request->input('name'),
+            (string) $request->input('name'),
         );
     }
 

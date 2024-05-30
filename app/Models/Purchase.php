@@ -16,13 +16,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Purchase extends Model
 {
     use HasFactory;
-    use SoftDeletes, HasOwnership;
+    use HasOwnership;
+    use SoftDeletes;
 
     protected $guarded = [];
 
     protected $casts = [
         'date'       => 'date',
-        'status'     => PurchaseStatus::class
+        'status'     => PurchaseStatus::class,
     ];
 
     public function supplier(): BelongsTo
