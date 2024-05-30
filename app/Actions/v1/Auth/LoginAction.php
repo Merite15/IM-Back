@@ -21,7 +21,7 @@ final class LoginAction
     public function handle(LoginDTO $dto): ApiErrorResponse | Exception | ApiSuccessResponse | Response
     {
         try {
-            $user = User::query()->with('roles.permissions', 'companies')->where('email', $dto->getEmail())->first();
+            $user = User::query()->with('roles.permissions', 'currentCompany', 'companies')->where('email', $dto->getEmail())->first();
 
             if (!$user || !Hash::check($dto->getPassword(), $user->password)) {
                 throw new Exception('Les informations d\'identification fournies sont incorrectes.');

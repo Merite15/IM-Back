@@ -7,6 +7,7 @@ use App\Enums\TokenAbility;
 use App\Http\Controllers\Api\v1\AuthController;
 use App\Http\Controllers\Api\v1\CategoryController;
 use App\Http\Controllers\Api\v1\CompanyController;
+use App\Http\Controllers\Api\v1\ConfigController;
 use App\Http\Controllers\Api\v1\CustomerController;
 use App\Http\Controllers\Api\v1\DashboardController;
 use App\Http\Controllers\Api\v1\OrderController;
@@ -45,6 +46,8 @@ Route::prefix('auth')->group(function (): void {
 
 Route::group(['middleware' => ['auth:sanctum', 'ability:' . TokenAbility::ACCESS_API->value]], function (): void {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
+
+    Route::get('/app-config', ConfigController::class)->name('app-config');
 
     Route::prefix('products')->group(function (): void {
         Route::controller(ProductController::class)->group(function (): void {
