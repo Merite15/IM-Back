@@ -19,7 +19,6 @@ final class StoreUnit
         try {
             Unit::create([
                 'name' => $dto->getName(),
-                'slug' =>  Str::slug($dto->getSlug()),
                 'short_code' =>  Str::slug($dto->getShortCode()),
                 'company_id' => auth()->user()->current_company,
             ]);

@@ -17,7 +17,7 @@ final class FetchCategories
         try {
             return new CategoryCollectionResponse(
                 categoryCollection: new CategoryCollection(
-                    resource: Category::query()->latest()->get()
+                    resource: Category::query()->withCount('products')->latest()->get()
                 ),
             );
         } catch (Throwable $exception) {

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Builder;
+use App\Models\Scopes\CurrentCompanyScope;
+use App\Models\Traits\HasOwnership;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -13,7 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Unit extends Model
 {
     use HasFactory;
-    use SoftDeletes;
+    use SoftDeletes, HasOwnership;
 
     protected $guarded = [];
 
@@ -24,8 +25,6 @@ class Unit extends Model
 
     protected static function booted(): void
     {
-        static::addGlobalScope('current_company', function (Builder $builder): void {
-            $builder->where('company_id', auth()->user()->current_company);
-        });
+        static::addGlobalScope(new CurrentCompanyScope());
     }
 }

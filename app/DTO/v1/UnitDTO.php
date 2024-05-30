@@ -10,7 +10,6 @@ final class UnitDTO
 {
     public function __construct(
         private readonly string $name,
-        private readonly string $slug,
         private readonly string $short_code,
     ) {
     }
@@ -19,28 +18,13 @@ final class UnitDTO
     {
         return new self(
             (string)$request->input('name'),
-            (string)$request->input('slug'),
             (string)$request->input('short_code')
         );
-    }
-
-    public function toArray(): array
-    {
-        return [
-            'name' => $this->name,
-            'slug' => $this->slug,
-            'short_code' => $this->short_code,
-        ];
     }
 
     public function getName(): string
     {
         return $this->name;
-    }
-
-    public function getSlug(): string
-    {
-        return $this->slug;
     }
 
     public function getShortCode(): string
