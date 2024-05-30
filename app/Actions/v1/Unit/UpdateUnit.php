@@ -21,7 +21,6 @@ final class UpdateUnit
 
             $unit->update([
                 'name' => $dto->getName(),
-                'slug' =>  Str::slug($dto->getSlug()),
                 'short_code' =>  Str::slug($dto->getShortCode()),
             ]);
 

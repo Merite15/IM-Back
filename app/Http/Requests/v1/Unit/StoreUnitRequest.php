@@ -26,7 +26,6 @@ class StoreUnitRequest extends FormRequest
         return [
             'name' => 'required|string',
             'short_code' => 'required|string',
-            'slug' => 'required|string|alpha_dash',
         ];
     }
 }
