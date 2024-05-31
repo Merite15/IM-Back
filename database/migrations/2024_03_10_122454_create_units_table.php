@@ -7,7 +7,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class () extends Migration {
+return new class() extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -16,8 +17,8 @@ return new class () extends Migration {
         Schema::create('units', function (Blueprint $table): void {
             $table->comment('Table qui stocke les unités');
             $table->id();
-            $table->string('name')->comment('Nom de l\'unité');
-            $table->string('short_code')->nullable()->comment('Code court de l\'unité');
+            $table->string('name')->unique()->comment('Nom de l\'unité');
+            $table->string('short_code')->unique()->comment('Code court de l\'unité');
             $table->foreignIdFor(Company::class)->constrained()->comment('Identifiant de la société associée');
             $table->softDeletes();
             $table->timestamps();

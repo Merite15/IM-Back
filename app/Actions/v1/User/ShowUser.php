@@ -18,7 +18,7 @@ final class ShowUser
         try {
             return new ApiSuccessResponse(
                 message: 'Element récupéré avec succès',
-                data: new UserResource(User::query()->findOrFail($id)),
+                data: new UserResource(User::query()->with('companies', 'roles')->findOrFail($id)),
             );
         } catch (Throwable $exception) {
             return new ApiErrorResponse(

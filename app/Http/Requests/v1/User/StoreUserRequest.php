@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Requests\v1\User;
 
-use App\Enums\UserGender;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Enum;
 use Illuminate\Validation\Rules\Password;
 
 class StoreUserRequest extends FormRequest
@@ -28,10 +26,9 @@ class StoreUserRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:50',
-            'gender' => ['required', new Enum(UserGender::class)],
-            'phone' => 'required|string|unique:users,phone|min:9',
             'role_id' => 'integer|required|exists:roles,id',
-            'email' => 'required|max:50|indisposable|email:rfc,dns,spoof,filter,filter_unicode|unique:users,email,filter',
+            'companies' => 'array|required',
+            'email' => 'required|indisposable|email:rfc,dns,spoof,filter,filter_unicode|unique:users,email, filter',
             'password' => ['required', Password::min(8)
                 ->letters()
                 ->mixedCase()

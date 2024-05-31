@@ -4,42 +4,28 @@ declare(strict_types=1);
 
 namespace App\DTO\v1\User;
 
-use App\Enums\UserGender;
 use Illuminate\Http\Request;
 
-final class UserDTO
+final class CreateUserDTO
 {
     public function __construct(
         private readonly string $name,
-        private readonly UserGender $gender,
         private readonly string $email,
-        private readonly string $phone,
+        private readonly array $companies,
         private readonly string $password,
         private readonly int $role_id,
-    ) {}
+    ) {
+    }
 
     public static function fromRequest(Request $request): self
     {
         return new self(
             (string) $request->input('name'),
-            UserGender::from($request->input('gender')),
             (string) $request->input('email'),
-            (string) $request->input('phone'),
+            $request->input('companies'),
             (string) $request->input('password'),
             (int) $request->input('role_id'),
         );
-    }
-
-    public function toArray(): array
-    {
-        return [
-            'gender' => $this->gender,
-            'email' => $this->email,
-            'name' => $this->name,
-            'password' => $this->password,
-            'phone' => $this->phone,
-            'role_id' => $this->role_id,
-        ];
     }
 
     public function getName(): string
@@ -47,19 +33,14 @@ final class UserDTO
         return $this->name;
     }
 
-    public function getGender(): UserGender
+    public function getCompanies(): array
     {
-        return $this->gender;
+        return $this->companies;
     }
 
     public function getEmail(): string
     {
         return $this->email;
-    }
-
-    public function getPhone(): string
-    {
-        return $this->phone;
     }
 
     public function getPassword(): string

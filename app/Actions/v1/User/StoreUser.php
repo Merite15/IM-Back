@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Actions\v1\User;
 
-use App\DTO\v1\User\UserDTO;
+use App\DTO\v1\User\CreateUserDTO;
 use App\Models\User;
 use App\Responses\ApiErrorResponse;
 use App\Responses\ApiSuccessResponse;
@@ -13,21 +13,21 @@ use Throwable;
 
 final class StoreUser
 {
-    public function handle(UserDTO $dto): ApiSuccessResponse | ApiErrorResponse
+    public function handle(CreateUserDTO $dto): ApiSuccessResponse | ApiErrorResponse
     {
         try {
             $user = User::create([
                 'name' => $dto->getName(),
-                'gender' => $dto->getGender(),
                 'email' => $dto->getEmail(),
                 'password' => $dto->getPassword(),
-                'phone' => $dto->getPhone(),
             ]);
 
             $user->assignRole($dto->getRoleId());
 
+            $user->companies()->sync($dto->getCompanies());
+
             return new ApiSuccessResponse(
-                message: "Avance de salaire ajoutée avec succès",
+                message: "Utilisateur ajouté avec succès",
                 code: Response::HTTP_CREATED,
             );
         } catch (Throwable $exception) {

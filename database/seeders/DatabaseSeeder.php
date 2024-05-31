@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
             PurchaseSeeder::class,
             PurchaseDetailsSeeder::class,
             SaleSeeder::class,
-            SaleDetailsSeeder::class,
+            // SaleDetailsSeeder::class,
         ]);
     }
 }

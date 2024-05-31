@@ -23,6 +23,11 @@ class UpdateUserRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [];
+        return [
+            'name' => 'required|string|max:50',
+            'role_id' => 'integer|required|exists:roles,id',
+            'companies' => 'array|required',
+            'email' => 'required|indisposable|email:rfc,dns,spoof,filter,filter_unicode|unique:users,email,' . $this->user,
+        ];
     }
 }

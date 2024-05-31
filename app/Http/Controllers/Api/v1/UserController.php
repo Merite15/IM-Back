@@ -9,7 +9,8 @@ use App\Actions\v1\User\FetchUsers;
 use App\Actions\v1\User\ShowUser;
 use App\Actions\v1\User\StoreUser;
 use App\Actions\v1\User\UpdateUser;
-use App\DTO\v1\User\UserDTO;
+use App\DTO\v1\User\CreateUserDTO;
+use App\DTO\v1\User\UpdateUserDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\v1\User\StoreUserRequest;
 use App\Http\Requests\v1\User\UpdateUserRequest;
@@ -32,7 +33,7 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request, StoreUser $action)
     {
-        return $action->handle(UserDTO::fromRequest($request));
+        return $action->handle(CreateUserDTO::fromRequest($request));
     }
 
     /**
@@ -48,7 +49,7 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, string $id, UpdateUser $action)
     {
-        return $action->handle($id, UserDTO::fromRequest($request));
+        return $action->handle($id, UpdateUserDTO::fromRequest($request));
     }
 
     /**
