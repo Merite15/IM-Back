@@ -30,7 +30,7 @@ class SaleDetailsFactory extends Factory
             'total' => $total,
             'sale_id' => Sale::all()->random()->id,
             'product_id' => fake()->randomElement([1, 2, 3, 4, 5]),
-            'company_id' => Company::all()->random()->id,
+            'company_id' => fake()->randomElement([1, 2, 3, 4, 5]),
         ];
     }
 }

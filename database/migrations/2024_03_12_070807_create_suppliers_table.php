@@ -9,7 +9,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class () extends Migration {
+return new class() extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -25,7 +26,6 @@ return new class () extends Migration {
             $table->string('shop_name')->comment('Nom du magasin du fournisseur');
             $table->string('city')->comment('Ville du fournisseur');
             $table->enum('type', SupplierType::values());
-            $table->enum('gender', UserGender::values());
             $table->foreignIdFor(Company::class)->constrained();
             $table->softDeletes();
             $table->timestamps();

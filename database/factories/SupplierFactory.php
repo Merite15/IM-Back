@@ -29,7 +29,6 @@ class SupplierFactory extends Factory
             'shop_name' => fake()->company(),
             'city' => fake()->city,
             'type' => fake()->randomElement(SupplierType::cases()),
-            'gender' => fake()->randomElement(UserGender::cases()),
             'company_id' => Company::all()->random()->id,
         ];
     }

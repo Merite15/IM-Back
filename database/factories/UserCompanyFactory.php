@@ -1,16 +1,15 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Database\Factories;
 
 use App\Models\Company;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Unit>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\UserCompany>
  */
-class UnitFactory extends Factory
+class UserCompanyFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -20,9 +19,8 @@ class UnitFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->unique()->words(2, true),
-            'short_code' => fake()->unique()->words(1, true),
             'company_id' => Company::all()->random()->id,
+            'user_id' => User::all()->random()->id,
         ];
     }
 }

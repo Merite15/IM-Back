@@ -17,9 +17,9 @@ final class SupplierDTO
         private readonly string $phone,
         private readonly string $shop_name,
         private readonly SupplierType $type,
-        private readonly UserGender $gender,
         private readonly string $city,
-    ) {}
+    ) {
+    }
 
     public static function fromRequest(Request $request): self
     {
@@ -30,23 +30,8 @@ final class SupplierDTO
             (string) $request->input('phone'),
             (string) $request->input('shop_name'),
             SupplierType::from($request->input('type')),
-            UserGender::from($request->input('gender')),
             (string) $request->input('city'),
         );
-    }
-
-    public function toArray(): array
-    {
-        return [
-            'name' => $this->name,
-            'email' => $this->email,
-            'address' => $this->address,
-            'phone' => $this->phone,
-            'shop_name' => $this->shop_name,
-            'gender' => $this->gender,
-            'city' => $this->city,
-            'type' => $this->type,
-        ];
     }
 
     public function getName(): string
@@ -77,11 +62,6 @@ final class SupplierDTO
     public function getType(): SupplierType
     {
         return $this->type;
-    }
-
-    public function getGender(): UserGender
-    {
-        return $this->gender;
     }
 
     public function getCity(): string
