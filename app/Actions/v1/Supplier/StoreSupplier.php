@@ -23,13 +23,12 @@ final class StoreSupplier
                 'address' => $dto->getAddress(),
                 'phone' => $dto->getPhone(),
                 'shop_name' => $dto->getShopName(),
-                'gender' => $dto->getGender(),
                 'city' => $dto->getCity(),
                 'company_id' => auth()->user()->current_company,
             ]);
 
             return new ApiSuccessResponse(
-                message: "fournisseur ajouté avec succès",
+                message: "Fournisseur ajouté avec succès",
                 code: Response::HTTP_CREATED,
             );
         } catch (Throwable $exception) {

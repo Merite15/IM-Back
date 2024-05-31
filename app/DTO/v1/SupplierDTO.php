@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\DTO\v1;
 
 use App\Enums\SupplierType;
-use App\Enums\UserGender;
 use Illuminate\Http\Request;
 
 final class SupplierDTO
@@ -18,8 +17,7 @@ final class SupplierDTO
         private readonly string $shop_name,
         private readonly SupplierType $type,
         private readonly string $city,
-    ) {
-    }
+    ) {}
 
     public static function fromRequest(Request $request): self
     {

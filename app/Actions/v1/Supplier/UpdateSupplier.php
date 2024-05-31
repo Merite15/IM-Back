@@ -25,11 +25,10 @@ final class UpdateSupplier
                 'address' => $dto->getAddress(),
                 'phone' => $dto->getPhone(),
                 'shop_name' => $dto->getShopName(),
-                'gender' => $dto->getGender(),
                 'city' => $dto->getCity(),
             ]);
 
-            return new ApiSuccessResponse(message: 'Element modifié avec succès');
+            return new ApiSuccessResponse(message: 'Fournisseur modifié avec succès');
         } catch (Throwable $exception) {
             return new ApiErrorResponse(
                 exception: $exception,

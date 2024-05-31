@@ -32,9 +32,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/run-migration', fn () => RunMigration::handle());
+Route::get('/run-migration', fn() => RunMigration::handle());
 
-Route::middleware('auth:sanctum')->get('/user', fn (Request $request) => $request->user());
+Route::middleware('auth:sanctum')->get('/user', fn(Request $request) => $request->user());
 
 Route::middleware('auth:sanctum', 'ability:' . TokenAbility::ISSUE_ACCESS_TOKEN->value)->group(function (): void {
     Route::get('/auth/refresh-token', [AuthController::class, 'refreshToken']);

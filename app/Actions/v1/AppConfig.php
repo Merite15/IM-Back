@@ -18,7 +18,7 @@ final class AppConfig
             'payment_type' => PaymentType::values(),
             'purchase_status' => PurchaseStatus::values(),
             'supplier_type' => SupplierType::values(),
-            'user_gender' => UserGender::values(),
+            'user_genders' => UserGender::values(),
         ];
 
         return new ApiSuccessResponse(

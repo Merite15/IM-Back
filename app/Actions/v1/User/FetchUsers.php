@@ -15,7 +15,7 @@ final class FetchUsers
     public function handle(): ApiErrorResponse | UserCollectionResponse
     {
         try {
-            $users = User::query()->with('roles')->whereHas('companies', function ($query) {
+            $users = User::query()->with('roles')->whereHas('companies', function ($query): void {
                 $query->where('companies.id', auth()->user()->current_company);
             })->get();
 

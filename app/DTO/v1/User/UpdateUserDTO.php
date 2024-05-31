@@ -13,8 +13,7 @@ final class UpdateUserDTO
         private readonly string $email,
         private readonly array $companies,
         private readonly int $role_id,
-    ) {
-    }
+    ) {}
 
     public static function fromRequest(Request $request): self
     {

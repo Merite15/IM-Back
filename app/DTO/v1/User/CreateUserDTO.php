@@ -14,8 +14,7 @@ final class CreateUserDTO
         private readonly array $companies,
         private readonly string $password,
         private readonly int $role_id,
-    ) {
-    }
+    ) {}
 
     public static function fromRequest(Request $request): self
     {

@@ -16,7 +16,7 @@ final class FetchRoles
         try {
             return new ApiSuccessResponse(
                 message: 'Roles récupérés avec succès',
-                data: Role::query()->with('permissions')->get()
+                data: Role::query()->with('permissions')->get(),
             );
         } catch (Throwable $exception) {
             return new ApiErrorResponse(

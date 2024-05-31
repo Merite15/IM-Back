@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Http\Requests\v1\Supplier;
 
 use App\Enums\SupplierType;
-use App\Enums\UserGender;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
 
