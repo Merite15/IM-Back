@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Actions\v1\Order\Due;
+namespace App\Actions\v1\Order;
 
 use App\DTO\v1\Order\PayOrderDTO;
 use App\Enums\OrderStatus;

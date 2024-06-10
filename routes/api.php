@@ -64,14 +64,11 @@ Route::group(['middleware' => ['auth:sanctum', 'ability:' . TokenAbility::ACCESS
         });
     });
 
-    // Route::prefix('orders')->group(function (): void {
-    //     Route::controller(OrderController::class)->group(function (): void {
-    //         Route::get('pending', 'getPendingOrders');
-    //         Route::get('due', 'getDueOrders');
-    //         Route::put('pay-due-order/{order}', 'payDueOrder');
-    //         Route::get('complete', 'getCompleteOrders');
-    //     });
-    // });
+    Route::prefix('orders')->group(function (): void {
+        Route::controller(OrderController::class)->group(function (): void {
+            Route::put('pay-due-order/{order}', 'payDueOrder');
+        });
+    });
 
     Route::resources([
         'companies' => CompanyController::class,
@@ -83,7 +80,7 @@ Route::group(['middleware' => ['auth:sanctum', 'ability:' . TokenAbility::ACCESS
         'products' => ProductController::class,
         'sales' => SaleController::class,
         'roles' => RoleController::class,
-        // 'customers' => CustomerController::class,
-        // 'orders' => OrderController::class,
+        'customers' => CustomerController::class,
+        'orders' => OrderController::class,
     ], ['except' => ['create', 'edit']]);
 });
