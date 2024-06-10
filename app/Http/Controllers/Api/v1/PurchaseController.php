@@ -32,11 +32,6 @@ class PurchaseController extends Controller
         return $action->handle();
     }
 
-    public function getApprovedPurchases(FetchApprovedPurchases $action)
-    {
-        return $action->handle();
-    }
-
     public function purchaseReport(PurchaseReport $action)
     {
         return $action->handle();
@@ -72,11 +67,6 @@ class PurchaseController extends Controller
     public function destroy(string $id, DestroyPurchase $action)
     {
         return $action->handle($id);
-    }
-
-    public function exportPurchaseReport(ExportPurchaseRequest $request, ExportPurchaseReport $action)
-    {
-        return $action->handle(ExportDateDTO::fromRequest($request));
     }
 
     public function exportExcel(ExportPurchaseExcel $action)

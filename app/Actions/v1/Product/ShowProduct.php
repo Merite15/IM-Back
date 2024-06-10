@@ -19,7 +19,7 @@ final class ShowProduct
         try {
             $generator = new BarcodeGeneratorHTML();
 
-            $product = new ProductResource(Product::query()->findOrFail($id));
+            $product = new ProductResource(Product::query()->with('unit', 'category')->findOrFail($id));
 
             $barcode = $generator->getBarcode($product->code, $generator::TYPE_CODE_128);
 

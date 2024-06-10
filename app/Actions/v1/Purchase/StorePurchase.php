@@ -11,6 +11,7 @@ use App\Responses\ApiSuccessResponse;
 use Carbon\Carbon;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 use Throwable;
 
 final class StorePurchase
@@ -18,6 +19,8 @@ final class StorePurchase
     public function handle(PurchaseDTO $dto): ApiSuccessResponse | ApiErrorResponse
     {
         try {
+            DB::beginTransaction();
+
             $purchase = Purchase::create([
                 'purchase_no' => IdGenerator::generate([
                     'table' => 'purchases',
@@ -31,26 +34,33 @@ final class StorePurchase
                 'company_id' => auth()->user()->current_company,
             ]);
 
-            if ( ! $dto->getProducts() === null) {
+            if ($dto->getProducts() !== null) {
                 $details = [];
 
                 foreach ($dto->getProducts() as $product) {
+                    // dd($product);
+
                     $details['purchase_id']    = $purchase['id'];
                     $details['product_id']     = $product['product_id'];
                     $details['quantity']       = $product['quantity'];
-                    $details['unit_cost']       = (int) ($product['unit_cost']);
-                    $details['total']          = $product['total'];
+                    $details['unit_cost']       = $product['unit_cost'];
+                    $details['total']          = ($product['quantity'] * $product['unit_cost']);
                     $details['created_at']     = Carbon::now();
+                    $details['company_id'] = auth()->user()->current_company;
 
                     $purchase->details()->insert($details);
                 }
             }
+
+            DB::commit();
 
             return new ApiSuccessResponse(
                 message: "Achat ajouté avec succès",
                 code: Response::HTTP_CREATED,
             );
         } catch (Throwable $exception) {
+            DB::rollBack();
+
             return new ApiErrorResponse(
                 exception: $exception,
                 code: Response::HTTP_NOT_FOUND,

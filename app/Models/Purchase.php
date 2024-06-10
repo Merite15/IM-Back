@@ -22,7 +22,6 @@ class Purchase extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'date'       => 'date',
         'status'     => PurchaseStatus::class,
     ];
 

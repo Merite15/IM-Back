@@ -17,7 +17,7 @@ final class FetchPurchases
         try {
             return new PurchaseCollectionResponse(
                 purchaseCollection: new PurchaseCollection(
-                    resource: Purchase::query()->latest()->get(),
+                    resource: Purchase::query()->with('supplier')->latest()->get(),
                 ),
             );
         } catch (Throwable $exception) {

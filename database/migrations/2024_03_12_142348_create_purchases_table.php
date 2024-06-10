@@ -9,7 +9,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class () extends Migration {
+return new class() extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -18,7 +19,7 @@ return new class () extends Migration {
         Schema::create('purchases', function (Blueprint $table): void {
             $table->comment('Table qui stocke les achats');
             $table->id();
-            $table->string('date')->comment('Date de l\'achat');
+            $table->date('date')->comment('Date de l\'achat');
             $table->string('purchase_no')->comment('Numéro d\'achat')->nullable();
             $table->integer('total_amount')->comment('Montant total');
             $table->enum('status', PurchaseStatus::values())->default(PurchaseStatus::Pending->value)->comment('Statut de l\'achat');

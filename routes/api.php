@@ -32,9 +32,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/run-migration', fn() => RunMigration::handle());
+Route::get('/run-migration', fn () => RunMigration::handle());
 
-Route::middleware('auth:sanctum')->get('/user', fn(Request $request) => $request->user());
+Route::middleware('auth:sanctum')->get('/user', fn (Request $request) => $request->user());
 
 Route::middleware('auth:sanctum', 'ability:' . TokenAbility::ISSUE_ACCESS_TOKEN->value)->group(function (): void {
     Route::get('/auth/refresh-token', [AuthController::class, 'refreshToken']);
@@ -61,7 +61,6 @@ Route::group(['middleware' => ['auth:sanctum', 'ability:' . TokenAbility::ACCESS
         Route::controller(PurchaseController::class)->group(function (): void {
             Route::get('export-report', 'exportPurchaseReport');
             Route::get('export-excel', 'exportExcel');
-            Route::get('approved', 'getApprovedPurchases');
         });
     });
 

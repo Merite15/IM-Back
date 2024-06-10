@@ -23,9 +23,11 @@ final class UpdateProduct
                 'category_id' => $dto->getCategoryId(),
                 'unit_id' => $dto->getUnitId(),
                 'quantity' => $dto->getQuantity(),
+                'quantity_alert' => $dto->getQuantityAlert(),
                 'notes' => $dto->getNotes(),
                 'buying_price' => $dto->getBuyingPrice(),
                 'selling_price' => $dto->getSellingPrice(),
+                'notes' => $dto->getNotes(),
             ]);
 
             return new ApiSuccessResponse(message: 'Element modifié avec succès');

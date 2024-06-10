@@ -22,7 +22,7 @@ final class ShowPurchase
             $products = PurchaseDetails::where('purchase_id', $purchase->id)->get();
 
             return new ApiSuccessResponse(
-                message: 'Client récupéré avec succès',
+                message: 'Achat récupéré avec succès',
                 data: [
                     'purchase' => $purchase,
                     'products' => $products,

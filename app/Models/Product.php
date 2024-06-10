@@ -21,10 +21,6 @@ class Product extends Model
 
     protected $guarded = [];
 
-    protected $casts = [
-        'tax_type' => TaxType::class,
-    ];
-
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
@@ -43,16 +39,16 @@ class Product extends Model
     protected function buyingPrice(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => $value / 100,
-            set: fn($value) => $value * 100,
+            get: fn ($value) => $value / 100,
+            set: fn ($value) => $value * 100,
         );
     }
 
     protected function sellingPrice(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => $value / 100,
-            set: fn($value) => $value * 100,
+            get: fn ($value) => $value / 100,
+            set: fn ($value) => $value * 100,
         );
     }
 }
