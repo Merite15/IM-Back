@@ -38,8 +38,6 @@ final class StorePurchase
                 $details = [];
 
                 foreach ($dto->getProducts() as $product) {
-                    // dd($product);
-
                     $details['purchase_id']    = $purchase['id'];
                     $details['product_id']     = $product['product_id'];
                     $details['quantity']       = $product['quantity'];

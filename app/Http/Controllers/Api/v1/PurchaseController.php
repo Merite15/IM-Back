@@ -6,17 +6,13 @@ namespace App\Http\Controllers\Api\v1;
 
 use App\Actions\v1\Purchase\DestroyPurchase;
 use App\Actions\v1\Purchase\ExportPurchaseExcel;
-use App\Actions\v1\Purchase\ExportPurchaseReport;
-use App\Actions\v1\Purchase\FetchApprovedPurchases;
 use App\Actions\v1\Purchase\FetchPurchases;
 use App\Actions\v1\Purchase\PurchaseReport;
 use App\Actions\v1\Purchase\ShowPurchase;
 use App\Actions\v1\Purchase\StorePurchase;
 use App\Actions\v1\Purchase\UpdatePurchase;
-use App\DTO\v1\ExportDateDTO;
 use App\DTO\v1\PurchaseDTO;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\v1\Purchase\ExportPurchaseRequest;
 use App\Http\Requests\v1\Purchase\StorePurchaseRequest;
 use App\Responses\ApiErrorResponse;
 use App\Responses\ApiSuccessResponse;
@@ -56,9 +52,9 @@ class PurchaseController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(string $id, UpdatePurchase $action)
+    public function update(string $id, UpdatePurchase $action, StorePurchaseRequest $request,)
     {
-        return $action->handle($id);
+        return $action->handle($id, PurchaseDTO::fromRequest($request));
     }
 
     /**

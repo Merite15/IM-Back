@@ -15,7 +15,11 @@ final class DestroyPurchase
     public function handle(string $id): ApiSuccessResponse | ApiErrorResponse
     {
         try {
-            Purchase::query()->findOrFail($id)->delete();
+            $purchase = Purchase::query()->findOrFail($id);
+
+            $purchase->details()->delete();
+
+            $purchase->delete();
 
             return new ApiSuccessResponse(
                 message: 'Element supprimé avec succès',
