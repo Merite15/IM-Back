@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Resources\v1\Category;
 
+use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
@@ -16,11 +17,8 @@ class CategoryCollection extends ResourceCollection
      *
      * @return array<int|string, mixed>
      */
-    public function toArray(Request $request): array
+    public function toArray(Request $request): Collection
     {
-        return [
-            'message' => "Catégories de produits récupérées avec succès",
-            'data' => $this->collection,
-        ];
+        return $this->collection;
     }
 }

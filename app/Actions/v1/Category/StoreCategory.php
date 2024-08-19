@@ -22,6 +22,7 @@ final class StoreCategory
             ]);
 
             return new ApiSuccessResponse(
+                envelope: true,
                 message: "Catégorie ajoutée avec succès",
                 code: Response::HTTP_CREATED,
             );

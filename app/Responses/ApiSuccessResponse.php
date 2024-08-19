@@ -18,6 +18,7 @@ class ApiSuccessResponse implements Responsable
         private ?bool $success = true,
         private int $code = Response::HTTP_OK,
         private array $headers = [],
+        private bool $envelope = false,
         private array $stat = [],
     ) {}
 
@@ -26,17 +27,21 @@ class ApiSuccessResponse implements Responsable
      */
     public function toResponse($request)
     {
-        $responseData = [
-            'success' => $this->success,
-            'message' => $this->message,
-        ];
+        if ($this->envelope) {
+            $responseData = [
+                'success' => $this->success,
+                'message' => $this->message,
+            ];
 
-        if ($this->data !== null) {
-            $responseData['data'] = $this->data;
-        }
+            if ($this->data !== null) {
+                $responseData['data'] = $this->data;
+            }
 
-        if ( ! empty($this->stat)) {
-            $responseData['stat'] = $this->stat;
+            if (! empty($this->stat)) {
+                $responseData['stat'] = $this->stat;
+            }
+        } else {
+            $responseData = $this->data;
         }
 
         return response()->json($responseData, $this->code, $this->headers);
